@@ -188,7 +188,7 @@ Note that the console gets its own instance of the RunGML interpreter.  When run
 ### Console Syntax Differences
 
 The console has some minor syntax conveniences that are not supported for programs stored in JSON files:
-- It permits the use of single or double quotes, treating them idendically.
+- It permits the use of single or double quotes, treating them idendically (**except when building for HTML, which requires double quotes**).
 - It automatically adds a set of brackets around your command.
 
 So while a hello world program stored as JSON looks like: `["print", "Hello, world!"]`
