@@ -30,7 +30,7 @@ In addition to the RunGML language definition and interpreter, this library also
 6. (Optional) Add an instance of the `oRunGML_Console` object to the first room of your program.
 
 ### (Optional) Loose Json Support
-As of version 1.1, RunGML provides optional support for JuJuAdams' Loose JSON formatting.  You'll need to take a few extra steps to make this work:
+As of version 1.1, RunGML provides optional support for JuJu Adams' Loose JSON formatting.  You'll need to take a few extra steps to make this work:
 
 1. Clone the ExtendingJSON repo from https://github.com/JujuAdams/ExtendingJSON (or download and extract the .zip version)
 	- Current version as of testing is commit 4137a1a from 2023-12-06
