@@ -33,7 +33,7 @@ In addition to the RunGML language definition and interpreter, this library also
 As of version 1.1, RunGML provides optional support for JuJu Adams' Loose JSON formatting.  You'll need to take a few extra steps to make this work:
 
 1. Clone the ExtendingJSON repo from https://github.com/JujuAdams/ExtendingJSON (or download and extract the .zip version)
-	- Current version as of testing is commit 4137a1a from 2023-12-06
+	- Current version as of testing is [commit 4137a1a](https://github.com/JujuAdams/ExtendingJSON/commit/4137a1a0e75971ca103bb4d1c4ee8a46026ab0d7)
 2. In your GameMaker project, right-click the Asset Browser, and select `Add Existing`
 3. Navigate to the following files in the repo you just downloaded (you'll need to do a separate `Add Existing` for each of them):
 	- `scripts/LooseJSONRead/LooseJSONRead.yy`
