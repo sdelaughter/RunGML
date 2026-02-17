@@ -1,5 +1,6 @@
 {
   "FolderOrderSettings":[
+    {"name":"Loose JSON","order":17,"path":"folders/Loose JSON.yy",},
     {"name":"RunGML","order":15,"path":"folders/RunGML.yy",},
     {"name":"Fonts","order":3,"path":"folders/RunGML/Fonts.yy",},
     {"name":"Rooms","order":2,"path":"folders/RunGML/Rooms.yy",},
@@ -10,6 +11,9 @@
     {"name":"oRunGML_Object","order":1,"path":"objects/oRunGML_Object/oRunGML_Object.yy",},
     {"name":"oRunGML_ObjectTemplate","order":2,"path":"objects/oRunGML_ObjectTemplate/oRunGML_ObjectTemplate.yy",},
     {"name":"oRunGML_SpriteBuilder","order":4,"path":"objects/oRunGML_SpriteBuilder/oRunGML_SpriteBuilder.yy",},
+    {"name":"LooseJSONBufferRead","order":2,"path":"scripts/LooseJSONBufferRead/LooseJSONBufferRead.yy",},
+    {"name":"LooseJSONBufferWrite","order":3,"path":"scripts/LooseJSONBufferWrite/LooseJSONBufferWrite.yy",},
+    {"name":"LooseJSONWrite","order":1,"path":"scripts/LooseJSONWrite/LooseJSONWrite.yy",},
     {"name":"scrRunGML_Colors","order":2,"path":"scripts/scrRunGML_Colors/scrRunGML_Colors.yy",},
     {"name":"scrRunGML_Config","order":1,"path":"scripts/scrRunGML_Config/scrRunGML_Config.yy",},
   ],

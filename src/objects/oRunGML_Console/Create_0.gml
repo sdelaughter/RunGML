@@ -27,6 +27,7 @@ max_history = 20;
 command_history = [];
 command_history_pos = -1;
 command_history_max = 100;
+clear_on_toggle = false;
 
 key_hold_delay = 0.5;
 key_hold_rate = 0.1;
@@ -75,8 +76,10 @@ toggle = function(_set=!enabled) {
 		keyboard_lastkey = -1;
 		keyboard_lastchar = "";
 		keyboard_string = ""
-		clear_line();
-		command_history_pos = 0;
+		if clear_on_toggle {
+			clear_line();
+			command_history_pos = 0;
+		}
 	}
 	RunGML_Console_OnToggle(enabled);
 }
@@ -129,7 +132,7 @@ wrap_string = function(_s, _w=undefined) {
 exec_line = function(_l) {
 	var _json;
 	try {
-		_json = json_parse(string("[{0}]", _l))
+		_json = RunGML_Read(string("[{0}]", _l))
 	} catch(_e) {
 		new RunGML_Error(string("Invalid Syntax\nOriginal Error:\n{0}", _e)).warn(RunGMLI)
 		return undefined;

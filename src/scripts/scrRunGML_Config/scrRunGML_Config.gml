@@ -38,6 +38,15 @@ global.RunGML_Console_lineHeight = 18;
 // The console interpreter will throw to its display regardless
 global.RunGML_throwErrors = false;
 
+// Support the use of Loose JSON formatting
+// Requires manual addition of scripts from:
+// https://github.com/JujuAdams/ExtendingJSON/tree/main/scripts
+// For import: LooseJSONRead and LooseJSONBufferRead
+// For export: LooseJSONWrite and LooseJSONBufferWrite
+// Note: If you use quotes with LooseJSON, they must be double quotes, and commas are still required
+global.RunGML_importLooseJSON = false;
+global.RunGML_exportLooseJSON = false;
+
 // Define custom behavior when toggling the console on/off
 // For example: `global.paused = _enabled`
 function RunGML_Console_OnToggle(_enabled) {

@@ -1,4 +1,4 @@
-#macro RunGML_Version "1.0.4"
+#macro RunGML_Version "1.1.0"
 #macro RunGML_Homepage "https://github.com/sdelaughter/RunGML"
 
 
@@ -55,6 +55,22 @@ function RunGML_Interpreter(_name="RunGML_I") constructor {
 		array_push(_temp_list_cache, _temp_list);
 		
 		return _out;
+	}
+}
+
+function RunGML_Read(_string) {
+	if global.RunGML_importLooseJSON {
+		return LooseJSONRead(_string);
+	} else {
+		return json_parse(_string);
+	}
+}
+
+function RunGML_Write(_string, _pretty=false) {
+	if global.RunGML_exportLooseJSON {
+		return LooseJSONWrite(_string, _pretty);
+	} else {
+		return json_stringify(_string, _pretty);
 	}
 }
 
@@ -673,7 +689,7 @@ new RunGML_Op("run",
 	
 new RunGML_Op("exec",
 	function(_i, _l) {
-		return _i.run(json_parse(_l[0]));
+		return _i.run(RunGML_Read(_l[0]));
 	},
 @"Execute a string as a program.
 - args: [string]
@@ -764,7 +780,7 @@ new RunGML_Op("import",
 			file_text_readln(_file);
 		}
 		file_text_close(_file);
-		return json_parse(_json_string);
+		return RunGML_Read(_json_string);
 	},
 @"Import JSON from a file
 - args: [filepath]
@@ -813,7 +829,7 @@ new RunGML_Op("export",
 		if array_length(_l) > 2 {
 			_pretty = _l[2];	
 		}
-		var _json_string = json_stringify(_l[1], _pretty);
+		var _json_string = RunGML_Write(_l[1], _pretty);
 		file_text_write_string(_file, _json_string);
 		file_text_close(_file);
 		return []

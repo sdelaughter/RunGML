@@ -29,6 +29,23 @@ In addition to the RunGML language definition and interpreter, this library also
 5. Click `Import`
 6. (Optional) Add an instance of the `oRunGML_Console` object to the first room of your program.
 
+### (Optional) Loose Json Support
+As of version 1.1, RunGML provides optional support for JuJuAdams' Loose JSON formatting.  You'll need to take a few extra steps to make this work:
+
+1. Clone the ExtendingJSON repo from https://github.com/JujuAdams/ExtendingJSON (or download and extract the .zip version)
+	- Current version as of testing is commit 4137a1a from 2023-12-06
+2. In your GameMaker project, right-click the Asset Browser, and select `Add Existing`
+3. Navigate to the following files in the repo you just downloaded (you'll need to do a separate `Add Existing` for each of them):
+	- `scripts/LooseJSONRead/LooseJSONRead.yy`
+	- `scripts/LooseJSONReadBuffer/LooseJSONReadBuffer.yy`
+	- `scripts/LooseJSONWrite/LooseJSONWrite.yy`
+        - `scripts/LooseJSONWriteBuffer/LooseJSONWriteBuffer.yy`
+4. In `scrRunGML_Config` set `global.RunGML_importLooseJson` and/or `global.RUNGML_exportLooseJSON` to `true`
+
+This will remove the need to put quotes around *most* operators and arguments.  See the ExtendingJSON repo for details.
+
+Note that if you use quotes with Loose JSON enabled they must be double quotes.
+
 ## Running Programs
 
 First create an instance of the RunGML interpreter:
@@ -188,7 +205,7 @@ Note that the console gets its own instance of the RunGML interpreter.  When run
 ### Console Syntax Differences
 
 The console has some minor syntax conveniences that are not supported for programs stored in JSON files:
-- It permits the use of single or double quotes, treating them identically (**except when building for HTML, which requires double quotes**).
+- It permits the use of single or double quotes, treating them identically (**except when building for HTML which requires double quotes, and when using Loose JSON which requires either no quotes or double quotes**).
 - It automatically adds a set of brackets around your command.
 
 So while a hello world program stored as JSON looks like: `["print", "Hello, world!"]`
@@ -196,6 +213,11 @@ So while a hello world program stored as JSON looks like: `["print", "Hello, wor
 The equivalent console command can look like: `'print", "Hello, World'`
 
 Combining quote types in this way is not advised.  Consistent use of single quotes in the console is probably fine.  Future updates may change the way quotation marks and escape characters are handled to improve consistency.
+
+With Loose JSON it would look like `print, "Hello, World"`.  Here, quotes are required around the text because it contains a commma.
+
+Without the comma you can simply do `print, Hello World`
+`
 
 ### Console-Specific Operators
 

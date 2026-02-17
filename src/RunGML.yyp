@@ -2,7 +2,7 @@
   "$GMProject":"v1",
   "%Name":"RunGML",
   "AudioGroups":[
-    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
     "children":[],
@@ -10,6 +10,7 @@
   },
   "defaultScriptType":1,
   "Folders":[
+    {"$GMFolder":"","%Name":"Loose JSON","folderPath":"folders/Loose JSON.yy","name":"Loose JSON","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"RunGML","folderPath":"folders/RunGML.yy","name":"RunGML","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Fonts","folderPath":"folders/RunGML/Fonts.yy","name":"Fonts","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Objects","folderPath":"folders/RunGML/Objects.yy","name":"Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -18,6 +19,7 @@
   ],
   "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[
+    {"$GMIncludedFile":"","%Name":"bounce_spr.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"bounce_spr.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"bounce.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"bounce.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"clock.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"clock.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"counter.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"counter.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
@@ -31,7 +33,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.13.0.190",
+    "IDEVersion":"2024.14.3.217",
   },
   "name":"RunGML",
   "resources":[
@@ -42,6 +44,10 @@
     {"id":{"name":"oRunGML_SpriteBuilder","path":"objects/oRunGML_SpriteBuilder/oRunGML_SpriteBuilder.yy",},},
     {"id":{"name":"oRunGML_Test","path":"objects/oRunGML_Test/oRunGML_Test.yy",},},
     {"id":{"name":"rRunGML_Test","path":"rooms/rRunGML_Test/rRunGML_Test.yy",},},
+    {"id":{"name":"LooseJSONBufferRead","path":"scripts/LooseJSONBufferRead/LooseJSONBufferRead.yy",},},
+    {"id":{"name":"LooseJSONBufferWrite","path":"scripts/LooseJSONBufferWrite/LooseJSONBufferWrite.yy",},},
+    {"id":{"name":"LooseJSONRead","path":"scripts/LooseJSONRead/LooseJSONRead.yy",},},
+    {"id":{"name":"LooseJSONWrite","path":"scripts/LooseJSONWrite/LooseJSONWrite.yy",},},
     {"id":{"name":"scrRunGML_Colors","path":"scripts/scrRunGML_Colors/scrRunGML_Colors.yy",},},
     {"id":{"name":"scrRunGML_Config","path":"scripts/scrRunGML_Config/scrRunGML_Config.yy",},},
     {"id":{"name":"scrRunGML","path":"scripts/scrRunGML/scrRunGML.yy",},},
