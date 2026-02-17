@@ -281,6 +281,8 @@ Description of what the operator does.
 ### Constraint Definitions
 The list of constraints is optional.  If present, it should contain `RunGML_Constraint_ArgCount`, and/or `RunGML_Constraint_ArgType` structs.  These can be used to enforce constraints on the number and type of arguments, respectively, that the operator will accept.  If violated, a `RunGML_Error` will be printed.
 
+Note that constraint checking is a fairly intensive operation.  It is disabled by default, and can be enabled by setting the macro `RunGML_I_checkConstraints` to `true` in `scrRunGML_Config`.
+
 #### RunGML_Constraint_ArgCount
 
 Accpets two arguments:
