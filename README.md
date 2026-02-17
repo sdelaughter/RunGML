@@ -217,7 +217,6 @@ Combining quote types in this way is not advised.  Consistent use of single quot
 With Loose JSON it would look like `print, "Hello, World"`.  Here, quotes are required around the text because it contains a commma.
 
 Without the comma you can simply do `print, Hello World`
-`
 
 ### Console-Specific Operators
 
