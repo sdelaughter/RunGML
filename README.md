@@ -39,7 +39,7 @@ As of version 1.1, RunGML provides optional support for JuJu Adams' Loose JSON f
 	- `scripts/LooseJSONRead/LooseJSONRead.yy`
 	- `scripts/LooseJSONReadBuffer/LooseJSONReadBuffer.yy`
 	- `scripts/LooseJSONWrite/LooseJSONWrite.yy`
-        - `scripts/LooseJSONWriteBuffer/LooseJSONWriteBuffer.yy`
+    - `scripts/LooseJSONWriteBuffer/LooseJSONWriteBuffer.yy`
 4. In `scrRunGML_Config` set `global.RunGML_importLooseJson` and/or `global.RUNGML_exportLooseJSON` to `true`
 
 This will remove the need to put quotes around *most* operators and arguments.  See the ExtendingJSON repo for details.
