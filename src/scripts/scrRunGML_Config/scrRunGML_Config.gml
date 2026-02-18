@@ -47,6 +47,10 @@ global.RunGML_throwErrors = false;
 global.RunGML_importLooseJSON = false;
 global.RunGML_exportLooseJSON = false;
 
+// Attempt to interpret the first argument of any list as a built-in asset/function
+// Only applies if it's not recognized as a RunGML operator or alias first
+global.RunGML_useBuiltinOps = true;
+
 // Define custom behavior when toggling the console on/off
 // For example: `global.paused = _enabled`
 function RunGML_Console_OnToggle(_enabled) {
@@ -76,9 +80,6 @@ function RunGML_ConfigOps() {
 
 	// You can also define aliases for operators
 	RunGML_alias("test_alias", "test_operator")
-	
-	// Create wrappers for native GameMaker functions by name
-	RunGML_opWrapper("show_debug_message");
 	
 	// And define new color names for use with the "color" operator
 	RunGML_color("seafoam", #78aa9f)

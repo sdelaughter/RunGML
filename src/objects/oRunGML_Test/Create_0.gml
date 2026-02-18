@@ -33,6 +33,12 @@ with(new RunGML_Interpreter("Test")) {
 	// Create a bouncer
 	show_debug_message("RunGML Test: Running bounce example")
 	run(["example", "bounce"]);
+	
+	// Create a second bouncer if LooseJSON is enabled
+	if global.RunGML_importLooseJSON {
+		show_debug_message("RunGML Test: Running bounce example with Loose JSON")
+		run(["example", "bounce_loose"]);
+	}
 }
 
 //with(new RunGML_Interpreter("Debug")) {

@@ -19,7 +19,7 @@
   ],
   "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[
-    {"$GMIncludedFile":"","%Name":"bounce_spr.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"bounce_spr.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"bounce_loose.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"bounce_loose.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"bounce.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"bounce.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"clock.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"clock.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"counter.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"counter.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},

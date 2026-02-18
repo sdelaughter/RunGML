@@ -1,5 +1,19 @@
 # RunGML Patch Notes
 
+## 1.2.0 (2026-02-18)
+- If an initial list item is not recognized as a RunGML operator (or alias) it will now be interpreted as a built-in asset/function whenever possible, instead of the list simply returning that initial item as a string
+    - This effectively removes the need for the `op` operator and RunGML_OpWrapper (which didn't work in a lot of cases anyways)
+        - Those features still exist for now but may be removed at some point in the future and should be avoided
+    - A defined RunGML operator (or alias) will take precendence over any built-ins with the same name
+        - Future versions may remove or rename some operator definitions to allow built-in versions to be used normally (TBD)
+    - This behavior can be disbaled by setting `global.RunGML_useBuiltinOps = false`
+    - It's possible this is a terrible idea for some reason I haven't fully thought through, so keep enabled at your own risk and please report any weird behavior or disasterous consequences you encounter. Hopefully it's fine and useful.
+- Removed the example RunGML_OpWrapper for `show_debug_message`
+- Added a `bounce_loose` example program to demonstrate Loose JSON support
+    - This will be run by the test object if `global.RunGML_importLooseJSON == true`
+- Removed the extraneous `bounce_spr` example program
+- The `add` operator now correctly sums an arbitrary number of arguments instead of just the first two
+
 ## 1.1.0 (2026-02-17)
 - Added support for Loose JSON formatting
 	- Requires manual addition of scripts from:

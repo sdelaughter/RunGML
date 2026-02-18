@@ -81,8 +81,12 @@ In addition to lists there are also strings, numbers, and structs.
 The RunGML Interpreter evaluates a list as follows:
 - An empty list returns nothing.
 - Any list elements that are lists will be evaluated first (recursively).
-- If the first element is (or evaluates to) a string naming an operator, that operator will be applied to any remaining elements and the result will be returned.
-- Otherwise, the first element itself will be returned.
+- If the first element is (or evaluates to) a string naming an operator:
+    - That operator will be applied to any remaining elements and the result will be returned.
+- Else if the first element names a built-in asset:
+    - If that asset is callable, it will be called with the remaining elements as arguments and the result will be returned
+    - Else that asset's index will be returned
+- Else the first element itself will be returned as a string
 
 In code:
 
@@ -99,6 +103,13 @@ run = function(_l) {
     if struct_exists(language, _op_name) {
         var _op = struct_get(language, _op_name);
         var _out = _op.exec(self, _l);
+    } else {
+        var _asset = asset_get_index(_op_name)
+        if _asset != -1 {
+            if is_callable(_asset) {
+                _out = struct_execute_ext(_asset, _l);
+            else _out = _asset;
+        }
     }
     return _out;
 }

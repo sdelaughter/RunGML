@@ -1,4 +1,4 @@
-#macro RunGML_Version "1.1.0"
+#macro RunGML_Version "1.2.0"
 #macro RunGML_Homepage "https://github.com/sdelaughter/RunGML"
 
 
@@ -44,7 +44,13 @@ function RunGML_Interpreter(_name="RunGML_I") constructor {
 			_out = _op.exec(self, _temp_list);
 			if is_instanceof(_out, RunGML_Error) {
 				_out.warn(self);
-				//_out = undefined;
+			}
+		} else if global.RunGML_useBuiltinOps and _op_name != -1 {
+			var _asset = asset_get_index(_op_name);
+			if _asset != -1 {
+				if is_callable(_asset) {
+					_out = script_execute_ext(_asset, _temp_list);
+				} else _out = _asset;
 			}
 		}
 		
@@ -1418,7 +1424,12 @@ new RunGML_Op ("undefined",
 new RunGML_Op("add",
 	function(_i, _l) {
 		// a, b
-		return _l[0] + _l[1];
+		var _out = 0;
+		var _n = array_length(_l)
+		for (var i=0; i<_n; i++) {
+			_out += _l[i];	
+		}
+		return _out;
 	},
 @"Add two or more numbers (use 'cat' or 'string' to combine strings)
 - args: [A, B]
