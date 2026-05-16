@@ -24,7 +24,8 @@ global.RunGML_overwriteConstants = false
 global.RunGML_I_debug = false;
 
 // Set the number of decimal places to display for floating point numbers in the console
-global.RunGML_Console_floatPrecision = 8;
+global.RunGML_floatPrecision = 8;
+global.RunGML_floatTrailingZeroes = true;
 
 // Set the console's font
 global.RunGML_Console_font = fntRunGML_Console;

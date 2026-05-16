@@ -12,7 +12,7 @@ last_created = undefined;
 
 toggle_key = global.RunGML_Console_toggleKey;
 meta_key = vk_control;
-float_precision = global.RunGML_Console_floatPrecision;
+float_precision = global.RunGML_floatPrecision;
 
 dt = 0;
 age = 0;
@@ -151,7 +151,7 @@ exec_line = function(_l) {
 		if array_length(_output) < 1 return;
 	}
 	if is_numeric(_output) {
-		_output = trim_numeric_string(_output);
+		_output = RunGML_float_format(_output);
 	}
 	log_line(outprompt + string(_output));
 }

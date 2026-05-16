@@ -20,11 +20,7 @@ function RunGML_DefineAliases(_wipe=true) {
 	RunGML_alias("divide", "div");
 	
 	// Constants
-	RunGML_alias("RunGML_Version", "version")
-	RunGML_alias("GM_version", "gm_version")
-	RunGML_alias("GM_build_type", "gm_build_type")
-	RunGML_alias("GM_build_date", "gm_build_date")
-	RunGML_alias("GM_runtime_version", "gm_runtime_version")
+	RunGML_alias("version", "RunGML_Version");
 	RunGML_alias("True", "true");
 	RunGML_alias("False", "false");
 	RunGML_alias("NaN", "nan");

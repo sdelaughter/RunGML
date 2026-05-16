@@ -1,11 +1,11 @@
 # RunGML Patch Notes
 
-## 1.3.0 (2026-05-06)
+## 1.3.0 (2026-05-16)
 #### Features
 - Added operator definitions for nearly 700 previously inaccessible built-in constants.
     - Thanks to TabularElf for pointing me to the list of constants in [GMLspeak](https://github.com/tabularelf/GMLspeak), I would not have found them all on my own.
-    - Non-LTS constants are still unsupported for now.
-- Added `op_search` operator to display a list of all operator and alias names containing a given substring.  Helpful since the output of `op_list` no longer fits on-screen.
+    - Non-LTS constants are still unsupported for now.  They'll probably be added whenever the new LTS gets released.
+- Added `op_search` operator to display a list of all operator and alias names containing a given substring.
 - Support for Loose JSON is now included and enabled by default for reading (writing still uses double-quotes by default)
     - Brought to you by the [ExtendingJSON](https://github.com/JujuAdams/ExtendingJSON) library, created by Juju Adams.
 - Added a set of operators for recording sequences of console inputs, storing them as program files, and replaying the results.  Note that these operators are *only* functional when executed by an interpreter whose parent is a console instance.
@@ -36,9 +36,14 @@
 #### Misc.
 - The `run` operator no longer creates and uses a fresh instance of the interpreter, and will instead run from whichever instance calls it.
     - Added a new `run_clean` operator that preserves the old behavior.
-    - The `example`, `runfile`, `runprog`, and `rec_replay` operators will all use `run` by default, but now accept an optional second argument which will cause them to use `run_clean` instead if that argument is true.
+    - The `example`, `runfile`, and `runprog` operators will all use `run_clean` by default, but now accept an optional second argument which will cause them to use `run` instead if that argument is false.
+    - The `rec_replay` operator uses `run` by default, but accepts and optional second argument which will cause it to use `run_clean` instead if that argument is true.
 - Removed `RunGML_opWrapper` and the `op` operator (obsoleted by v1.2.0).
 - Removed redundant definitions for operators that behaved identically to built-in functions with the same names.
+- The `op_list` and `op_names` operators now exclude constants by default, and support an optional argument that includes them if it's true
+- Improved display of floats in console and documentation
+    - Trailing zeroes are now trimmed by default.  Can be reverted by setting `global.RunGML_floatTrailingZeroes=true` in `scrRunGML_Config`
+- Renamed `global.RunGML_Console_floatPrecision` to `global.RunGML_floatPrecision` since this setting now also applies to constants in the manual
 - Enabled SDF for console font to improve legibility
 
 

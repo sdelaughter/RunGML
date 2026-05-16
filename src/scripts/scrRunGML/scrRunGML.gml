@@ -353,11 +353,13 @@ function RunGML_float_format(_val, _digits=undefined) {
 	if string_count(".", string(_val)) != 1 return _val;
 	try {
 		_val = real(_val);
-		if is_undefined(_digits) _digits = global.RunGML_Console_floatPrecision;
+		if is_undefined(_digits) _digits = global.RunGML_floatPrecision;
 		var _total = string_length(string(floor(_val)));
 		var _out = string_format(_val, _total, _digits);
-		while string_char_at(_out, string_length(_out)) == "0" {
-			_out = string_trim_end(_out, "0")
+		if not global.RunGML_floatTrailingZeroes {
+			while string_char_at(_out, string_length(_out)) == "0" {
+				_out = string_trim_end(_out, "0")
+			}
 		}
 		return _out;
 	} catch(_e) {

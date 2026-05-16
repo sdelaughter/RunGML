@@ -7,11 +7,11 @@ function RunGML_DefineConstants() {
 	
 	struct_foreach({
 		//Versions
-		"version":				RunGML_Version,
-		"gm_version":			GM_version,
-		"gm_runtime_version":	GM_runtime_version,
-		"gm_build_type":		GM_build_type,
-		"gm_build_date":		GM_build_date,
+		"RunGML_Version":				RunGML_Version,
+		"GM_Version":			GM_version,
+		"GM_runtime_version":	GM_runtime_version,
+		"GM_build_type":		GM_build_type,
+		"GM_build_date":		GM_build_date,
 	
 		// Bool
 		"true":		true,

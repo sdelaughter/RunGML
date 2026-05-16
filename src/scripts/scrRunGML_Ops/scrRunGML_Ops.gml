@@ -38,30 +38,62 @@ function RunGML_DefineOps(_wipe=true) {
 		function(_i, _l=[]) {
 			var _op_list = struct_get_names(_i.ops);
 			array_sort(_op_list, true);
-			return _op_list;
+			
+			var _include_constants = false;
+			if array_length(_l) > 0 _include_constants = _l[0];
+			if not _include_constants {
+				var _out = [];
+				var _n_ops = array_length(_op_list);
+				var _op_name, _op;
+				for (var i=0; i<_n_ops; i++) {
+					_op_name = _op_list[i];
+					_op = struct_get(_i.ops, _op_name);
+					if _op.is_constant() continue;
+					array_push(_out, _op_name);
+				}
+				return _out;
+			} else return _op_list;
 		},
 	@"Return a list of supported operators
-	- args: []
+	- args: [(include_constants=false)]
 	- output: [string, *]",
-		[new RunGML_Constraint_ArgCount("eq", 0)]
+		[new RunGML_Constraint_ArgType(0, "bool", false)]
 	)
 	
 	new RunGML_Op("op_names",
 		function(_i, _l=[]) {
 			var _op_list = struct_get_names(_i.ops);
 			array_sort(_op_list, true);
+			
+			var _include_constants = false;
+			if array_length(_l) > 0 _include_constants = _l[0];
+			if not _include_constants {
+				var _out = [];
+				var _n_ops = array_length(_op_list);
+				var _op_name, _op;
+				for (var i=0; i<_n_ops; i++) {
+					_op_name = _op_list[i];
+					_op = struct_get(_i.ops, _op_name);
+					if _op.is_constant() continue;
+					array_push(_out, _op_name);
+				}
+				return _out;
+			} else {
+				_out = _op_list;
+			}
+			
 			var _str = "";
-			var _op_count = array_length(_op_list)
+			var _op_count = array_length(_out)
 			for (var i=0; i<_op_count; i++) {
 				if i > 0 _str += ", ";
-				_str += _op_list[i];
+				_str += _out[i];
 			}
 			return _str;
 		},
 	@"Return a string listing names of supported operators
-	- args: []
+	- args: [(include_constants)]
 	- output: string",
-		[new RunGML_Constraint_ArgCount("eq", 0)]
+		[new RunGML_Constraint_ArgType(0, "bool", false)]
 	)
 	
 	new RunGML_Op("op_search",
@@ -137,44 +169,83 @@ function RunGML_DefineOps(_wipe=true) {
 			if array_length(_l) > 0 _filename = _l[0];
 			if file_exists(_filename) file_delete(_filename);
 			var _f = file_text_open_append(_filename)
-			var _ops = array_concat(variable_struct_get_names(_i.ops), variable_struct_get_names(_i.aliases));
+			var _ops = variable_struct_get_names(_i.ops);
 			array_sort(_ops, true);
 			var _op, _op_name;
-			file_text_write_string(_f, string(
-	@"# RunGML Manual
+			file_text_write_string(_f, string(@"# RunGML Manual
+			
+## About
 
-	## About
+Version: {0}
 
-	Version: {0}
-
-	Homepage: {1}",
+Homepage: {1}
+",
 				RunGML_Version,
 				RunGML_Homepage
 			));
-			file_text_write_string(_f, "\n\n## Operators & *Aliases*\n");
+			
+			file_text_write_string(_f, @"
+## Table of Contents
+
+- [Operator List](#operator-list)
+- [Alias Definitions](#alias-definitions)
+- [Operator Documentation](#operator-documentation)
+- [Constant Definitions](#constant-definitions)
+"
+			);
+			
+			
+			file_text_write_string(_f, "\n\n## Operator List\n");
 			var _str = "";
 			var _op_count = array_length(_ops)
 			var _constants = [];
 			var _function_ops = [];
+			var _did_first = false;
 			for (var i=0; i<_op_count; i++) {
 				_op_name = _ops[i];
-				if struct_exists(_i.ops, _op_name) {
-					_op = struct_get(_i.ops, _op_name);
-					if _op.is_constant() {
-						array_push(_constants,[_op_name, _op.f]);
-					}
-					_str = string("[{0}]({1})", _op_name, string("#{0}", _op.name))
-				} else {
-					_op = struct_get(_i.aliases, _op_name);
-					while struct_exists(_i.aliases, _op) {
-						_op = struct_get(_i.aliases, _op);
-					}
-					_str = string("[*{0}*]({1})", _op_name, string("#{0}", _op))
+				//if struct_exists(_i.ops, _op_name) {
+				_op = struct_get(_i.ops, _op_name);
+				if _op.is_constant() {
+					array_push(_constants,[_op_name, _op.f]);
+					continue;
 				}
-				if i > 0 _str = string_concat(", ", _str)
+				_str = string("[{0}]({1})", _op_name, string("#{0}", string_lower(_op.name)))
+				if _did_first _str = string_concat(", ", _str)
+				_did_first = true;
 				file_text_write_string(_f, _str)
 			}
 		
+			file_text_write_string(_f, "\n\n## Alias Definitions");
+			var _alias_names = variable_struct_get_names(_i.aliases)
+			var _primary_alias_names = [];
+			var _points_to = [];
+			var _n_aliases = array_length(_alias_names);
+			var _nickname, _name;
+			for (var i=0; i<_n_aliases; i++) {
+				_nickname = _alias_names[i];
+				_name = struct_get(_i.aliases, _nickname);
+				array_push(_points_to, _name);
+			}
+			for (var i=0; i<_n_aliases; i++) {
+				_nickname = _alias_names[i];
+				if array_contains(_points_to, _nickname) continue;
+				_name = struct_get(_i.aliases, _nickname);
+				array_push(_primary_alias_names, _nickname);
+			}
+			array_sort(_primary_alias_names, true);
+			var _alias_defs = "";
+			_n_aliases = array_length(_primary_alias_names);
+			for (var i=0; i<_n_aliases; i++) {
+				_nickname = _primary_alias_names[i];
+				_alias_defs += $"\n- {_nickname}";
+				while(struct_exists(_i.aliases, _nickname)) {
+					_name = struct_get(_i.aliases, _nickname);
+					_alias_defs += $" -> {_name}";
+					_nickname = _name;
+				}
+			}
+			file_text_write_string(_f, _alias_defs);
+			
 			file_text_write_string(_f, "\n\n## Operator Documentation\n");
 
 			for (var i=0; i<_op_count; i++) {
@@ -185,13 +256,13 @@ function RunGML_DefineOps(_wipe=true) {
 				file_text_write_string(_f, "\n"+_op.help()+"\n")
 			}
 			
-			file_text_write_string(_f, "\n\n## Constants\n");
+			file_text_write_string(_f, "\n\n## Constant Definitions\n");
 			var _const_count = array_length(_constants);
 			var _const_name, _const_value;
 			for (var i=0; i<_const_count; i++) {
 				_const_name = _constants[i][0];
 				_const_value = _constants[i][1];
-				file_text_write_string(_f, $"\n#### {_const_name}\n{RunGML_float_format(_const_value)}")
+				file_text_write_string(_f, $"\n- {_const_name} = {RunGML_float_format(_const_value)}")
 			}
 			
 			file_text_close(_f);
@@ -623,9 +694,9 @@ function RunGML_DefineOps(_wipe=true) {
 	
 	new RunGML_Op("runfile",
 		function(_i, _l) {
-			var _runner = "run";
+			var _runner = "run_clean";
 			if array_length(_l) > 1 {
-				if _l[1] _runner = "run_clean";	
+				if not _l[1] _runner = "run";	
 			}
 			return _i.run([
 				[_runner, ["import", _l[0]]]
@@ -642,9 +713,9 @@ function RunGML_DefineOps(_wipe=true) {
 	
 	new RunGML_Op("runprog",
 		function(_i, _l) {
-			var _runner = "run";
+			var _runner = "run_clean";
 			if array_length(_l) > 1 {
-				if _l[1] _runner = "run_clean";	
+				if not _l[1] _runner = "run";	
 			}
 			return _i.run([
 				[_runner, ["import", ["string", "RunGML/programs/{0}.json", _l[0]]]]
@@ -680,9 +751,9 @@ function RunGML_DefineOps(_wipe=true) {
 	
 	new RunGML_Op("example",
 		function(_i, _l) {
-			var _runner = "run";
+			var _runner = "run_clean";
 			if array_length(_l) > 1 {
-				if _l[1] _runner = "run_clean";	
+				if not _l[1] _runner = "run";	
 			}
 			return _i.run([_runner, ["import", ["string", "RunGML/programs/examples/{0}.json", _l[0]]]])
 		},
