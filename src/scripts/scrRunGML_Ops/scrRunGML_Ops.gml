@@ -491,6 +491,30 @@ Homepage: {1}
 		[]
 	)
 	
+	new RunGML_Op("rec_line",
+		function(_i, _l) {
+			if object_get_name(variable_instance_get(_i.parent, "object_index")) == "oRunGML_Console" {
+				_i.parent.skip_line_recording = true;
+				var _n_lines = array_length(_i.parent.record);
+				if array_length(_l) < 1 {
+					return _n_lines;
+				}
+				
+				try	{
+					var _line = _i.parent.record[_l[0]];
+				} catch(_e) {
+					return new RunGML_Error($"{_l[0]} is not a valid line number.  Must be less than recording length of {_n_lines}");
+				}
+				return RunGML_Write(_line);
+			}
+			return [];
+		},
+	@"If no arguments are passed, return the number of lines that have been recorded.  If a number is passed, return the corresponding line (zero-indexed) from the recording as a string.
+	- args: [(line_number)]
+	- output: [count OR line]",
+		[]
+	)
+	
 	new RunGML_Op("rec_delete",
 		function(_i, _l) {
 			if object_get_name(variable_instance_get(_i.parent, "object_index")) == "oRunGML_Console" {

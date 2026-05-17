@@ -5,17 +5,17 @@
 global.RunGML_I_checkConstraints = false;
 
 // Set the key to toggle the console on/off
-global.RunGML_Console_toggleKey = vk_f9
+global.RunGML_Console_toggleKey = vk_f9;
 
 // Set the modifier key used for shortcuts (e.g. meta-L to clear console input history)
-global.RunGML_Console_metaKey = vk_control
+global.RunGML_Console_metaKey = vk_control;
 
 // Determine whether the console can be used
 // For example, set to the value of a DEV_MODE macro to disable console access for players
-global.RunGML_Console_canToggle = true
+global.RunGML_Console_canToggle = true;
 
 // Always recreate the console if it's destroyed (starts inactive -- press key defined above to activate)
-global.RunGML_Console_superPersistent = true
+global.RunGML_Console_superPersistent = true;
 
 // Allow new definitions to overwrite existing ones
 global.RunGML_overwriteOps = false;
@@ -84,7 +84,7 @@ function RunGML_ConfigOps() {
 	RunGML_Op("test_constant", 42);
 
 	// You can also define aliases for operators
-	RunGML_alias("test_alias", "test_operator")
+	RunGML_alias("test_alias", "test_operator");
 	
 	// Or even define aliases for other aliases, ad infinitum
 	RunGML_alias("test_alias_alias", "test_alias");

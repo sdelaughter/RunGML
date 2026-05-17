@@ -5,26 +5,29 @@
 - Added operator definitions for nearly 700 previously inaccessible built-in constants.
     - Thanks to TabularElf for pointing me to the list of constants in [GMLspeak](https://github.com/tabularelf/GMLspeak), I would not have found them all on my own.
     - Non-LTS constants are still unsupported for now.  They'll probably be added whenever the new LTS gets released.
-- Support for Loose JSON is now included and enabled by default for reading (writing still uses double-quotes by default).
+- Support for Loose JSON is now included and enabled by default for reading (writing still uses standard double-quoted JSON by default).
     - Brought to you by the [ExtendingJSON](https://github.com/JujuAdams/ExtendingJSON) library, created by Juju Adams.
 - Added a set of operators for recording sequences of console inputs, storing them as program files, and replaying the results.  Note that these operators are *only* functional when executed by an interpreter whose parent is a console instance.
-    - Call `rec_start` to start recording.  By default, programs created this way will begin with `pass`, but you can call `rec_start, last` or `rec_start, list` to begin programs with those operators instead.  You can also call `rec_start, none` to use the next line input as the initial operator.
+    - Call `rec_start` to start recording.  By default, programs created this way will begin with `pass`, but you can call `rec_start, last` or `rec_start, list` to begin programs with those operators instead.  You can also call `rec_start, none` to use the next line that's input as the initial operator.
     - Call `rec_stop, program_name` to save all lines since calling `rec_start` to `[save_directory]/RunGML/prog_recordings/program_name.json`.
     - Call `rec_cancel` to stop recording without saving and discard all recorded lines.
     - Call `rec_pause` to temporarily pause recording.
     - Call `rec_resume` to resume recording after having called `rec_pause`.
     - Call `rec_replay, program_name` to run a program saved at `[save_directory]/RunGML/prog_recordings/program_name.json`
-    - Call `rec_preview` to print any text that has been recorded so far, as a string.  Accepts an option arugment to print pretty JSON if true.
+    - Call `rec_preview` to print any text that has been recorded so far, as a string.  Accepts an optional arugment to print pretty JSON if true.
+    - Call `rec_line, number` to print a specific line number from the recording, or print the total number of recorded lines if no `number` argument is provided.
     - Call `rec_delete, index, count` to delete `count` lines from the recording, starting at line `index` (count is optional and defaults to 1).
 - Added new `op_search` operator to display a list of all operator and alias names containing a given substring.
 - Added new `screenshot` operator.  Saves to `[save_dir]/RunGML/screenshots/current_timestamp.png` by default.  Accepts an optional arugment to specify a filename in place of the generated timestamp.
 - The `if` operator now accepts capitalized versions of `True` and `False` as keys in the dictionary passed as its second argument.  These can be used without double quotes when LooseJSON is enabled, unlike `true` and `false` which must be double-quoted.
 
 #### Bug Fixes & Code Safety
-- Aliases can now be created for other aliases, and all layers of aliases will point to and be listed in the documentation for the original operator.
+- Aliases can now be created for other aliases, and all layers of aliases will be listed in the documentation for the original operator.
 - Operators can now be defined for a specific instance of the RunGML interpreter, in cases it uses something other than the global set of definitions (this was already the case for aliases).
 - Improved handling of attempts to redefine existing operators/aliases.  `scrRunGML_Config` now includes globals allowing/preventing overwriting of each definition type, and definition functions now accept an optional `_overwrite` argument which can supersede those globals.  For example, you cannot define a new operator using the name of an existing operator unless `RunGML_overwriteOps == true` or using the name of an existing alias unless `RunGML_overwriteAliases == true`; but, if you call `RunGML_Op()` with the argument `_overwrite=true`, that will allow you to bypass *both* of those global settings.
+- Redefining an alias will now properly update the alias lists of both the old and new operators pointed to, including mentions of any aliases that point to the changed alias.
 - Fixed bugs relating to `RunGML_Error.warn()`.
+- Operators beginning with capital letters no longer create broken links in the operator list at the top of the manual.
 - Converted all macros in `scrRunGML_Config` to global variables with the same names, so they can be modified at runtime.
 - Replaced all uses of `noone` with `undefined` (and all checks of `x == noone` with `is_undefined(x)`), aside from the definition of the `noone` constant.
 - Made certain methods static to reduce memory consumption.
@@ -32,13 +35,14 @@
 #### Organization & Documentation
 - Moved definitions of operators, aliases, and constants into their own scripts, separate from the core RunGML functions.  These definitions are now wrapped in `RunGML_DefineOps`, `RunGML_DefineAliases`, and `RunGML_DefineConstants` functions to enable more precision about when and where their definitions are created.  All three of those, along with `RunGML_DefineConfig` will be called by `RunGML_Init`, which is run automatically the first time an instance of the `RunGML_Interpreter` is constructed.
 - Documentation for constants now shows their value.
-- Constant definitions are now listed in a separate section at the bottom of the manual.
+- Constants and aliases now have their own sections of the manual, and are excluded from the list of operators at the top of the manual.
+- Added a table of contents to the manual.
 
 #### Misc.
 - The `run` operator no longer creates and uses a fresh instance of the interpreter, and will instead run from whichever instance calls it.
     - Added a new `run_clean` operator that preserves the old behavior.
     - The `example`, `runfile`, and `runprog` operators will all use `run_clean` by default, but now accept an optional second argument which will cause them to use `run` instead if that argument is false.
-    - The `rec_replay` operator uses `run` by default, but accepts and optional second argument which will cause it to use `run_clean` instead if that argument is true.
+    - The `rec_replay` operator uses `run` by default, but accepts an optional second argument which will cause it to use `run_clean` instead if that argument is true.
 - Removed `RunGML_opWrapper` and the `op` operator (obsoleted by v1.2.0).
 - Removed redundant definitions for operators that behaved identically to built-in functions with the same names.
 - The `op_list` and `op_names` operators now exclude constants by default, and support an optional argument that includes them if it's true.

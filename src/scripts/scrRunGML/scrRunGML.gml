@@ -306,17 +306,6 @@ function RunGML_Op(_name, _f, _desc="", _constraints=[], _i=undefined, _overwrit
 	struct_set(global.RunGML_Ops, name, self);
 }
 
-//function RunGML_listOpAliases(_op_name, _i=undefined) {
-//	if is_undefined(_i) {
-//		_aliases = global.RunGML_Aliases;
-//		_ops = global.RunGML_Ops;
-//	} else {
-//		_aliases = _i.aliases;
-//		_ops = _i.ops;
-//	}
-//}
-
-
 function RunGML_alias(_nickname, _name, _i=undefined, _overwrite=false) {
 // Create an alias for an operator
 	var _aliases, _ops;
