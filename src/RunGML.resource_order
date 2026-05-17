@@ -14,7 +14,10 @@
     {"name":"LooseJSONBufferRead","order":2,"path":"scripts/LooseJSONBufferRead/LooseJSONBufferRead.yy",},
     {"name":"LooseJSONBufferWrite","order":3,"path":"scripts/LooseJSONBufferWrite/LooseJSONBufferWrite.yy",},
     {"name":"LooseJSONWrite","order":1,"path":"scripts/LooseJSONWrite/LooseJSONWrite.yy",},
+    {"name":"scrRunGML_Aliases","order":5,"path":"scripts/scrRunGML_Aliases/scrRunGML_Aliases.yy",},
     {"name":"scrRunGML_Colors","order":2,"path":"scripts/scrRunGML_Colors/scrRunGML_Colors.yy",},
     {"name":"scrRunGML_Config","order":1,"path":"scripts/scrRunGML_Config/scrRunGML_Config.yy",},
+    {"name":"scrRunGML_Constants","order":4,"path":"scripts/scrRunGML_Constants/scrRunGML_Constants.yy",},
+    {"name":"scrRunGML_Ops","order":3,"path":"scripts/scrRunGML_Ops/scrRunGML_Ops.yy",},
   ],
 }

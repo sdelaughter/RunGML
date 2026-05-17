@@ -26,7 +26,7 @@ if keyboard_check(meta_key) {
 	if keyboard_check_pressed(vk_enter) {
 		enter();
 	} else{
-		if alphabet == noone {
+		if is_undefined(alphabet) {
 			current_line = string_insert(keyboard_string, current_line, cursor_pos);
 			cursor_pos += string_length(keyboard_string);
 		} else {

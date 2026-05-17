@@ -1,4 +1,4 @@
-if RunGML_Console_superPersistent {
+if global.RunGML_Console_superPersistent {
 	var _other_exists = false;
 	var _me = id;
 	with(oRunGML_Console) {

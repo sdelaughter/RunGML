@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scrRunGML_Ops",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scrRunGML_Ops",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/RunGML/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

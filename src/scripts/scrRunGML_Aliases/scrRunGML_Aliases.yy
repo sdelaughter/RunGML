@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scrRunGML_Aliases",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scrRunGML_Aliases",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/RunGML/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

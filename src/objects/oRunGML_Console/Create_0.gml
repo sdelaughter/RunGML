@@ -6,13 +6,13 @@ global.RunGML_Console = _me;
 
 RunGMLI = new RunGML_Interpreter("Console");
 RunGMLI.parent = id;
-RunGMLI.throw_errors = true;
+RunGMLI.throw_errors = true; // This should always be true for the console's interpreter, regardless of the global setting
 
-last_created = noone;
+last_created = undefined;
 
-toggle_key = RunGML_Console_toggleKey;
-meta_key = vk_control;
-float_precision = global.RunGML_Console_floatPrecision;
+toggle_key = global.RunGML_Console_toggleKey;
+meta_key = global.RunGML_Console_metaKey;
+float_precision = global.RunGML_floatPrecision;
 
 dt = 0;
 age = 0;
@@ -49,7 +49,7 @@ history_bg_alpha = 0.75;
 font = global.RunGML_Console_font;
 text_scale = global.RunGML_Console_scale;
 
-alphabet = noone;
+alphabet = undefined;
 // Set to only allow certain characters
 // TODO: expand to include accents + other scripts (blacklist specials instead?)
 //alphabet = [
@@ -65,8 +65,12 @@ alphabet = noone;
 
 separators = [" ", ",", ".", ":", ";", "'", "\"", "_", "-", "<", ">", "[", "]", "{", "}"]
 
+recording = false;
+record = [];
+skip_line_recording = false;
+
 toggle = function(_set=!enabled) {
-	if !RunGML_Console_canToggle {
+	if !global.RunGML_Console_canToggle {
 		enabled = false;
 		return;
 	}
@@ -132,20 +136,23 @@ wrap_string = function(_s, _w=undefined) {
 exec_line = function(_l) {
 	var _json;
 	try {
-		_json = RunGML_Read(string("[{0}]", _l))
+		_json = RunGML_Read($"[{_l}]");
 	} catch(_e) {
-		new RunGML_Error(string("Invalid Syntax\nOriginal Error:\n{0}", _e)).warn(RunGMLI)
+		new RunGML_Error(string("Invalid Syntax\nOriginal Error:\n{0}", _e)).warn(RunGMLI);
 		return undefined;
 	}
-	var _output = RunGMLI.run(_json)
+	
+	skip_line_recording = false;
+	var _output = RunGMLI.run(_json);
+	if recording and not skip_line_recording array_push(record, _json);
+	
 	if _output == undefined return;
 	if is_array(_output) {
 		if array_length(_output) < 1 return;
 	}
 	if is_numeric(_output) {
-		_output = trim_numeric_string(_output);
+		_output = RunGML_float_format(_output);
 	}
-	
 	log_line(outprompt + string(_output));
 }
 

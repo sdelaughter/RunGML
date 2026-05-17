@@ -4,8 +4,8 @@
 		[p, x, [div, [display_gui_w], 2.0]],
 		[p, y, [div, [display_gui_h], 2.0]],
 		[if,
-			["undefined", [g, RunGML_logoSprite]], {
-				"true": [g, RunGML_logoSprite, [sprite, RunGML/sprites/RunGML.png]]
+			[undefined, [g, RunGML_logoSprite]], {
+				True: [g, RunGML_logoSprite, [sprite, RunGML/sprites/RunGML.png]]
 			}
 		],
 		[p, image_speed, 0],
@@ -23,7 +23,7 @@
 				[lt, [p, bbox_left], 0],
 				[gt, [p, bbox_right], [display_gui_w]]
 			],{
-				"true": [pass,
+				True: [pass,
 					[p, x_speed, [mult, -1, [p, x_speed]]],
 					[p, x, [clamp, [p, x], 1, [sub, [display_gui_w], [p, sprite_width]]]],
 					[p, image_blend, [color_rand]]
@@ -35,7 +35,7 @@
 				[lt, [p, bbox_top], 0],
 				[gt, [p, bbox_bottom], [display_gui_h]]
 			],{
-				"true": [pass,
+				True: [pass,
 					[p, y_speed, [mult, -1, [p, y_speed]]],
 					[p, y, [clamp, [p, y], 1, [sub, [display_gui_h], [p, sprite_height]]]],
 					[p, image_blend, [color_rand]]

@@ -13,7 +13,6 @@ with(new RunGML_Interpreter("Test")) {
 		["string", "{0}{1} output", 3, ["nth", 3]]
 	]))
 	
-	
 	// Run a program from a file
 	show_debug_message("RunGML Test: Hello, filesystem?")
 	run(["runfile", "RunGML/programs/examples/hello.json"]);
