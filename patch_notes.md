@@ -1,6 +1,6 @@
 # RunGML Patch Notes
 
-## 1.3.0 (2026-05-16)
+## 1.3.0 (2026-05-17)
 #### Features
 - Added operator definitions for nearly 700 previously inaccessible built-in constants.
     - Thanks to TabularElf for pointing me to the list of constants in [GMLspeak](https://github.com/tabularelf/GMLspeak), I would not have found them all on my own.
@@ -37,6 +37,8 @@
 - Documentation for constants now shows their value.
 - Constants and aliases now have their own sections of the manual, and are excluded from the list of operators at the top of the manual.
 - Added a table of contents to the manual.
+- Copies of `README.md` and `patch_notes.md` are now included in the datafiles (mostly to make my life easier by storing everything in one place, feel free to not include them when you import the package).
+- Various updates to `README.md`.
 
 #### Misc.
 - The `run` operator no longer creates and uses a fresh instance of the interpreter, and will instead run from whichever instance calls it.
