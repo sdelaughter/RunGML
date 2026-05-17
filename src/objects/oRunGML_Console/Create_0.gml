@@ -6,12 +6,12 @@ global.RunGML_Console = _me;
 
 RunGMLI = new RunGML_Interpreter("Console");
 RunGMLI.parent = id;
-RunGMLI.throw_errors = true;
+RunGMLI.throw_errors = true; // This should always be true for the console's interpreter, regardless of the global setting
 
 last_created = undefined;
 
 toggle_key = global.RunGML_Console_toggleKey;
-meta_key = vk_control;
+meta_key = global.RunGML_Console_metaKey;
 float_precision = global.RunGML_floatPrecision;
 
 dt = 0;

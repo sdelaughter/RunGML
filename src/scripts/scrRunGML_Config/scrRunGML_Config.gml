@@ -7,6 +7,9 @@ global.RunGML_I_checkConstraints = false;
 // Set the key to toggle the console on/off
 global.RunGML_Console_toggleKey = vk_f9
 
+// Set the modifier key used for shortcuts (e.g. meta-L to clear console input history)
+global.RunGML_Console_metaKey = vk_control
+
 // Determine whether the console can be used
 // For example, set to the value of a DEV_MODE macro to disable console access for players
 global.RunGML_Console_canToggle = true
@@ -15,9 +18,8 @@ global.RunGML_Console_canToggle = true
 global.RunGML_Console_superPersistent = true
 
 // Allow new definitions to overwrite existing ones
-global.RunGML_overwriteOps = true
-global.RunGML_overwriteAliases = false
-global.RunGML_overwriteConstants = false
+global.RunGML_overwriteOps = false;
+global.RunGML_overwriteAliases = false;
 
 // Enable debug output for interpreters
 // Sets default behavior, can be changed for specific interpreter instances.
@@ -25,7 +27,7 @@ global.RunGML_I_debug = false;
 
 // Set the number of decimal places to display for floating point numbers in the console
 global.RunGML_floatPrecision = 8;
-global.RunGML_floatTrailingZeroes = true;
+global.RunGML_floatTrailingZeroes = false;
 
 // Set the console's font
 global.RunGML_Console_font = fntRunGML_Console;

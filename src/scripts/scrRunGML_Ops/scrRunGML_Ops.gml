@@ -111,7 +111,7 @@ function RunGML_DefineOps(_wipe=true) {
 			array_sort(_valid, true);
 			return _valid;
 		},
-	@"Return a list of operators whose names contain a give string.
+	@"Return a list of operators and aliases whose names contain a give string.
 	- args: [string]
 	- output: [string, *]",
 		[new RunGML_Constraint_ArgCount("eq", 1)]

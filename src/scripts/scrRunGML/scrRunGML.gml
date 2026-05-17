@@ -92,7 +92,7 @@ function RunGML_Error(_msg="") constructor {
 	msg = string(_msg);
 	static warn = function(_i=undefined) {
 		var _formatted = prefix + msg + suffix
-		if is_undefined(_i) {
+		if not is_undefined(_i) {
 			if _i.throw_errors throw(_formatted);
 			return;
 		}
@@ -234,7 +234,7 @@ function RunGML_Op(_name, _f, _desc="", _constraints=[], _i=undefined, _overwrit
 	}
 	
 	if is_instanceof(_err, RunGML_Error) {
-		if !is_undefined(_i) _out.warn();
+		_err.warn(_i);
 		return _err;
 	}
 
@@ -306,10 +306,21 @@ function RunGML_Op(_name, _f, _desc="", _constraints=[], _i=undefined, _overwrit
 	struct_set(global.RunGML_Ops, name, self);
 }
 
+//function RunGML_listOpAliases(_op_name, _i=undefined) {
+//	if is_undefined(_i) {
+//		_aliases = global.RunGML_Aliases;
+//		_ops = global.RunGML_Ops;
+//	} else {
+//		_aliases = _i.aliases;
+//		_ops = _i.ops;
+//	}
+//}
+
 
 function RunGML_alias(_nickname, _name, _i=undefined, _overwrite=false) {
 // Create an alias for an operator
 	var _aliases, _ops;
+	var _exists = false;
 	if is_undefined(_i) {
 		_aliases = global.RunGML_Aliases;
 		_ops = global.RunGML_Ops;
@@ -318,35 +329,87 @@ function RunGML_alias(_nickname, _name, _i=undefined, _overwrite=false) {
 		_ops = _i.ops;
 	}
 	var _err = [];
-	if struct_exists(_aliases, _nickname) and not (_overwrite or global.RunGML_overwriteAliases) {
-		_err = new RunGML_Error(string("Cannot redefine alias: {0} -> {1}", _nickname, struct_get(_aliases, _nickname)));
+	
+	if not struct_exists(_ops, _name) and not struct_exists(_aliases, _name) {
+		_err = new RunGML_Error(string("Cannot create alias for undefined name: {0}", _name));
+		_err.warn(_i);
+		return _err;
 	}
+	
+	if struct_exists(_aliases, _nickname) {
+		_exists = true;
+		if not (_overwrite or global.RunGML_overwriteAliases) {
+			_err = new RunGML_Error(string("Cannot redefine alias: {0} -> {1}", _nickname, struct_get(_aliases, _nickname)));
+			_err.warn(_i);
+			return _err;
+		}
+	}
+	
 	if struct_exists(_ops, _nickname) {
 		if (_overwrite or global.RunGML_overwriteOps) {
 			struct_remove(_ops, _nickname);
 		} else {
 			_err = new RunGML_Error(string("Cannot create alias with defined operator as nickname: {0}", _nickname));
+			_err.warn(_i);
+			return _err;
 		}
-	}
-
-	if not struct_exists(_ops, _name) {
-		if not struct_exists(_aliases, _name) {
-			_err = new RunGML_Error(string("Cannot create alias for undefined name: {0}", _name));
-		}	
 	}
 	
-	if is_instanceof(_err, RunGML_Error) {
-		if !is_undefined(_i) _err.warn();
-		return _err;
-	} else {
-		var _resolves_to = _name;
-		while struct_exists(_aliases, _resolves_to) {
-			_resolves_to = struct_get(_aliases, _resolves_to);
-		}
-		array_push(struct_get(struct_get(_ops, _resolves_to), "aliases"), _nickname);
-		struct_set(_aliases, _nickname, _name);
-		return [];
+	// Figure out which operator the alias will point to now
+	var _resolves_to = _name;
+	while struct_exists(_aliases, _resolves_to) {
+		_resolves_to = struct_get(_aliases, _resolves_to);
 	}
+
+	if _exists {
+		// Figure out which operator the alias was pointing to before
+		var _old_name = struct_get(_aliases, _nickname);
+		var _did_resolve_to = _old_name;
+		while struct_exists(_aliases, _did_resolve_to) {
+			_did_resolve_to = struct_get(_aliases, _did_resolve_to);
+		}
+		
+		// Search recursively backwards for any other aliases that point to this alias
+		var _pointed_to_by = [_nickname];
+		var _to_check = [_nickname];
+		var _did_check = [];
+		var _alias_nicknames = struct_get_names(_aliases);
+		var _n_aliases = array_length(_alias_nicknames);
+		var _tmp_nickname, _tmp_name, _checking;
+		while array_length(_to_check) > 0 {
+			_checking = array_shift(_to_check);
+			array_push(_did_check, _checking);
+			for (var i=0; i<_n_aliases; i++) {
+				_tmp_nickname = _alias_nicknames[i];
+				_tmp_name = struct_get(_aliases, _tmp_nickname);
+				if _tmp_name == _checking {
+					if not array_contains(_pointed_to_by, _tmp_nickname) {
+						array_push(_pointed_to_by, _tmp_nickname);
+					}
+					if not array_contains(_did_check, _tmp_nickname) {
+						array_push(_to_check, _tmp_nickname);	
+					}
+				}
+			}
+		}
+		
+		// Remove higher order aliases from old op and add to new
+		var _n_pointers = array_length(_pointed_to_by);
+		var _pointer, _index, _old_op, _new_op;
+		for (var i=0; i<_n_pointers; i++) {
+			_pointer = _pointed_to_by[i];
+			_old_op = struct_get(_ops, _did_resolve_to)
+			_new_op = struct_get(_ops, _resolves_to)
+			
+			_index = array_get_index(struct_get(_old_op, "aliases"), _pointer);
+			array_delete(struct_get(_old_op, "aliases"), _index, 1);
+			array_push(struct_get(_new_op, "aliases"), _pointer);
+		}
+	}
+	
+	if not _exists array_push(struct_get(struct_get(_ops, _resolves_to), "aliases"), _nickname);
+	struct_set(_aliases, _nickname, _name);
+	return [];
 }
 
 function RunGML_float_format(_val, _digits=undefined) {
