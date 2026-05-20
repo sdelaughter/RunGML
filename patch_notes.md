@@ -1,5 +1,18 @@
 # RunGML Patch Notes
 
+## 1.3.1 (2026-05-20)
+#### Features
+- Aliases can now refer to things besides defined operators or other aliases (functions, assets, strings, numbers, etc.).
+- Calling `help` on an alias now displays the reference chain for that alias before displaying the help info for what it points to.
+- Added new `gm_manual` operator.
+    - Call with no arguments to open the GameMaker manual homepage.
+    - Call `gm_manual, search_term` to open the GameMaker manual page for the given search term if one exists, or to search the manual for that term if not.
+- Calling `help, search_term` will now open the GameMaker manual page for the given search term if one exists, unless the search term corresponds to a RunGML operator or alias.
+
+#### Bug Fixes
+- Overwriting an alias definition with an operator definition now updates the list of alias definitions for the operator the alias used to point to (if any).
+- Fixed markdown formatting in operator docstrings.
+
 ## 1.3.0 (2026-05-17)
 #### Features
 - Added operator definitions for nearly 700 previously inaccessible built-in constants.

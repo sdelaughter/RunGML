@@ -18,8 +18,8 @@ global.RunGML_Console_canToggle = true;
 global.RunGML_Console_superPersistent = true;
 
 // Allow new definitions to overwrite existing ones
-global.RunGML_overwriteOps = false;
-global.RunGML_overwriteAliases = false;
+global.RunGML_overwriteOps = true;
+global.RunGML_overwriteAliases = true;
 
 // Enable debug output for interpreters
 // Sets default behavior, can be changed for specific interpreter instances.
@@ -74,7 +74,7 @@ function RunGML_ConfigOps() {
 		function(_i, _l) {
 			return "Hello, Config!"
 		},
-@"Test operator
+		@"Test operator
 - args: []
 - output: string",
 		[new RunGML_Constraint_ArgCount("geq", 0)]

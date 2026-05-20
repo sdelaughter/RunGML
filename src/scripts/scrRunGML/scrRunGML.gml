@@ -1,4 +1,4 @@
-#macro RunGML_Version "1.3.0"
+#macro RunGML_Version "1.3.1"
 #macro RunGML_Homepage "https://github.com/sdelaughter/RunGML"
 
 global.RunGML_Ops = {};
@@ -39,11 +39,12 @@ function RunGML_Interpreter(_name="RunGML_I") constructor {
 		}
 		
 		var _op_name = array_shift(_temp_list);
-		var _out = _op_name;
 		while struct_exists(aliases, _op_name) {
 			// While to allow for nested aliases
 			_op_name = struct_get(aliases, _op_name);
 		}
+		var _out = _op_name;
+		
 		if struct_exists(ops, _op_name) {
 			var _op = struct_get(ops, _op_name);
 			if debug show_debug_message(@"RunGML_I:{0}[{1}].exec({2}({3}))", name, recursion, _op_name, _temp_list);
@@ -227,6 +228,25 @@ function RunGML_Op(_name, _f, _desc="", _constraints=[], _i=undefined, _overwrit
 	}
 	if struct_exists(_aliases, _name) {
 		if (_overwrite or global.RunGML_overwriteAliases) {
+			// Figure out which operator the alias was pointing to before
+			var _did_resolve_to = RunGML_aliasResolvesTo(_name, _i);
+		
+			// Search recursively backwards for any other aliases that point to this alias
+			var _pointed_to_by = RunGML_listAliasesOf(_name, _i);
+			array_push(_pointed_to_by, _name)
+		
+			// Remove higher order aliases from old op
+			var _n_pointers = array_length(_pointed_to_by);
+			var _pointer, _index, _old_op, _new_op;
+			for (var i=0; i<_n_pointers; i++) {
+				_pointer = _pointed_to_by[i];
+				_old_op = struct_get(_ops, _did_resolve_to)
+			
+				if !is_undefined(_old_op) {
+					_index = array_get_index(struct_get(_old_op, "aliases"), _pointer);
+					array_delete(struct_get(_old_op, "aliases"), _index, 1);
+				}
+			}
 			struct_remove(_aliases, _name);
 		} else {
 			_err = new RunGML_Error(string("Cannot define operator with existing alias name: {0} -> {1}", _name, struct_get(_aliases, _name)));
@@ -250,13 +270,13 @@ function RunGML_Op(_name, _f, _desc="", _constraints=[], _i=undefined, _overwrit
 			_docstring += $" [constant] = {RunGML_float_format(f)}"
 		}
 		if array_length(aliases) > 0 {
-			_docstring += string("\n- aliases: {0}", aliases);
+			_docstring += $"\n- aliases: {aliases}";
 		}
 		var _n_constraints = array_length(constraints);
 		if _n_constraints > 0 {
 			_docstring += "\n- constraints:";
 			for (var i=0; i<_n_constraints; i++) {
-				_docstring += string("\n    - {0}", constraints[i].doc())
+				_docstring += $"\n    - {constraints[i].doc()}";
 			}
 		}
 		return _docstring;
@@ -306,6 +326,69 @@ function RunGML_Op(_name, _f, _desc="", _constraints=[], _i=undefined, _overwrit
 	struct_set(global.RunGML_Ops, name, self);
 }
 
+function RunGML_aliasResolvesTo(_nickname, _i=undefined) {
+	var _aliases, _ops;
+	var _exists = false;
+	if is_undefined(_i) {
+		_aliases = global.RunGML_Aliases;
+		_ops = global.RunGML_Ops;
+	} else {
+		_aliases = _i.aliases;
+		_ops = _i.ops;
+	}
+	
+	var _resolves_to = _nickname;
+	while struct_exists(_aliases, _resolves_to) {
+		_resolves_to = struct_get(_aliases, _resolves_to);
+	}
+	return _resolves_to;
+}
+
+function RunGML_listAliasesOf(_search_for, _i=undefined) {
+	var _aliases, _ops;
+	if is_undefined(_i) {
+		_aliases = global.RunGML_Aliases;
+		_ops = global.RunGML_Ops;
+	} else {
+		_aliases = _i.aliases;
+		_ops = _i.ops;
+	}
+	
+	var _pointed_to_by = [];
+	var _to_check = [];
+	
+	var _alias_nicknames = struct_get_names(_aliases);
+	var _n_aliases = array_length(_alias_nicknames);
+	for (var i=0; i<_n_aliases; i++) {
+		var _nickname = _alias_nicknames[i];
+		var _name = struct_get(_aliases, _nickname);
+		if _name == _search_for {
+			array_push(_pointed_to_by, _nickname);
+			array_push(_to_check, _nickname);
+		}
+	}
+	
+	var _did_check = [];
+	var _tmp_nickname, _tmp_name, _checking;
+	while array_length(_to_check) > 0 {
+		_checking = array_shift(_to_check);
+		array_push(_did_check, _checking);
+		for (var i=0; i<_n_aliases; i++) {
+			_tmp_nickname = _alias_nicknames[i];
+			_tmp_name = struct_get(_aliases, _tmp_nickname);
+			if _tmp_name == _checking {
+				if not array_contains(_pointed_to_by, _tmp_nickname) {
+					array_push(_pointed_to_by, _tmp_nickname);
+				}
+				if not array_contains(_did_check, _tmp_nickname) {
+					array_push(_to_check, _tmp_nickname);	
+				}
+			}
+		}
+	}
+	return _pointed_to_by;
+}
+
 function RunGML_alias(_nickname, _name, _i=undefined, _overwrite=false) {
 // Create an alias for an operator
 	var _aliases, _ops;
@@ -318,12 +401,6 @@ function RunGML_alias(_nickname, _name, _i=undefined, _overwrite=false) {
 		_ops = _i.ops;
 	}
 	var _err = [];
-	
-	if not struct_exists(_ops, _name) and not struct_exists(_aliases, _name) {
-		_err = new RunGML_Error(string("Cannot create alias for undefined name: {0}", _name));
-		_err.warn(_i);
-		return _err;
-	}
 	
 	if struct_exists(_aliases, _nickname) {
 		_exists = true;
@@ -344,43 +421,16 @@ function RunGML_alias(_nickname, _name, _i=undefined, _overwrite=false) {
 		}
 	}
 	
-	// Figure out which operator the alias will point to now
-	var _resolves_to = _name;
-	while struct_exists(_aliases, _resolves_to) {
-		_resolves_to = struct_get(_aliases, _resolves_to);
-	}
+	// Figure out what the alias will point to now
+	var _resolves_to = RunGML_aliasResolvesTo(_name, _i)
 
 	if _exists {
 		// Figure out which operator the alias was pointing to before
-		var _old_name = struct_get(_aliases, _nickname);
-		var _did_resolve_to = _old_name;
-		while struct_exists(_aliases, _did_resolve_to) {
-			_did_resolve_to = struct_get(_aliases, _did_resolve_to);
-		}
+		var _did_resolve_to = RunGML_aliasResolvesTo(_nickname, _i);
 		
 		// Search recursively backwards for any other aliases that point to this alias
-		var _pointed_to_by = [_nickname];
-		var _to_check = [_nickname];
-		var _did_check = [];
-		var _alias_nicknames = struct_get_names(_aliases);
-		var _n_aliases = array_length(_alias_nicknames);
-		var _tmp_nickname, _tmp_name, _checking;
-		while array_length(_to_check) > 0 {
-			_checking = array_shift(_to_check);
-			array_push(_did_check, _checking);
-			for (var i=0; i<_n_aliases; i++) {
-				_tmp_nickname = _alias_nicknames[i];
-				_tmp_name = struct_get(_aliases, _tmp_nickname);
-				if _tmp_name == _checking {
-					if not array_contains(_pointed_to_by, _tmp_nickname) {
-						array_push(_pointed_to_by, _tmp_nickname);
-					}
-					if not array_contains(_did_check, _tmp_nickname) {
-						array_push(_to_check, _tmp_nickname);	
-					}
-				}
-			}
-		}
+		var _pointed_to_by = RunGML_listAliasesOf(_nickname, _i)
+		array_push(_pointed_to_by, _nickname);
 		
 		// Remove higher order aliases from old op and add to new
 		var _n_pointers = array_length(_pointed_to_by);
@@ -390,13 +440,19 @@ function RunGML_alias(_nickname, _name, _i=undefined, _overwrite=false) {
 			_old_op = struct_get(_ops, _did_resolve_to)
 			_new_op = struct_get(_ops, _resolves_to)
 			
-			_index = array_get_index(struct_get(_old_op, "aliases"), _pointer);
-			array_delete(struct_get(_old_op, "aliases"), _index, 1);
-			array_push(struct_get(_new_op, "aliases"), _pointer);
+			if !is_undefined(_old_op) {
+				_index = array_get_index(struct_get(_old_op, "aliases"), _pointer);
+				array_delete(struct_get(_old_op, "aliases"), _index, 1);
+			}
+			if !is_undefined(_new_op) {
+				array_push(struct_get(_new_op, "aliases"), _pointer);
+			}
 		}
 	}
 	
-	if not _exists array_push(struct_get(struct_get(_ops, _resolves_to), "aliases"), _nickname);
+	if not _exists and struct_exists(_ops, _resolves_to) {
+		array_push(struct_get(struct_get(_ops, _resolves_to), "aliases"), _nickname);
+	}
 	struct_set(_aliases, _nickname, _name);
 	return [];
 }
@@ -429,6 +485,20 @@ function RunGML_color(_name, _color) {
 	struct_set(global.RunGML_Colors	, _name, _color)
 }
 
+function RunGML_Load_GM_Manual_Index(_path="RunGML/gm_manual.json") {
+	// JSON obtained from https://manual.gamemaker.io/monthly/en/helpdocs_keywords.json
+	// Last updated 2026-05-20
+	if !file_exists(_path) return {};
+	var _file = file_text_open_read(_path);
+	var _json_string = "";
+	while (!file_text_eof(_file)) {
+		_json_string += file_text_read_string(_file);
+		file_text_readln(_file);
+	}
+	file_text_close(_file);
+	return RunGML_Read(_json_string);	
+}
+
 function RunGML_Init() {
 	global.RunGML_Ops = {};
 	global.RunGML_Aliases = {};
@@ -437,5 +507,6 @@ function RunGML_Init() {
 	RunGML_DefineAliases();
 	RunGML_ConfigOps();
 	
+	global.RunGML_GM_Manual_Index = RunGML_Load_GM_Manual_Index();
 	global.RunGML_DidInit = true;
 }
