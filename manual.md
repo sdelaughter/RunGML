@@ -2,7 +2,7 @@
 			
 ## About
 
-Version: 1.3.0
+Version: 1.3.1
 
 Homepage: https://github.com/sdelaughter/RunGML
 
@@ -15,7 +15,7 @@ Homepage: https://github.com/sdelaughter/RunGML
 
 
 ## Operator List
-[add](#add), [alias](#alias), [and](#and), [angle](#angle), [application_surface](#application_surface), [approach](#approach), [arctan2](#arctan2), [array](#array), [asset](#asset), [asset_type](#asset_type), [async_load](#async_load), [cat](#cat), [choose](#choose), [clear](#clear), [color](#color), [color_inv](#color_inv), [color_inv_hue](#color_inv_hue), [color_merge](#color_merge), [color_rand](#color_rand), [console](#console), [cos](#cos), [create](#create), [current](#current), [current_day](#current_day), [current_hour](#current_hour), [current_minute](#current_minute), [current_month](#current_month), [current_second](#current_second), [current_time](#current_time), [current_year](#current_year), [cursor](#cursor), [cursor_sprite](#cursor_sprite), [date_get](#date_get), [datestring](#datestring), [datetime](#datetime), [debug](#debug), [dec](#dec), [delta](#delta), [delta_time](#delta_time), [destroy](#destroy), [display_gui_h](#display_gui_h), [display_gui_w](#display_gui_w), [display_h](#display_h), [display_w](#display_w), [div](#div), [do](#do), [do_here](#do_here), [dot](#dot), [dot3](#dot3), [dot3_norm](#dot3_norm), [dot_norm](#dot_norm), [draw_alpha](#draw_alpha), [draw_circle](#draw_circle), [draw_color](#draw_color), [draw_ellipse](#draw_ellipse), [draw_font](#draw_font), [draw_format](#draw_format), [draw_halign](#draw_halign), [draw_line](#draw_line), [draw_point](#draw_point), [draw_rect](#draw_rect), [draw_self](#draw_self), [draw_valign](#draw_valign), [eq](#eq), [event_data](#event_data), [event_number](#event_number), [event_type](#event_type), [example](#example), [exec](#exec), [export](#export), [for](#for), [fps](#fps), [fps_real](#fps_real), [fullscreen](#fullscreen), [game_display_name](#game_display_name), [game_project_name](#game_project_name), [game_save_id](#game_save_id), [game_speed](#game_speed), [game_time](#game_time), [geq](#geq), [global](#global), [gt](#gt), [help](#help), [hsv](#hsv), [if](#if), [import](#import), [in](#in), [inc](#inc), [inst](#inst), [instance_count](#instance_count), [iter](#iter), [iters](#iters), [last](#last), [len](#len), [lendir_x](#lendir_x), [lendir_y](#lendir_y), [leq](#leq), [list](#list), [log](#log), [lt](#lt), [manual](#manual), [map_range](#map_range), [mod](#mod), [mouse_button](#mouse_button), [mouse_lastbutton](#mouse_lastbutton), [mouse_x](#mouse_x), [mouse_y](#mouse_y), [mult](#mult), [near](#near), [near_cursor](#near_cursor), [neq](#neq), [not](#not), [nth](#nth), [object](#object), [op_count](#op_count), [op_list](#op_list), [op_names](#op_names), [op_search](#op_search), [or](#or), [os_browser](#os_browser), [os_device](#os_device), [os_type](#os_type), [os_version](#os_version), [out](#out), [parent](#parent), [pass](#pass), [point_dir](#point_dir), [point_dist](#point_dist), [pow](#pow), [print](#print), [prog](#prog), [program_directory](#program_directory), [quit](#quit), [rand](#rand), [rand_int](#rand_int), [rand_seed](#rand_seed), [rec_cancel](#rec_cancel), [rec_delete](#rec_delete), [rec_line](#rec_line), [rec_pause](#rec_pause), [rec_preview](#rec_preview), [rec_replay](#rec_replay), [rec_resume](#rec_resume), [rec_start](#rec_start), [rec_stop](#rec_stop), [reference](#reference), [reference_parent](#reference_parent), [repeat](#repeat), [restart](#restart), [rgb](#rgb), [rickroll](#rickroll), [room](#room), [room_first](#room_first), [room_h](#room_h), [room_last](#room_last), [room_next](#room_next), [room_w](#room_w), [run](#run), [run_clean](#run_clean), [runfile](#runfile), [runprog](#runprog), [screenshot](#screenshot), [shader](#shader), [shader_reset](#shader_reset), [sin](#sin), [sprite](#sprite), [string](#string), [struct](#struct), [struct_keys](#struct_keys), [sub](#sub), [switch](#switch), [tan](#tan), [temp_directory](#temp_directory), [test_operator](#test_operator), [this](#this), [type](#type), [undefined](#undefined), [update](#update), [url_open](#url_open), [var](#var), [view_current](#view_current), [webgl_enabled](#webgl_enabled), [while](#while), [working_directory](#working_directory)
+[add](#add), [alias](#alias), [and](#and), [angle](#angle), [application_surface](#application_surface), [approach](#approach), [arctan2](#arctan2), [array](#array), [asset](#asset), [asset_type](#asset_type), [async_load](#async_load), [cat](#cat), [choose](#choose), [clear](#clear), [color](#color), [color_inv](#color_inv), [color_inv_hue](#color_inv_hue), [color_merge](#color_merge), [color_rand](#color_rand), [console](#console), [cos](#cos), [create](#create), [current](#current), [current_day](#current_day), [current_hour](#current_hour), [current_minute](#current_minute), [current_month](#current_month), [current_second](#current_second), [current_time](#current_time), [current_year](#current_year), [cursor](#cursor), [cursor_sprite](#cursor_sprite), [date_get](#date_get), [datestring](#datestring), [datetime](#datetime), [debug](#debug), [dec](#dec), [delta](#delta), [delta_time](#delta_time), [destroy](#destroy), [display_gui_h](#display_gui_h), [display_gui_w](#display_gui_w), [display_h](#display_h), [display_w](#display_w), [div](#div), [do](#do), [do_here](#do_here), [dot](#dot), [dot3](#dot3), [dot3_norm](#dot3_norm), [dot_norm](#dot_norm), [draw_alpha](#draw_alpha), [draw_circle](#draw_circle), [draw_color](#draw_color), [draw_ellipse](#draw_ellipse), [draw_font](#draw_font), [draw_format](#draw_format), [draw_halign](#draw_halign), [draw_line](#draw_line), [draw_point](#draw_point), [draw_rect](#draw_rect), [draw_self](#draw_self), [draw_valign](#draw_valign), [eq](#eq), [event_data](#event_data), [event_number](#event_number), [event_type](#event_type), [example](#example), [exec](#exec), [export](#export), [for](#for), [fps](#fps), [fps_real](#fps_real), [fullscreen](#fullscreen), [game_display_name](#game_display_name), [game_project_name](#game_project_name), [game_save_id](#game_save_id), [game_speed](#game_speed), [game_time](#game_time), [geq](#geq), [global](#global), [gm_manual](#gm_manual), [gt](#gt), [help](#help), [hsv](#hsv), [if](#if), [import](#import), [in](#in), [inc](#inc), [inst](#inst), [instance_count](#instance_count), [iter](#iter), [iters](#iters), [last](#last), [len](#len), [lendir_x](#lendir_x), [lendir_y](#lendir_y), [leq](#leq), [list](#list), [log](#log), [lt](#lt), [manual](#manual), [map_range](#map_range), [mod](#mod), [mouse_button](#mouse_button), [mouse_lastbutton](#mouse_lastbutton), [mouse_x](#mouse_x), [mouse_y](#mouse_y), [mult](#mult), [near](#near), [near_cursor](#near_cursor), [neq](#neq), [not](#not), [nth](#nth), [object](#object), [op_count](#op_count), [op_list](#op_list), [op_names](#op_names), [op_search](#op_search), [or](#or), [os_browser](#os_browser), [os_device](#os_device), [os_type](#os_type), [os_version](#os_version), [out](#out), [parent](#parent), [pass](#pass), [point_dir](#point_dir), [point_dist](#point_dist), [pow](#pow), [print](#print), [prog](#prog), [program_directory](#program_directory), [quit](#quit), [rand](#rand), [rand_int](#rand_int), [rand_seed](#rand_seed), [rec_cancel](#rec_cancel), [rec_delete](#rec_delete), [rec_line](#rec_line), [rec_pause](#rec_pause), [rec_preview](#rec_preview), [rec_replay](#rec_replay), [rec_resume](#rec_resume), [rec_start](#rec_start), [rec_stop](#rec_stop), [reference](#reference), [reference_parent](#reference_parent), [repeat](#repeat), [restart](#restart), [rgb](#rgb), [rickroll](#rickroll), [room](#room), [room_first](#room_first), [room_h](#room_h), [room_last](#room_last), [room_next](#room_next), [room_w](#room_w), [run](#run), [run_clean](#run_clean), [runfile](#runfile), [runprog](#runprog), [screenshot](#screenshot), [shader](#shader), [shader_reset](#shader_reset), [sin](#sin), [sprite](#sprite), [string](#string), [struct](#struct), [struct_keys](#struct_keys), [sub](#sub), [switch](#switch), [tan](#tan), [temp_directory](#temp_directory), [test_operator](#test_operator), [this](#this), [type](#type), [undefined](#undefined), [update](#update), [url_open](#url_open), [var](#var), [view_current](#view_current), [webgl_enabled](#webgl_enabled), [while](#while), [working_directory](#working_directory)
 
 ## Alias Definitions
 - False -> false
@@ -44,8 +44,8 @@ Homepage: https://github.com/sdelaughter/RunGML
 
 ### add
 Add two or more numbers (use 'cat' or 'string' to combine strings)
-	- args: [A, B]
-	- output: A + B (+ ...)
+- args: [A, B]
+- output: A + B (+ ...)
 - constraints:
     - count(args) geq 2
     - typeof(args[all]) in [ "number","int32","int64" ] (required)
@@ -53,12 +53,12 @@ Add two or more numbers (use 'cat' or 'string' to combine strings)
 ### alias
 Create an operator alias. Behavior depends on the number of arguments:
 
-	0. Return the interpreter's entire alias struct
-	1. If the argument names an operator or alias, return a list of all synonyms starting with the real name.
-	2. Creates a new alias with nickname arg0 for operator arg1.  arg0 cannot be in use, arg1 must be defined.
+0. Return the interpreter's entire alias struct
+1. If the argument names an operator or alias, return a list of all synonyms starting with the real name.
+2. Creates a new alias with nickname arg0 for operator arg1.  arg0 cannot be in use, arg1 must be defined.
 	
-	- args: [(nickname), (name)]
-	- output: struct or list
+- args: [(nickname), (name)]
+- output: struct or list
 - constraints:
     - count(args) leq 2
     - typeof(args[0]) in [ "string" ] (optional)
@@ -66,13 +66,13 @@ Create an operator alias. Behavior depends on the number of arguments:
 
 ### and
 Logical and operator
-	    - args: [A, B]
-	    - output: A and B
+- args: [A, B]
+- output: A and B
 
 ### angle
 Find the shortest distance between two angles.
-	- args: [end_angle, start_angle]
-	- output: angle_difference
+- args: [end_angle, start_angle]
+- output: angle_difference
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
     - typeof(args[1]) in [ "number","int32","int64" ] (required)
@@ -82,16 +82,16 @@ Find the shortest distance between two angles.
 
 ### approach
 Increment a number by some amount while staying within a range
-	- args: [number, increment, min, max]
-	- output: [number]
+- args: [number, increment, min, max]
+- output: [number]
 - constraints:
     - count(args) eq 4
     - typeof(args[all]) in [ "number","int32","int64" ] (required)
 
 ### arctan2
 Return arctan2 of an angle y/x. y = opposite side of triangle and x = adjacent side of triangle
-	- args: [y, x]
-	- output: arctan2(y, x)
+- args: [y, x]
+- output: arctan2(y, x)
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
     - typeof(args[1]) in [ "number","int32","int64" ] (required)
@@ -99,25 +99,26 @@ Return arctan2 of an angle y/x. y = opposite side of triangle and x = adjacent s
 ### array
 Create, read, or modify an array. Behavior depends on the number of arguments:
 
-	0. Return an empty array
-	1. Return [arg0]
-	2. Return arg0[arg1]
-	3. Set arg0[arg1] = arg2;
-	- args: [(array), (index), (value)]
-	- output: [*]
+0. Return an empty array
+1. Return [arg0]
+2. Return arg0[arg1]
+3. Set arg0[arg1] = arg2
+
+- args: [(array), (index), (value)]
+- output: [*]
 - aliases: [ "a" ]
 
 ### asset
 Return the index of the named asset
-	- args: [asset_name]
-	- output: index
+- args: [asset_name]
+- output: index
 - constraints:
     - typeof(args[0]) in [ "string" ] (required)
 
 ### asset_type
 Return the type of a variable
-	- args: [*]
-	- output: type_name
+- args: [*]
+- output: type_name
 - constraints:
     - typeof(args[0]) in [ "ref","string" ] (required)
 
@@ -126,44 +127,44 @@ Return the type of a variable
 
 ### cat
 Concatenate arguments into a single string
-	    - args: [value, (...)]
-	    - output: [string]
+- args: [value, (...)]
+- output: [string]
 
 ### choose
 Return a random element from a list.
-	- args: [(max=1)]
-	- output: number
+- args: [(max=1)]
+- output: number
 - constraints:
     - typeof(args[0]) in [ "array" ] (required)
 
 ### clear
 If run from a console, clear that console's history
-	- args: []
-	- output: instance
+- args: []
+- output: instance
 - constraints:
     - count(args) eq 0
 
 ### color
 Create a color by name or hex code
-	- args: [string]
-	- output: color
+- args: [string]
+- output: color
 - constraints:
     - typeof(args[0]) in [ "string" ] (required)
 
 ### color_inv
 Return the RGB inverse of a color
-	- args: [color]
-	- output: color
+- args: [color]
+- output: color
 
 ### color_inv_hue
 Return the hue inverse of a color, with the same saturation and value
-	- args: [color]
-	- output: color
+- args: [color]
+- output: color
 
 ### color_merge
 Merge two colors by some amount
-	- args: [color1, color2, fraction]
-	- output: color3
+- args: [color1, color2, fraction]
+- output: color3
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
     - typeof(args[1]) in [ "number","int32","int64" ] (required)
@@ -171,21 +172,21 @@ Merge two colors by some amount
 
 ### color_rand
 Create a random color
-	- args: []
-	- output: color
+- args: []
+- output: color
 
 ### console
 Return a reference to the RunGML console, creating one if it doesn't exist
-	- args: []
-	- output: instance
+- args: []
+- output: instance
 - constraints:
     - count(args) leq 2
     - typeof(args[0]) in [ "string" ] (optional)
 
 ### cos
 Return the cosine of an angle in raidans.
-	- args: [angle]
-	- output: cos/dcos/arccos/darccos(angle)
+- args: [angle]
+- output: cos/dcos/arccos/darccos(angle)
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
     - typeof(args[1]) in [ "bool" ] (optional)
@@ -193,8 +194,8 @@ Return the cosine of an angle in raidans.
 
 ### create
 Create a new object instance
-	- args: [x, y, depth/layer_name, object_name]
-	- output: [instance_id]
+- args: [x, y, depth/layer_name, object_name]
+- output: [instance_id]
 - constraints:
     - count(args) eq 4
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
@@ -204,8 +205,8 @@ Create a new object instance
 
 ### current
 Return the current time. Argument is a string specifying a date component: second/minute/hour/day/weekday/month/year, or s/m/h/d/w/M/y.  With no arguments, return the current datetime.
-	- args: [('s'/'m'/'h'/'d'/'w'/'M'/'y')]
-	- output: number
+- args: [('s'/'m'/'h'/'d'/'w'/'M'/'y')]
+- output: number
 - constraints:
     - typeof(args[0]) in [ "string" ] (optional)
 
@@ -232,85 +233,85 @@ Return the current time. Argument is a string specifying a date component: secon
 
 ### cursor
 Return the cursor's coordinates
-	- args: []
-	- output: [mouse_x, mouse_y]
+- args: []
+- output: [mouse_x, mouse_y]
 
 ### cursor_sprite
 [dynamic constant]
 
 ### date_get
 Get the second, minute, hour, day, weekday, month, or year from a datetime value.
-	- args: [datetime, 's'/'m'/'h'/'d'/'w'/'M'/'y']
-	- output: number
+- args: [datetime, 's'/'m'/'h'/'d'/'w'/'M'/'y']
+- output: number
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
     - typeof(args[1]) in [ "string" ] (required)
 
 ### datestring
 Create a string from a datetime value, or return the current datetime if no arguments are passed.
-	- args: [(datetime)]
-	- output: date_string
+- args: [(datetime)]
+- output: date_string
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (optional)
 
 ### datetime
 Create a datetime value
-	- args: [year, month, day, hour, minute, second]
-	- output: datetime
+- args: [year, month, day, hour, minute, second]
+- output: datetime
 - constraints:
     - count(args) eq 6
     - typeof(args[all]) in [ "number","int32","int64" ] (required)
 
 ### debug
 Enable or disable the GameMaker deubg overlay. Passing zero arguments toggles its visibility.
-	    - args: [(enable), (minimize), (scale), (alpha)]
-	    - output: []
+- args: [(enable), (minimize), (scale), (alpha)]
+- output: []
 
 ### dec
 Decrement a variable by some amount.  If the variable is undefined, set it to that amount.
-	- args: [register_name, number]
-	- output: []
+- args: [register_name, number]
+- output: []
 - constraints:
     - typeof(args[0]) in [ "string","number","int32","int64" ] (required)
     - typeof(args[1]) in [ "number","int32","int64" ] (optional)
 
 ### delta
 Return the time elapsed since the previous frame in seconds
-	- args: []
-	- output: number
+- args: []
+- output: number
 
 ### delta_time
 [dynamic constant]
 
 ### destroy
 Destroy an instance
-	- args: [instance_id]
-	- output: []
+- args: [instance_id]
+- output: []
 
 ### display_gui_h
 Returns the height of the display GUI.
-	- args: []
-	- output: [height]
+- args: []
+- output: [height]
 
 ### display_gui_w
 Returns the width of the display GUI.
-	- args: []
-	- output: [width]
+- args: []
+- output: [width]
 
 ### display_h
 Returns the height of the display.
-	- args: []
-	- output: [height]
+- args: []
+- output: [height]
 
 ### display_w
 Returns the width of the display.
-	- args: []
-	- output: [width]
+- args: []
+- output: [width]
 
 ### div
 Divide two numbers
-	- args: [A, B]
-	- output: A / B
+- args: [A, B]
+- output: A / B
 - aliases: [ "divide" ]
 - constraints:
     - count(args) eq 2
@@ -318,63 +319,63 @@ Divide two numbers
 
 ### do
 Execute a function with an optional list of arguments in its original context using method_call().
-	- args: [function, ([args])]
-	- output: *
+- args: [function, ([args])]
+- output: *
 - constraints:
     - typeof(args[0]) in [ "method" ] (required)
     - typeof(args[1]) in [ "array" ] (optional)
 
 ### do_here
 Execute a function with an optional list of arguments in the operator's context using script_execute_ext().  In most cases, use 'do' instead.
-	- args: [function, ([args])]
-	- output: *
+- args: [function, ([args])]
+- output: *
 - constraints:
     - typeof(args[0]) in [ "method" ] (required)
     - typeof(args[1]) in [ "array" ] (optional)
 
 ### dot
 Find the dot product of two 2d vectors
-	- args: [x1, y1, x2, y2]
-	- output: dot_product
+- args: [x1, y1, x2, y2]
+- output: dot_product
 - constraints:
     - count(args) eq 4
     - typeof(args[all]) in [ "number","int32","int64" ] (required)
 
 ### dot3
 Find the dot product of two 3d vectors
-	- args: [x1, y1, z1, x2, y2, z2]
-	- output: dot_product
+- args: [x1, y1, z1, x2, y2, z2]
+- output: dot_product
 - constraints:
     - count(args) eq 6
     - typeof(args[all]) in [ "number","int32","int64" ] (required)
 
 ### dot3_norm
 Find the normalised dot product of two 3d vectors
-	- args: [x1, y1, z1, x2, y2, z2]
-	- output: dot_product
+- args: [x1, y1, z1, x2, y2, z2]
+- output: dot_product
 - constraints:
     - count(args) eq 6
     - typeof(args[all]) in [ "number","int32","int64" ] (required)
 
 ### dot_norm
 Find the normalised dot product of two 2d vectors
-	- args: [x1, y1, x2, y2]
-	- output: dot_product
+- args: [x1, y1, x2, y2]
+- output: dot_product
 - constraints:
     - count(args) eq 4
     - typeof(args[all]) in [ "number","int32","int64" ] (required)
 
 ### draw_alpha
 Get or set the draw alpha.
-	- args: [(alpha)]
-	- output: (alpha)
+- args: [(alpha)]
+- output: (alpha)
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (optional)
 
 ### draw_circle
 Draw a circle
-	- args: [x, y, (r=1), (outline=false), (c_center=draw_color), (c_edge=draw_color)]
-	- output: []
+- args: [x, y, (r=1), (outline=false), (c_center=draw_color), (c_edge=draw_color)]
+- output: []
 - constraints:
     - count(args) in [ 3,4,5,6 ]
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
@@ -385,15 +386,15 @@ Draw a circle
 
 ### draw_color
 Get or set the draw color.
-	- args: [(color)]
-	- output: (color)
+- args: [(color)]
+- output: (color)
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (optional)
 
 ### draw_ellipse
 Draw an ellipse
-	- args: [x1, y1, x2, y2, (outline=false), (c_center=draw_color), (c_edge=draw_color)]
-	- output: []
+- args: [x1, y1, x2, y2, (outline=false), (c_center=draw_color), (c_edge=draw_color)]
+- output: []
 - constraints:
     - count(args) in [ 3,4,5,6 ]
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
@@ -406,27 +407,27 @@ Draw an ellipse
 
 ### draw_font
 Get or set the draw font.
-	- args: [(font name or asset reference)]
-	- output: (font asset reference)
+- args: [(font name or asset reference)]
+- output: (font asset reference)
 - constraints:
     - typeof(args[0]) in [ "string","ref" ] (required)
 
 ### draw_format
 Get or set the draw font, horizontal alignment, vertical alignment, color, and alpha simultaneously.  Use to backup/restore settings before/after drawing to isolate changes.
-	- args: [([font, h_align, v_align, color, alpha])]
-	- output: ([font, h_align, v_align, color, alpha])
+- args: [([font, h_align, v_align, color, alpha])]
+- output: ([font, h_align, v_align, color, alpha])
 - constraints:
     - count(args) leq 1
 
 ### draw_halign
 Get or set the horizontal draw alignment
-	- args: [(value)]
-	- output: (value)
+- args: [(value)]
+- output: (value)
 
 ### draw_line
 Draw a line
-	- args: [x1, y1, x2, y2, (color), (color2)]
-	- output: []
+- args: [x1, y1, x2, y2, (color), (color2)]
+- output: []
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
     - typeof(args[1]) in [ "number","int32","int64" ] (required)
@@ -437,8 +438,8 @@ Draw a line
 
 ### draw_point
 Draw a point
-	- args: [x, y, (color)]
-	- output: []
+- args: [x, y, (color)]
+- output: []
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
     - typeof(args[1]) in [ "number","int32","int64" ] (required)
@@ -446,8 +447,8 @@ Draw a point
 
 ### draw_rect
 Draw a rectangle
-	- args: [x1, y1, x2, y2, (outline=false), (c1=draw_color), (c2=c1, c3=c1, c4=c1)]
-	- output: []
+- args: [x1, y1, x2, y2, (outline=false), (c1=draw_color), (c2=c1, c3=c1, c4=c1)]
+- output: []
 - constraints:
     - count(args) in [ 4,5,6,9 ]
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
@@ -462,20 +463,20 @@ Draw a rectangle
 
 ### draw_self
 Draw text
-	- args: [instance]
-	- output: []
+- args: [instance]
+- output: []
 - constraints:
     - typeof(args[0]) in [ "ref" ] (required)
 
 ### draw_valign
 Get or set the vertical draw alignment
-	- args: [(value)]
-	- output: (value)
+- args: [(value)]
+- output: (value)
 
 ### eq
 Check whether two arguments are equivalent
-	    - args: [A, B]
-	    - output: [(A == B)]
+- args: [A, B]
+- output: [(A == B)]
 
 ### event_data
 [dynamic constant]
@@ -488,24 +489,24 @@ Check whether two arguments are equivalent
 
 ### example
 Run an included example program
-	- args: [example_program_name]
-	- output: *
+- args: [example_program_name]
+- output: *
 - constraints:
     - typeof(args[0]) in [ "string" ] (required)
     - typeof(args[1]) in [ "bool" ] (optional)
 
 ### exec
 Execute a string as a program.
-	- args: [string]
-	- output: *
+- args: [string]
+- output: *
 - constraints:
     - count(args) eq 1
     - typeof(args[0]) in [ "string" ] (required)
 
 ### export
 Export JSON to a file
-	- args: [path, data, (pretty=true)]
-	- output: []
+- args: [path, data, (pretty=true)]
+- output: []
 - constraints:
     - typeof(args[0]) in [ "string" ] (required)
     - typeof(args[1]) in [ "array","struct" ] (required)
@@ -513,10 +514,11 @@ Export JSON to a file
 
 ### for
 Exectue a RunGML program in a for loop.  Comparison should be one of the following strings: 'eq', 'neq', 'gt', 'lt', 'geq', 'leq'
-	        for (var i=[start]; i [comparison] [reference]; i += increment) {run(program)}
-		
-	- args: [start, comparison, reference, increment, {'do': program}]
-	- output: []
+
+	for (var i=[start]; i [comparison] [reference]; i += increment) {run(program)}
+	
+- args: [start, comparison, reference, increment, {'do': program}]
+- output: []
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
     - typeof(args[1]) in [ "string" ] (required)
@@ -526,16 +528,18 @@ Exectue a RunGML program in a for loop.  Comparison should be one of the followi
 
 ### fps
 Get the current fps (capped at the room speed)
-	- args: []
-	- output: fps
+- args: []
+- output: fps
 
 ### fps_real
-[dynamic constant]
+Get the current fps (not capped at the room speed)
+- args: []
+- output: fps_real
 
 ### fullscreen
 Toggle fullscreen mode.  Set status with a single boolean argument, or swap status with no arguments.
-	- args: [(bool)]
-	- output: []
+- args: [(bool)]
+- output: []
 
 ### game_display_name
 [dynamic constant]
@@ -548,8 +552,8 @@ Toggle fullscreen mode.  Set status with a single boolean argument, or swap stat
 
 ### game_speed
 Get or set the game speed in terms of fps
-	- args: [(game_speed)]
-	- output: (game_speed)
+- args: [(game_speed)]
+- output: (game_speed)
 
 ### game_time
 Return the time in seconds since the game began
@@ -558,63 +562,73 @@ Return the time in seconds since the game began
 
 ### geq
 Check whether the first argument is greater than or equal to the second
-	    - args: [A, B]
-	    - output: [(A >= B)]
+- args: [A, B]
+- output: [(A >= B)]
 
 ### global
 Create, read, or modify global variables. Behavior depends on the number of arguments:
+0. Return an empty struct
+1. Return {'struct': arg0}
+2. Return get_struct(arg0, arg1)
 
-	0. Return an empty struct
-	1. Return {'struct': arg0}
-	2. Return get_struct(arg0, arg1)
-	- args: []
-	- output: []
+- args: []
+- output: []
 - aliases: [ "g" ]
+
+### gm_manual
+Open the GameMaker manual website.
+Opens to the homepage if no argument is passed.
+Opens to the page corresponding to the search term if one exists.
+Opens to a search for the search term if no page exists.
+
+- args: [(search_term)]
+- output: []
 
 ### gt
 Check whether the first argument is greater than the second
-	    - args: [A, B]
-	    - output: [(A > B)]
+- args: [A, B]
+- output: [(A > B)]
 
 ### help
-Display documentation for RunGML, or for an operator named by the first argument.
-	- args: [(op_name)]
-	- output: doc_string
+Display documentation for RunGML, or for an operator/alias named by the first argument.
+If the first argument instead names a built-in asset, open its page on the GameMaker manual website.
+- args: [(op_name)]
+- output: doc_string
 - constraints:
     - count(args) leq 1
     - typeof(args[0]) in [ "string" ] (optional)
 
 ### hsv
 Create an HSV color
-	- args: [hue, saturation, value]
-	- output: color
+- args: [hue, saturation, value]
+- output: color
 
 ### if
 Evaluate and act on a conditional
-	- args: [conditional, {'true': program, 'false': program}]
-	- output: []
+- args: [conditional, {'true': program, 'false': program}]
+- output: []
 - constraints:
     - typeof(args[0]) in [ "bool" ] (required)
     - typeof(args[1]) in [ "struct" ] (required)
 
 ### import
 Import JSON from a file
-	- args: [filepath]
-	- output: json
+- args: [filepath]
+- output: json
 - constraints:
     - typeof(args[0]) in [ "string" ] (required)
 
 ### in
 Retrieve the output list from a struct produced by the 'out' operator.
-	- args: [struct]
-	- output: list
+- args: [struct]
+- output: list
 - constraints:
     - typeof(args[0]) in [ "struct" ] (required)
 
 ### inc
 Increment a variable by some amount.  If the variable is undefined, set it to that amount.
-	- args: [register_name, number]
-	- output: []
+- args: [register_name, number]
+- output: []
 - constraints:
     - typeof(args[0]) in [ "string","number","int32","int64" ] (required)
     - typeof(args[1]) in [ "number","int32","int64" ] (optional)
@@ -622,10 +636,11 @@ Increment a variable by some amount.  If the variable is undefined, set it to th
 ### inst
 Get and set instance variables. Behavior depends on the number of arguments:
 
-	2. Return variable_instance_get(arg0, arg1)
-	3. Do variable_instance_set(arg0, arg1, arg2)
-	- args: [instance, index, (value)]
-	- output: *
+2. Return variable_instance_get(arg0, arg1)
+3. Do variable_instance_set(arg0, arg1, arg2)
+
+- args: [instance, index, (value)]
+- output: *
 - aliases: [ "i" ]
 
 ### instance_count
@@ -633,90 +648,91 @@ Get and set instance variables. Behavior depends on the number of arguments:
 
 ### iter
 Get the current loop iterator
-	- args: []
-	- output: []
+- args: []
+- output: []
 - constraints:
     - count(args) eq 0
 
 ### iters
 Get a list of all loop iterators
-	- args: []
-	- output: []
+- args: []
+- output: []
 - constraints:
     - count(args) eq 0
 
 ### last
 Return the value of the last argument
-	- args: [*]
-	- output: *
+- args: [*]
+- output: *
 
 ### len
 Returns the length of a string, array, or struct.
-	- args: [string/array/struct]
-	- output: length
+- args: [string/array/struct]
+- output: length
 
 ### lendir_x
 Find the x component for a given vector
-	- args: [length, direction]
-	- output: x_component
+- args: [length, direction]
+- output: x_component
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
     - typeof(args[1]) in [ "number","int32","int64" ] (required)
 
 ### lendir_y
 Find the y component for a given vector
-	- args: [length, direction]
-	- output: y_component
+- args: [length, direction]
+- output: y_component
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
     - typeof(args[1]) in [ "number","int32","int64" ] (required)
 
 ### leq
 Check whether the first argument is less than or equal to the second
-	    - args: [A, B]
-	    - output: [(A <= B)]
+- args: [A, B]
+- output: [(A <= B)]
 
 ### list
 Return arguments as a list
-	- args: []
-	- output: []
+- args: []
+- output: []
 - aliases: [ "l" ]
 
 ### log
 Compute a logarithm.  Behavior depends on the number of arguments:
 
-	0. Return the log of the argument in base 10
-	1. Return the log of arg0 in the base of arg1
-	- args: [number, (base=10)]
-	- output: log_base(number)
+0. Return the log of the argument in base 10
+1. Return the log of arg0 in the base of arg1
+
+- args: [number, (base=10)]
+- output: log_base(number)
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
     - typeof(args[1]) in [ "number","int32","int64" ] (optional)
 
 ### lt
 Check whether the first argument is less than the second
-	    - args: [A, B]
-	    - output: [(A < B)]
+- args: [A, B]
+- output: [(A < B)]
 
 ### manual
 Generate full markdown-formatted documentation for all RunGML operators and view it in the browser.
-	- args: [(filename='RunGML/manual.md')]
-	- output: []
+- args: [(filename='RunGML/manual.md')]
+- output: []
 - constraints:
     - count(args) eq 0
 
 ### map_range
 Map a value proportionally from one range to another
-	- args: [number, in_min, in_max, out_min, out_max]
-	- output: number
+- args: [number, in_min, in_max, out_min, out_max]
+- output: number
 - constraints:
     - count(args) eq 5
     - typeof(args[all]) in [ "number","int32","int64" ] (required)
 
 ### mod
 Modulo operator
-	- args: [A, B]
-	- output: A mod B
+- args: [A, B]
+- output: A mod B
 - constraints:
     - count(args) eq 2
     - typeof(args[all]) in [ "number","int32","int64" ] (required)
@@ -735,8 +751,8 @@ Modulo operator
 
 ### mult
 Multiply two numbers
-	- args: [A, B]
-	- output: A * B
+- args: [A, B]
+- output: A * B
 - aliases: [ "multiply" ]
 - constraints:
     - count(args) eq 2
@@ -744,8 +760,8 @@ Multiply two numbers
 
 ### near
 Return index of instance (arg2) nearest to some coordinates (arg0, arg1).
-	- args: [(x=mouse_x), (y=mouse_y), (obj=any)]
-	- output: index
+- args: [(x=mouse_x), (y=mouse_y), (obj=any)]
+- output: index
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (optional)
     - typeof(args[0]) in [ "number","int32","int64" ] (optional)
@@ -753,30 +769,30 @@ Return index of instance (arg2) nearest to some coordinates (arg0, arg1).
 
 ### near_cursor
 Return index of instance nearest to the mouse.  Optional argument specifies an object index or asset name.
-	- args: [(object_index/asset_name)]
-	- output: index
+- args: [(object_index/asset_name)]
+- output: index
 - constraints:
     - typeof(args[0]) in [ "string","number","int32","int64" ] (optional)
 
 ### neq
 Check whether two arguments are not equal (inverse of 'eq')
-	    - args: [A, B]
-	    - output: [(A != B)]
+- args: [A, B]
+- output: [(A != B)]
 
 ### not
 Return the inverse of the argument's boolean value
-	    - args: [A]
-	    - output: [!A]
+- args: [A]
+- output: [!A]
 
 ### nth
 Get the ordinal suffix for a given number
-	- args: [number]
-	- output: 'st', 'nd', 'rd', or 'th'
+- args: [number]
+- output: 'st', 'nd', 'rd', or 'th'
 
 ### object
 Create a new oRunGML_Object instance and return its index
-	- args: [x, y, depth/layer_name, event_dictionary]
-	- output: oRunGML_Object instance
+- args: [x, y, depth/layer_name, event_dictionary]
+- output: oRunGML_Object instance
 - aliases: [ "o" ]
 - constraints:
     - count(args) eq 4
@@ -787,36 +803,36 @@ Create a new oRunGML_Object instance and return its index
 
 ### op_count
 Return the number of supported operators
-	- args: []
-	- output: number
+- args: []
+- output: number
 - constraints:
     - count(args) eq 0
 
 ### op_list
 Return a list of supported operators
-	- args: [(include_constants=false)]
-	- output: [string, *]
+- args: [(include_constants=false)]
+- output: [string, *]
 - constraints:
     - typeof(args[0]) in [ "bool" ] (optional)
 
 ### op_names
 Return a string listing names of supported operators
-	- args: [(include_constants)]
-	- output: string
+- args: [(include_constants)]
+- output: string
 - constraints:
     - typeof(args[0]) in [ "bool" ] (optional)
 
 ### op_search
 Return a list of operators and aliases whose names contain a give string.
-	- args: [string]
-	- output: [string, *]
+- args: [string]
+- output: [string, *]
 - constraints:
     - count(args) eq 1
 
 ### or
 Logical or operator
-	    - args: [A, B]
-	    - output: [(A or B)]
+- args: [A, B]
+- output: [(A or B)]
 
 ### os_browser
 [dynamic constant]
@@ -832,55 +848,55 @@ Logical or operator
 
 ### out
 Wrap argument list in a struct so it can be returned unevaluated.
-	- args: [*]
-	- output: struct
+- args: [*]
+- output: struct
 
 ### parent
 Return a reference to the RunGML interpreter's parent object.
-	- args: []
-	- output: instance
+- args: []
+- output: instance
 - aliases: [ "p" ]
 - constraints:
     - count(args) leq 2
 
 ### pass
 Do nothing
-	- args: [*]
-	- output: []
+- args: [*]
+- output: []
 
 ### point_dir
 Find the direction from one point to another
-	- args: [x1, y1, x2, y2]
-	- output: distance
+- args: [x1, y1, x2, y2]
+- output: distance
 - constraints:
     - count(args) eq 4
     - typeof(args[all]) in [ "number","int32","int64" ] (required)
 
 ### point_dist
 Find the distance between two points
-	- args: [x1, y1, x2, y2]
-	- output: distance
+- args: [x1, y1, x2, y2]
+- output: distance
 - constraints:
     - count(args) eq 4
     - typeof(args[all]) in [ "number","int32","int64" ] (required)
 
 ### pow
 Raise one number to the power of another
-	- args: [A, B]
-	- output: A ^ B
+- args: [A, B]
+- output: A ^ B
 - constraints:
     - count(args) eq 2
     - typeof(args[all]) in [ "number","int32","int64" ] (required)
 
 ### print
 Print a debug message
-	    - args: [stringable, (...)]
-	    - output: []
+- args: [stringable, (...)]
+- output: []
 
 ### prog
 Run arguments as programs
-	- args: []
-	- output: []
+- args: []
+- output: []
 - constraints:
     - typeof(args[0]) in [ "array" ] (required)
 
@@ -889,220 +905,226 @@ Run arguments as programs
 
 ### quit
 Quit the game
-	- args: []
-	- output: []
+- args: []
+- output: []
 - aliases: [ "q" ]
 
 ### rand
 Return a random value.  Behavior depends on the number of arguments:
-	0. Return a value between 0 and 1 (inclusive)
-	1. Return a value between 0 and arg0 (inclusive)
-	2. Return a value between arg0 and arg1 (inclusive)
-	- args: [(max=1)]
-	- output: number
+0. Return a value between 0 and 1 (inclusive)
+1. Return a value between 0 and arg0 (inclusive)
+2. Return a value between arg0 and arg1 (inclusive)
+
+- args: [(max=1)]
+- output: number
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (optional)
     - typeof(args[1]) in [ "number","int32","int64" ] (optional)
 
 ### rand_int
 Return a random integer.  Behavior depends on the number of arguments:
-	0. Return either 0 or 1
-	1. Return an integer between 0 and arg0 (inclusive)
-	2. Return an integer between arg0 and arg1 (inclusive)
-	- args: [(max=1)]
-	- output: number
+	
+0. Return either 0 or 1
+1. Return an integer between 0 and arg0 (inclusive)
+2. Return an integer between arg0 and arg1 (inclusive)
+
+- args: [(max=1)]
+- output: number
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (optional)
     - typeof(args[1]) in [ "number","int32","int64" ] (optional)
 
 ### rand_seed
 Return a random value between 0 and some upper limit (defaults to 1).  Inclusive on both ends.
-	- args: [(max=1)]
-	- output: number
+- args: [(max=1)]
+- output: number
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (optional)
 
 ### rec_cancel
 If run from a console, cancel recording input lines.
-	- args: []
-	- output: []
+- args: []
+- output: []
 
 ### rec_delete
 Delete one or more lines from the recorded program.
-	- args: [start_line, (line_count=1)]
-	- output: [preview]
+- args: [start_line, (line_count=1)]
+- output: [preview]
 
 ### rec_line
 If no arguments are passed, return the number of lines that have been recorded.  If a number is passed, return the corresponding line (zero-indexed) from the recording as a string.
-	- args: [(line_number)]
-	- output: [count OR line]
+- args: [(line_number)]
+- output: [count OR line]
 
 ### rec_pause
 If run from a console, pause recording input lines.  Resume recording later with rec_pause.
-	- args: []
-	- output: []
+- args: []
+- output: []
 
 ### rec_preview
 Preview the program currently stored as a recording, if one exists.  Accepts an optional argument which prints pretty JSON if true.
-	- args: [(pretty)]
-	- output: [preview]
+- args: [(pretty)]
+- output: [preview]
 
 ### rec_replay
 Run a program recorded via the console with rec_start/rec_stop
-	- args: [program_name, (clean)]
-	- output: *
+- args: [program_name, (clean)]
+- output: *
 - constraints:
     - typeof(args[0]) in [ "string" ] (required)
     - typeof(args[1]) in [ "bool" ] (optional)
 
 ### rec_resume
 If run from a console, resume recording input lines, after pausing with rec_pause.
-	- args: []
-	- output: []
+- args: []
+- output: []
 
 ### rec_start
 If run from a console, start recording the following lines to be saved as a program whenever [rec_stop, program_name] is entered.
-	- args: [(program_type)]
-	- output: []
+- args: [(program_type)]
+- output: []
 - constraints:
     - typeof(args[0]) in [ "string" ] (optional)
 
 ### rec_stop
 If run from a console, stop recording and save recorded lines as a program.
-	- args: [program_name]
-	- output: []
+- args: [program_name]
+- output: []
 - constraints:
     - typeof(args[0]) in [ "string" ] (required)
 
 ### reference
 Operate on referenced values.  Behavior depends on the number of arguments:
 
-	0. Return the interpreter's registers struct (same as ['v'])
-	1. (or more) If the first argument names an operator:
-	    - Substitute any other arguments that name defined reigsters with their values.
-	    - Run the first-argument operator on the resulting list of substituted arguments.
-	    - For example, the following two programs are functionally equivalent:
-	        - ['r', 'add', 'foo', 'bar']
-	        - ['add', ['v', 'foo'], ['v', 'bar']]
-	    - They will return the sum of the values in registers 'foo' and 'bar'.
-	- args: [(operator), (register_name, ...)]
-	- output: *
+0. Return the interpreter's registers struct (same as ['v'])
+1. (or more) If the first argument names an operator:
+	- Substitute any other arguments that name defined reigsters with their values.
+	- Run the first-argument operator on the resulting list of substituted arguments.
+	- For example, the following two programs are functionally equivalent:
+	    - ['r', 'add', 'foo', 'bar']
+	    - ['add', ['v', 'foo'], ['v', 'bar']]
+	- They will return the sum of the values in registers 'foo' and 'bar'.
+	
+- args: [(operator), (register_name, ...)]
+- output: *
 - aliases: [ "r" ]
 
 ### reference_parent
 Similar to the 'reference' ('r') operator, but substitutes with values from the parent's instance variables.  Behavior depends on the number of arguments:
 
-	0. Return the names of all parent instance variables
-	1. (or more) If the first argument names an operator:
-	    - Substitute any other arguments that name parent instance variables with their values
-	    - Run the first-argument operator on the resulting list of substituted arguments.
-	    - For example, the following two programs are functionally equivalent:
-	        - ['rp', 'add', 'foo', 'bar']
-	        - ['add', ['p', 'foo'], ['p', 'bar']]
-	    - They will return the sum of the values in parent instance variables 'foo' and 'bar'.
-	- args: [(operator), (variable, ...)]
-	- output: *
+0. Return the names of all parent instance variables
+1. (or more) If the first argument names an operator:
+	- Substitute any other arguments that name parent instance variables with their values
+	- Run the first-argument operator on the resulting list of substituted arguments.
+	- For example, the following two programs are functionally equivalent:
+	    - ['rp', 'add', 'foo', 'bar']
+	    - ['add', ['p', 'foo'], ['p', 'bar']]
+	- They will return the sum of the values in parent instance variables 'foo' and 'bar'.
+	
+- args: [(operator), (variable, ...)]
+- output: *
 - aliases: [ "rp" ]
 
 ### repeat
 Repeat a RunGML program a fixed number of times
-	- args: [count, {'do': program}]
-	- output: []
+- args: [count, {'do': program}]
+- output: []
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
     - typeof(args[1]) in [ "struct" ] (required)
 
 ### restart
 Restart the game
-	- args: []
-	- output: []
+- args: []
+- output: []
 
 ### rgb
 Create an RGB color
-	- args: [red, green, blue]
-	- output: color
+- args: [red, green, blue]
+- output: color
 
 ### rickroll
 Got 'em!
-	- args: []
-	- output: []
+- args: []
+- output: []
 
 ### room
 Behavior depends on the number of arguments:
 
-	0. Return the name of the current room
-	1. Go to the named room, if it exists
-	    - args: [(room_name)]
-	    - output: [(room_name)]
+0. Return the name of the current room
+1. Go to the named room, if it exists
+
+- args: [(room_name)]
+- output: [(room_name)]
 
 ### room_first
 [dynamic constant]
 
 ### room_h
 Returns the height of the current room.
-	    - args: []
-	    - output: [height]
+- args: []
+- output: [height]
 
 ### room_last
 [dynamic constant]
 
 ### room_next
 Go to the next room.
-	    - args: []
-	    - output: [height]
+- args: []
+- output: [height]
 
 ### room_w
 Returns the width of the current room.
-	    - args: []
-	    - output: [width]
+- args: []
+- output: [width]
 
 ### run
 Run arguments as a program, with the first argument becoming the new operator.
-	- args: [*]
-	- output: *
+- args: [*]
+- output: *
 
 ### run_clean
 Run arguments as a program, with the first argument becoming the new operator. Creates and uses a separate interpreter instance.
-	- args: [*]
-	- output: *
+- args: [*]
+- output: *
 
 ### runfile
 Run a program from a file
-	- args: [filepath]
-	- output: *
+- args: [filepath]
+- output: *
 - constraints:
     - typeof(args[0]) in [ "string" ] (required)
     - typeof(args[1]) in [ "bool" ] (optional)
 
 ### runprog
 Run a program from a file in the incdlued RunGML/programs directory.
-	- args: [program_name, (clean)]
-	- output: *
+- args: [program_name, (clean)]
+- output: *
 - constraints:
     - typeof(args[0]) in [ "string" ] (required)
     - typeof(args[1]) in [ "bool" ] (optional)
 
 ### screenshot
 Save a screenshot to RunGML/screenshots/timestamp.png.  Or pass a filename in place of generating a timestamp.
-	- args: [(filename)]
-	- output: []
+- args: [(filename)]
+- output: []
 
 ### shader
 Get or set the current shader. Zero arguments to get, one to set.
-	- args: [(shader)]
-	- output: [(shader)]
+- args: [(shader)]
+- output: [(shader)]
 - constraints:
     - typeof(args[0]) in [ "string","number","int32","int64" ] (optional)
 
 ### shader_reset
 Clear shaders
-	- args: []
-	- output: []
+- args: []
+- output: []
 
 ### sin
 Return the sine of an angle in raidans.
-	- args: [angle]
-	- output: sin/dsin/arcsin/darcsin(angle)
+- args: [angle]
+- output: sin/dsin/arcsin/darcsin(angle)
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
     - typeof(args[1]) in [ "bool" ] (optional)
@@ -1110,13 +1132,13 @@ Return the sine of an angle in raidans.
 
 ### sprite
 Create a new sprite from a file
-	- args: [sprite_index, frame, x, y]
-	- output: []
+- args: [sprite_index, frame, x, y]
+- output: []
 
 ### string
 Format a string
-	    - args: [template, (var0), ...]
-	    - output: [string]
+- args: [template, (var0), ...]
+- output: [string]
 - aliases: [ "str" ]
 - constraints:
     - typeof(args[0]) in [ "string" ] (required)
@@ -1124,23 +1146,24 @@ Format a string
 ### struct
 Create, read, or modify a struct. Behavior depends on the number of arguments:
 
-	0. Return an empty struct
-	1. Return {'struct': arg0}
-	2. Return get_struct(arg0, arg1)
-	3. Return set_struct(arg0, arg1, arg2);
-	- args: []
-	- output: []
+0. Return an empty struct
+1. Return {'struct': arg0}
+2. Return struct_get(arg0, arg1)
+3. Return struct_set(arg0, arg1, arg2)
+
+- args: []
+- output: []
 - aliases: [ "s" ]
 
 ### struct_keys
 Get a list of the keys in a struct
-	- args: [struct]
-	- output: [string, ...]
+- args: [struct]
+- output: [string, ...]
 
 ### sub
 Subtract two numbers
-	- args: [A, B]
-	- output: A - B
+- args: [A, B]
+- output: A - B
 - aliases: [ "subtract" ]
 - constraints:
     - count(args) eq 2
@@ -1148,16 +1171,16 @@ Subtract two numbers
 
 ### switch
 Perform switch/case evaluation
-	- args: [value, {'case0': program, 'case1': program, 'default': program}]
-	- output: []
+- args: [value, {'case0': program, 'case1': program, 'default': program}]
+- output: []
 - constraints:
     - count(args) eq 2
     - typeof(args[1]) in [ "struct" ] (required)
 
 ### tan
 Return the tangent of an angle in raidans.
-	- args: [angle, (degrees=true), (inverse=false)]
-	- output: tan/dtan/arctan/darctan(angle)
+- args: [angle, (degrees=true), (inverse=false)]
+- output: tan/dtan/arctan/darctan(angle)
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (required)
     - typeof(args[1]) in [ "bool" ] (optional)
@@ -1176,48 +1199,49 @@ Test operator
 
 ### this
 Return a reference to the current RunGML interpreter
-	- args: []
-	- output: instance
+- args: []
+- output: instance
 - aliases: [ "t" ]
 - constraints:
     - count(args) eq 0
 
 ### type
 Return the type of a variable
-	- args: [*]
-	- output: type_name
+- args: [*]
+- output: type_name
 - constraints:
     - count(args) eq 1
 
 ### undefined
 Return the GameMaker constant undefined, or determines whether the optional argument is undefined.
-	- args: [(variable)]
-	- output: undefined or True/False
+- args: [(variable)]
+- output: undefined or True/False
 - constraints:
     - count(args) leq 1
 
 ### update
 Open the RunGML homepage in the browser
-	- args: []
-	- output: string
+- args: []
+- output: string
 - constraints:
     - count(args) eq 0
 
 ### url_open
 Open a URL in the default browser
-	- args: [URL]
-	- output: []
+- args: [URL]
+- output: []
 - constraints:
     - typeof(args[0]) in [ "string" ] (required)
 
 ### var
 Get and set variables.  Behavior changes based on number of arguments:
 
-	0. Return the interpreter's entire registers struct.
-	1. Return the value saved in the named register.
-	2. Set the register named by the first argument to the value of the second argument.
-	- args: [int] or [string]
-	- output: *
+0. Return the interpreter's entire registers struct.
+1. Return the value saved in the named register.
+2. Set the register named by the first argument to the value of the second argument.
+
+- args: [int] or [string]
+- output: *
 - aliases: [ "v" ]
 
 ### view_current
@@ -1228,8 +1252,8 @@ Get and set variables.  Behavior changes based on number of arguments:
 
 ### while
 Exectue a RunGML program while a condition is true
-	- args: [{'check': program, 'do': program}]
-	- output: []
+- args: [{'check': program, 'do': program}]
+- output: []
 - constraints:
     - typeof(args[0]) in [ "struct" ] (required)
 
@@ -1240,10 +1264,10 @@ Exectue a RunGML program while a condition is true
 ## Constant Definitions
 
 - GM_Version = 1.2.0.0
-- GM_build_date = 46159.52490166
+- GM_build_date = 46162.72762093
 - GM_build_type = run
 - GM_runtime_version = 2024.14.4.268
-- RunGML_Version = 1.3.0
+- RunGML_Version = 1.3.1
 - all = -3
 - animcurvetype_catmullrom = 1
 - animcurvetype_linear = 0
