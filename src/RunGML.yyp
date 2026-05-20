@@ -21,6 +21,7 @@
     {"link":"io.gamemaker.sdfshaders-1.0.0","name":"io.gamemaker.sdfshaders-1.0.0","path":"io.gamemaker.sdfshaders-1.0.0.yyp",},
   ],
   "IncludedFiles":[
+    {"$GMIncludedFile":"","%Name":"gm_manual.json","CopyToMask":-1,"filePath":"datafiles/RunGML","name":"gm_manual.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"patch_notes.md","CopyToMask":-1,"filePath":"datafiles/RunGML","name":"patch_notes.md","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"bounce_loose.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"bounce_loose.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"bounce.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"bounce.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
