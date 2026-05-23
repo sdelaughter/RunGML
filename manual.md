@@ -2,7 +2,7 @@
 			
 ## About
 
-Version: 1.3.1
+Version: 1.4.0
 
 Homepage: https://github.com/sdelaughter/RunGML
 
@@ -15,7 +15,7 @@ Homepage: https://github.com/sdelaughter/RunGML
 
 
 ## Operator List
-[add](#add), [alias](#alias), [and](#and), [angle](#angle), [application_surface](#application_surface), [approach](#approach), [arctan2](#arctan2), [array](#array), [asset](#asset), [asset_type](#asset_type), [async_load](#async_load), [cat](#cat), [choose](#choose), [clear](#clear), [color](#color), [color_inv](#color_inv), [color_inv_hue](#color_inv_hue), [color_merge](#color_merge), [color_rand](#color_rand), [console](#console), [cos](#cos), [create](#create), [current](#current), [current_day](#current_day), [current_hour](#current_hour), [current_minute](#current_minute), [current_month](#current_month), [current_second](#current_second), [current_time](#current_time), [current_year](#current_year), [cursor](#cursor), [cursor_sprite](#cursor_sprite), [date_get](#date_get), [datestring](#datestring), [datetime](#datetime), [debug](#debug), [dec](#dec), [delta](#delta), [delta_time](#delta_time), [destroy](#destroy), [display_gui_h](#display_gui_h), [display_gui_w](#display_gui_w), [display_h](#display_h), [display_w](#display_w), [div](#div), [do](#do), [do_here](#do_here), [dot](#dot), [dot3](#dot3), [dot3_norm](#dot3_norm), [dot_norm](#dot_norm), [draw_alpha](#draw_alpha), [draw_circle](#draw_circle), [draw_color](#draw_color), [draw_ellipse](#draw_ellipse), [draw_font](#draw_font), [draw_format](#draw_format), [draw_halign](#draw_halign), [draw_line](#draw_line), [draw_point](#draw_point), [draw_rect](#draw_rect), [draw_self](#draw_self), [draw_valign](#draw_valign), [eq](#eq), [event_data](#event_data), [event_number](#event_number), [event_type](#event_type), [example](#example), [exec](#exec), [export](#export), [for](#for), [fps](#fps), [fps_real](#fps_real), [fullscreen](#fullscreen), [game_display_name](#game_display_name), [game_project_name](#game_project_name), [game_save_id](#game_save_id), [game_speed](#game_speed), [game_time](#game_time), [geq](#geq), [global](#global), [gm_manual](#gm_manual), [gt](#gt), [help](#help), [hsv](#hsv), [if](#if), [import](#import), [in](#in), [inc](#inc), [inst](#inst), [instance_count](#instance_count), [iter](#iter), [iters](#iters), [last](#last), [len](#len), [lendir_x](#lendir_x), [lendir_y](#lendir_y), [leq](#leq), [list](#list), [log](#log), [lt](#lt), [manual](#manual), [map_range](#map_range), [mod](#mod), [mouse_button](#mouse_button), [mouse_lastbutton](#mouse_lastbutton), [mouse_x](#mouse_x), [mouse_y](#mouse_y), [mult](#mult), [near](#near), [near_cursor](#near_cursor), [neq](#neq), [not](#not), [nth](#nth), [object](#object), [op_count](#op_count), [op_list](#op_list), [op_names](#op_names), [op_search](#op_search), [or](#or), [os_browser](#os_browser), [os_device](#os_device), [os_type](#os_type), [os_version](#os_version), [out](#out), [parent](#parent), [pass](#pass), [point_dir](#point_dir), [point_dist](#point_dist), [pow](#pow), [print](#print), [prog](#prog), [program_directory](#program_directory), [quit](#quit), [rand](#rand), [rand_int](#rand_int), [rand_seed](#rand_seed), [rec_cancel](#rec_cancel), [rec_delete](#rec_delete), [rec_line](#rec_line), [rec_pause](#rec_pause), [rec_preview](#rec_preview), [rec_replay](#rec_replay), [rec_resume](#rec_resume), [rec_start](#rec_start), [rec_stop](#rec_stop), [reference](#reference), [reference_parent](#reference_parent), [repeat](#repeat), [restart](#restart), [rgb](#rgb), [rickroll](#rickroll), [room](#room), [room_first](#room_first), [room_h](#room_h), [room_last](#room_last), [room_next](#room_next), [room_w](#room_w), [run](#run), [run_clean](#run_clean), [runfile](#runfile), [runprog](#runprog), [screenshot](#screenshot), [shader](#shader), [shader_reset](#shader_reset), [sin](#sin), [sprite](#sprite), [string](#string), [struct](#struct), [struct_keys](#struct_keys), [sub](#sub), [switch](#switch), [tan](#tan), [temp_directory](#temp_directory), [test_operator](#test_operator), [this](#this), [type](#type), [undefined](#undefined), [update](#update), [url_open](#url_open), [var](#var), [view_current](#view_current), [webgl_enabled](#webgl_enabled), [while](#while), [working_directory](#working_directory)
+[AudioEffectType](#audioeffecttype), [AudioLFOType](#audiolfotype), [GM_is_sandboxed](#gm_is_sandboxed), [RunGML_Test_Enum](#rungml_test_enum), [RunGML_Test_Enum2](#rungml_test_enum2), [add](#add), [alias](#alias), [and](#and), [angle](#angle), [application_surface](#application_surface), [approach](#approach), [arctan2](#arctan2), [array](#array), [asset](#asset), [asset_type](#asset_type), [async_load](#async_load), [cat](#cat), [choose](#choose), [clear](#clear), [color](#color), [color_inv](#color_inv), [color_inv_hue](#color_inv_hue), [color_merge](#color_merge), [color_rand](#color_rand), [console](#console), [cos](#cos), [create](#create), [current](#current), [current_day](#current_day), [current_hour](#current_hour), [current_minute](#current_minute), [current_month](#current_month), [current_second](#current_second), [current_time](#current_time), [current_year](#current_year), [cursor](#cursor), [cursor_sprite](#cursor_sprite), [date_get](#date_get), [datestring](#datestring), [datetime](#datetime), [debug](#debug), [dec](#dec), [delta](#delta), [delta_time](#delta_time), [destroy](#destroy), [display_gui_h](#display_gui_h), [display_gui_w](#display_gui_w), [display_h](#display_h), [display_w](#display_w), [div](#div), [do](#do), [do_here](#do_here), [dot](#dot), [dot3](#dot3), [dot3_norm](#dot3_norm), [dot_norm](#dot_norm), [draw_alpha](#draw_alpha), [draw_circle](#draw_circle), [draw_color](#draw_color), [draw_ellipse](#draw_ellipse), [draw_font](#draw_font), [draw_format](#draw_format), [draw_halign](#draw_halign), [draw_line](#draw_line), [draw_point](#draw_point), [draw_rect](#draw_rect), [draw_self](#draw_self), [draw_valign](#draw_valign), [eq](#eq), [event_data](#event_data), [event_number](#event_number), [event_type](#event_type), [example](#example), [exec](#exec), [export](#export), [flexpanel_align](#flexpanel_align), [flexpanel_direction](#flexpanel_direction), [flexpanel_display](#flexpanel_display), [flexpanel_edge](#flexpanel_edge), [flexpanel_flex_direction](#flexpanel_flex_direction), [flexpanel_gutter](#flexpanel_gutter), [flexpanel_justify](#flexpanel_justify), [flexpanel_position_type](#flexpanel_position_type), [flexpanel_unit](#flexpanel_unit), [flexpanel_wrap](#flexpanel_wrap), [for](#for), [fps](#fps), [fps_real](#fps_real), [fullscreen](#fullscreen), [game_display_name](#game_display_name), [game_project_name](#game_project_name), [game_save_id](#game_save_id), [game_speed](#game_speed), [game_time](#game_time), [geq](#geq), [global](#global), [gm_manual](#gm_manual), [gt](#gt), [help](#help), [hsv](#hsv), [if](#if), [import](#import), [in](#in), [inc](#inc), [inst](#inst), [instance_count](#instance_count), [iter](#iter), [iters](#iters), [last](#last), [len](#len), [lendir_x](#lendir_x), [lendir_y](#lendir_y), [leq](#leq), [list](#list), [log](#log), [lt](#lt), [manual](#manual), [map_range](#map_range), [mod](#mod), [mouse_button](#mouse_button), [mouse_lastbutton](#mouse_lastbutton), [mouse_x](#mouse_x), [mouse_y](#mouse_y), [mult](#mult), [near](#near), [near_cursor](#near_cursor), [neq](#neq), [not](#not), [nth](#nth), [object](#object), [op_count](#op_count), [op_list](#op_list), [op_names](#op_names), [op_search](#op_search), [or](#or), [os_browser](#os_browser), [os_device](#os_device), [os_type](#os_type), [os_version](#os_version), [out](#out), [parent](#parent), [pass](#pass), [point_dir](#point_dir), [point_dist](#point_dist), [pow](#pow), [print](#print), [prog](#prog), [program_directory](#program_directory), [quit](#quit), [rand](#rand), [rand_int](#rand_int), [rand_seed](#rand_seed), [rec_cancel](#rec_cancel), [rec_delete](#rec_delete), [rec_line](#rec_line), [rec_pause](#rec_pause), [rec_preview](#rec_preview), [rec_replay](#rec_replay), [rec_resume](#rec_resume), [rec_start](#rec_start), [rec_stop](#rec_stop), [reference](#reference), [reference_parent](#reference_parent), [repeat](#repeat), [restart](#restart), [rgb](#rgb), [rickroll](#rickroll), [room](#room), [room_first](#room_first), [room_h](#room_h), [room_last](#room_last), [room_next](#room_next), [room_w](#room_w), [run](#run), [run_clean](#run_clean), [runfile](#runfile), [runprog](#runprog), [screenshot](#screenshot), [shader](#shader), [shader_reset](#shader_reset), [sin](#sin), [sprite](#sprite), [string](#string), [struct](#struct), [struct_keys](#struct_keys), [sub](#sub), [switch](#switch), [tan](#tan), [temp_directory](#temp_directory), [test_operator](#test_operator), [this](#this), [type](#type), [undefined](#undefined), [update](#update), [url_open](#url_open), [var](#var), [view_current](#view_current), [webgl_enabled](#webgl_enabled), [while](#while), [working_directory](#working_directory)
 
 ## Alias Definitions
 - False -> false
@@ -41,6 +41,33 @@ Homepage: https://github.com/sdelaughter/RunGML
 - version -> RunGML_Version
 
 ## Operator Documentation
+
+### AudioEffectType
+Accessor for the AudioEffectType enum.
+- members: [ "Bitcrusher","Delay","Gain","HPF2","LPF2","Reverb1","Tremolo","PeakEQ","HiShelf","LoShelf","EQ","Compressor" ]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (optional)
+
+### AudioLFOType
+Accessor for the AudioLFOType enum.
+- members: [ "InvSawtooth","Sawtooth","Sine","Square","Triangle" ]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (optional)
+
+### GM_is_sandboxed
+[dynamic constant]
+
+### RunGML_Test_Enum
+Accessor for the RunGML_Test_Enum enum.
+- members: [ "foo","bar" ]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (optional)
+
+### RunGML_Test_Enum2
+Accessor for the RunGML_Test_Enum2 enum.
+- members: [ "foo","bar" ]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (optional)
 
 ### add
 Add two or more numbers (use 'cat' or 'string' to combine strings)
@@ -512,6 +539,66 @@ Export JSON to a file
     - typeof(args[1]) in [ "array","struct" ] (required)
     - typeof(args[2]) in [ "bool" ] (optional)
 
+### flexpanel_align
+Accessor for the flexpanel_align enum.
+- members: [ "auto","flex_start","center","flex_end","stretch","baseline","space_between","space_around","space_evenly" ]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (optional)
+
+### flexpanel_direction
+Accessor for the flexpanel_direction enum.
+- members: [ "inherit","LTR","RTL" ]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (optional)
+
+### flexpanel_display
+Accessor for the flexpanel_display enum.
+- members: [ "flex","none" ]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (optional)
+
+### flexpanel_edge
+Accessor for the flexpanel_edge enum.
+- members: [ "left","top","right","bottom","start","end","horizontal","vertical","all_edges" ]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (optional)
+
+### flexpanel_flex_direction
+Accessor for the flexpanel_flex_direction enum.
+- members: [ "column","column_reverse","row","row_reverse" ]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (optional)
+
+### flexpanel_gutter
+Accessor for the flexpanel_gutter enum.
+- members: [ "column","row","all_gutters" ]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (optional)
+
+### flexpanel_justify
+Accessor for the flexpanel_justify enum.
+- members: [ "start","center","flex_end","space_between","space_around","space_evenly" ]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (optional)
+
+### flexpanel_position_type
+Accessor for the flexpanel_position_type enum.
+- members: [ "relative","absolute" ]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (optional)
+
+### flexpanel_unit
+Accessor for the flexpanel_unit enum.
+- members: [ "point","percent","auto" ]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (optional)
+
+### flexpanel_wrap
+Accessor for the flexpanel_wrap enum.
+- members: [ "no_wrap","wrap","reverse" ]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (optional)
+
 ### for
 Exectue a RunGML program in a for loop.  Comparison should be one of the following strings: 'eq', 'neq', 'gt', 'lt', 'geq', 'leq'
 
@@ -935,9 +1022,9 @@ Return a random integer.  Behavior depends on the number of arguments:
     - typeof(args[1]) in [ "number","int32","int64" ] (optional)
 
 ### rand_seed
-Return a random value between 0 and some upper limit (defaults to 1).  Inclusive on both ends.
-- args: [(max=1)]
-- output: number
+Set the seed to the given value, or to a random value if no argument is provided.
+- args: [(seed)]
+- output: []
 - constraints:
     - typeof(args[0]) in [ "number","int32","int64" ] (optional)
 
@@ -1264,16 +1351,17 @@ Exectue a RunGML program while a condition is true
 ## Constant Definitions
 
 - GM_Version = 1.2.0.0
-- GM_build_date = 46162.72762093
+- GM_build_date = 46165.67101272
 - GM_build_type = run
-- GM_runtime_version = 2024.14.4.268
-- RunGML_Version = 1.3.1
+- GM_runtime_version = 2026.0.0.23
+- RunGML_Version = 1.4.0
 - all = -3
 - animcurvetype_catmullrom = 1
 - animcurvetype_linear = 0
 - asset_animationcurve = 10
 - asset_font = 6
 - asset_object = 0
+- asset_particlesystem = 11
 - asset_path = 4
 - asset_room = 3
 - asset_script = 5
@@ -1285,6 +1373,7 @@ Exectue a RunGML program while a condition is true
 - asset_timeline = 7
 - asset_unknown = -1
 - audio_3d = 2
+- audio_bus_main = { bypass : 0, gain : 1, effects : [ undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined ] }
 - audio_falloff_exponent_distance = 5
 - audio_falloff_exponent_distance_clamped = 6
 - audio_falloff_exponent_distance_scaled = 8
@@ -1306,6 +1395,11 @@ Exectue a RunGML program while a condition is true
 - bm_dest_alpha = 7
 - bm_dest_color = 9
 - bm_dest_colour = 9
+- bm_eq_add = 1
+- bm_eq_max = 2
+- bm_eq_min = 4
+- bm_eq_reverse_subtract = 5
+- bm_eq_subtract = 3
 - bm_inv_dest_alpha = 8
 - bm_inv_dest_color = 10
 - bm_inv_src_alpha = 6
@@ -1329,6 +1423,7 @@ Exectue a RunGML program while a condition is true
 - browser_opera = 6
 - browser_safari = 4
 - browser_safari_mobile = 5
+- browser_tizen = 9
 - browser_unknown = 0
 - browser_windows_store = 8
 - buffer_bool = 10
@@ -1464,6 +1559,7 @@ Exectue a RunGML program while a condition is true
 - ev_draw = 8
 - ev_draw_begin = 72
 - ev_draw_end = 73
+- ev_draw_normal = 0
 - ev_draw_post = 77
 - ev_draw_pre = 76
 - ev_end_of_path = 8
@@ -1590,11 +1686,22 @@ Exectue a RunGML program while a condition is true
 - gp_axislv = 32786
 - gp_axisrh = 32787
 - gp_axisrv = 32788
+- gp_extra1 = 32800
+- gp_extra2 = 32801
+- gp_extra3 = 32802
+- gp_extra4 = 32803
+- gp_extra5 = 32809
+- gp_extra6 = 32810
 - gp_face1 = 32769
 - gp_face2 = 32770
 - gp_face3 = 32771
 - gp_face4 = 32772
+- gp_home = 32799
 - gp_padd = 32782
+- gp_paddlel = 32805
+- gp_paddlelb = 32807
+- gp_paddler = 32804
+- gp_paddlerb = 32806
 - gp_padl = 32783
 - gp_padr = 32784
 - gp_padu = 32781
@@ -1606,6 +1713,7 @@ Exectue a RunGML program while a condition is true
 - gp_start = 32778
 - gp_stickl = 32779
 - gp_stickr = 32780
+- gp_touchpadbutton = 32808
 - infinity = inf
 - kbv_autocapitalize_characters = 3
 - kbv_autocapitalize_none = 0
@@ -1817,10 +1925,39 @@ Exectue a RunGML program while a condition is true
 - seqtracktype_sequence = 7
 - seqtracktype_spriteframes = 13
 - seqtracktype_string = 6
+- sprite_add_ext_error_cancelled = -2
+- sprite_add_ext_error_decompressfailed = -5
+- sprite_add_ext_error_loadfailed = -4
+- sprite_add_ext_error_setupfailed = -6
+- sprite_add_ext_error_spritenotfound = -3
+- sprite_add_ext_error_unknown = -1
 - spritespeed_framespergameframe = 1
 - spritespeed_framespersecond = 0
+- stencilop_decr = 8
+- stencilop_decr_wrap = 5
+- stencilop_incr = 7
+- stencilop_incr_wrap = 4
+- stencilop_invert = 6
+- stencilop_keep = 1
+- stencilop_replace = 3
+- stencilop_zero = 2
+- surface_r16float = 9
+- surface_r32float = 10
+- surface_r8unorm = 12
+- surface_rg8unorm = 13
+- surface_rgba16float = 14
+- surface_rgba32float = 15
+- surface_rgba4unorm = 11
+- surface_rgba8unorm = 6
 - tau = 6.28318531
 - test_constant = 42
+- textalign_bottom = 2
+- textalign_center = 1
+- textalign_justify = 3
+- textalign_left = 0
+- textalign_middle = 1
+- textalign_right = 2
+- textalign_top = 0
 - tf_anisotropic = 2
 - tf_linear = 1
 - tf_point = 0
@@ -1842,6 +1979,7 @@ Exectue a RunGML program while a condition is true
 - timezone_utc = 1
 - tm_countvsyncs = 1
 - tm_sleep = 0
+- tm_systemtiming = 2
 - true = 1
 - ty_real = 0
 - ty_string = 1

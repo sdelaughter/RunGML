@@ -290,15 +290,20 @@ Homepage: {1}
 	new RunGML_Op ("gm_manual",
 		function(_i, _l) {
 			var _url;
-			var _target = "monthly";
+			var _domain;
+			if global.RunGML_manualUseLocal {
+				_domain = "http://127.0.0.1:51290/index.htm"
+			} else {
+				_domain = $"https://manual.gamemaker.io/{global.RunGML_manualVersion}/{global.RunGML_manualLanguage}"
+			}
 			if array_length(_l) < 1 {
 				_url = "https://manual.gamemaker.io"
 			} else if struct_exists(global.RunGML_GM_Manual_Index, _l[0]) {
 				var _path = struct_get(global.RunGML_GM_Manual_Index, _l[0]);
 				_path = string_replace(_path, " ", "_");
-				_url = $"https://manual.gamemaker.io/{_target}/en/{_path}.htm";
+				_url = $"{_domain}#t={_path}.htm";
 			} else {
-				_url = $"https://manual.gamemaker.io/{_target}/en/#t=Content.htm&rhsearch={_l[0]}&ux=search"
+				_url = $"{_domain}#t=Content.htm&rhsearch={_l[0]}&ux=search"
 			}
 			url_open(_url);
 		},
@@ -1640,9 +1645,9 @@ Opens to a search for the search term if no page exists.
 			if array_length(_l) > 0 random_set_seed(_l[0]);
 			else randomise();
 		},
-	@"Return a random value between 0 and some upper limit (defaults to 1).  Inclusive on both ends.
-- args: [(max=1)]
-- output: number",
+	@"Set the seed to the given value, or to a random value if no argument is provided.
+- args: [(seed)]
+- output: []",
 		[
 			new RunGML_Constraint_ArgType(0, "numeric", false)
 		]
