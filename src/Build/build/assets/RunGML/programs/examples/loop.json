@@ -1,0 +1,12 @@
+["for", 0, "lt", 10, 1, {"do": ["pass",
+   ["if", ["lt", ["iter"], 8], {
+      "true": ["pass",
+         ["print", ["cat", "a", ["iter"]]],
+         ["for", 10, "gt", 0, -3, {"do": ["pass",
+            ["if", ["neq", ["iter"], 4], {
+               "true": ["print", ["cat", "b", ["iter"]]]
+            }]
+         ]}]
+      ]
+   }]
+]}]

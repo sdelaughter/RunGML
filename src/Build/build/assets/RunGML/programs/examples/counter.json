@@ -1,0 +1,20 @@
+["object", 0, 0, "Instances",
+	{
+		"create": ["pass",
+			["v", "counter", 0],
+			["v", "draw_x", 100],
+			["v", "draw_y", 100],
+			["v", "text_color", ["rgb", 0, 255, 255]]
+		],
+		"step": ["pass",
+			["v", "counter", ["add", 1, ["v", "counter"]]],
+			["if", ["gt", ["v", "counter"], ["fps"]], {
+				"true": ["v", "counter", 0]
+			}]
+		],
+		"draw": ["pass",
+			["r", "draw_set_color", "text_color"],
+			["r", "draw_text", "draw_x", "draw_y", "counter"]
+		]
+	}
+]
