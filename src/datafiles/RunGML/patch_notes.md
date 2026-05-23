@@ -1,5 +1,29 @@
 # RunGML Patch Notes
 
+## 1.4.0 (2026-05-22)
+#### Features
+- Upgraded to LTS 2026 (you should too if you want to use this version of RunGML).
+- Added new `RunGML_Enum` constructor, which inherits from `RunGML_Op`.
+    - When defining, pass a struct formatted as {"member_name": member_value} in place of a function definition (see `scrRunGML_Config` or the README for an example).
+    - Calling an enum operator with no arguments will return an ordered list of its members.
+    - Calling an enum operator with a member name as an argument will return that member's value.  Passing an invalid member name will return an error.
+- Added 12 new operator definitions to access various enums relating to Audio Effects and Flexpanels added in LTS 2026.
+- Added 50+ new operator definitions for constants added in LTS 2026.
+- Added a new `global.RunGML_manualUseLocal` setting to `scrRunGML_Config`.
+    - If you've downloaded the GameMaker manual locally, set this to `true`.  Then the `help` and `gm_manual` commands will open your local copy instead of the online version.
+- Added a new `global.RunGML_manualLanguage` setting to `scrRungML_Config`.
+    - Set which translation of the GameMaker manaul to open.  Only applies if using the online version, not a local download.
+    - Valid options are: "en", "fr", "es", "de", "ru", "it", "pl", "br", "ko", "zh", "ja"
+        - These are all the translations GameMaker provides.  If you want a different language that isn't listed, you'll need to ask them.
+    - Default is "en"
+- Added a new `global.RunGML_manualVersion` setting to `scrRunGML_Config`.
+    - Set which version of the GameMaker namual to open.  Only applies if using the online version, not a local download.
+    - Valid options are: "lts", "monthly", "beta".
+    - Default is "lts"
+
+#### Bug Fixes
+- Corrected docstring for the `rand_seed` operator.
+
 ## 1.3.1 (2026-05-20)
 #### Features
 - Aliases can now refer to things besides defined operators or other aliases (functions, assets, strings, numbers, etc.).

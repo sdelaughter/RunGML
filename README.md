@@ -19,6 +19,7 @@ A runtime scripting language for GameMaker.
 - [Objects](#objects)
 - [Operator Definitions](#operator-definitions)
     - [Constraint Definitions](#constraint-definitions)
+    - [Enum Definitions](#enum-definitions)
 - [Alias Definitions](#alias-definitons)
 - [Acknowledgements](#acknowledgements)
 - [Projects Using RunGML](#projects-using-rungml)
@@ -342,6 +343,39 @@ And two optional parameters:
 In addition to the type names provided by GameMaker's `typeof()`, it also supports:
 - "numeric" = ["number", "int32", "int64"]
 - "alphanumeric" = ["string", "number", "int32", "int64"]
+
+### Enum Definitions
+You can use the `RunGML_Enum` constructor to define an operator to serve as an enum accessor.  This inherits from `RunGML_Op`, but in place of a function definition, simply pass it a struct formatted as `{"member_name": member_value}` for the second argument.
+
+For example, if you have the following enum definition:
+```
+enum RunGML_Test_Enum {
+    foo,
+    bar
+}
+```
+
+You can create an accessor for it with:
+```
+new RunGML_Enum("RunGML_Test_Enum", {
+    "foo": RunGML_Test_Enum.foo,
+    "bar": RunGML_Test_Enum.bar
+})
+```
+
+Even if no enum definition exists in your GML code, you can define a RunGML-specific enum by specifying constant values directly:
+```
+new RunGML_Enum("RunGML_Test_Enum", {
+    "foo": 0,
+    "bar": 1
+})
+```
+
+In this case, you can specify *any* constant values, without the usual requirement that they be positive integers in the contiguous `[0-length)` range.
+
+Calling an enum operator with no arguments will return an ordered list of its member names.  Calling it with a member name as an argument will return that member's index/value.  Calling it with an invalid member name will return an error.
+
+You can provide a description and constraint list when defining an enum as you would with a regular operator, but if you do not they will be generated automatically.
 
 ## Alias Definitons
 Custom aliases can be added from anywhere using RunGML_alias("nickname", "operator_name").  They also *should* be defined in RunGML_ConfigOps().

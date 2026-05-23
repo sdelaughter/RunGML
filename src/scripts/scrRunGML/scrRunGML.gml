@@ -1,4 +1,4 @@
-#macro RunGML_Version "1.3.1"
+#macro RunGML_Version "1.4.0"
 #macro RunGML_Homepage "https://github.com/sdelaughter/RunGML"
 
 global.RunGML_Ops = {};
@@ -397,6 +397,7 @@ function RunGML_alias(_nickname, _name, _i=undefined, _overwrite=false) {
 		_aliases = global.RunGML_Aliases;
 		_ops = global.RunGML_Ops;
 	} else {
+		show_debug_message($"_i: {_i}");
 		_aliases = _i.aliases;
 		_ops = _i.ops;
 	}
@@ -455,6 +456,31 @@ function RunGML_alias(_nickname, _name, _i=undefined, _overwrite=false) {
 	}
 	struct_set(_aliases, _nickname, _name);
 	return [];
+}
+
+function RunGML_Enum(_name, _f=undefined, _desc="", _constraints=undefined, _i=undefined, _overwrite=false) : RunGML_Op(_name, _f, _desc, _constraints, _i, _overwrite) constructor {
+	if is_undefined(_f) _f = {}
+	members = _f;
+	member_names = variable_struct_get_names(members);
+	array_sort(member_names, function(a, b) {
+	    return struct_get(members, a) - struct_get(members, b);
+	});
+	
+	f = function(_i, _l) {
+		if array_length(_l) < 1 {
+			return member_names;	
+		} else if struct_exists(members, _l[0]) {
+			return struct_get(members, _l[0]);	
+		} else {
+			return new RunGML_Error($"Invalid enum member: {name}.{_l[0]}\nValid members are: {member_names}");
+		}
+	}
+	if is_undefined(_constraints) {
+		constraints = [new RunGML_Constraint_ArgType(0, ["string"], false)]
+	}
+	if string_length(_desc) < 1 {
+		desc = $"Accessor for the {_name} enum.\n- members: {member_names}"
+	}
 }
 
 function RunGML_float_format(_val, _digits=undefined) {

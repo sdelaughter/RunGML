@@ -56,6 +56,21 @@ global.RunGML_exportLooseJSON = false;
 // Only applies if it's not recognized as a RunGML operator or alias first
 global.RunGML_useBuiltinOps = true;
 
+// Set to true if you have downloaded the GameMaker manual locally.
+// Will use the local version instead of the web version when calling "help" or "gm_manual" for built-ins
+global.RunGML_manualUseLocal = false;
+
+// Set which translation of the GameMaker manual to open.
+// Only applies if using the online version, not a local copy.
+// Options are: "en", "fr", "es", "de", "ru", "it", "pl", "br", "ko", "zh", "ja"
+global.RunGML_manualLanguage = "en"
+
+// Set which version of the GameMaker manual to open.
+// Only applies if using the online version, not a local copy.
+// Options are: "lts", "monthly", "beta"
+global.RunGML_manualVersion = "lts"
+
+
 // Define custom behavior when toggling the console on/off
 // For example: `global.paused = _enabled`
 function RunGML_Console_OnToggle(_enabled) {
@@ -81,7 +96,7 @@ function RunGML_ConfigOps() {
 	)
 
 	// Operators can also define constant values
-	RunGML_Op("test_constant", 42);
+	new RunGML_Op("test_constant", 42);
 
 	// You can also define aliases for operators
 	RunGML_alias("test_alias", "test_operator");
@@ -91,4 +106,20 @@ function RunGML_ConfigOps() {
 	
 	// And define new color names for use with the "color" operator
 	RunGML_color("seafoam", #78aa9f)
+	
+	// If can create an accessor for an enum like this:
+	enum RunGML_Test_Enum {
+		foo,
+		bar
+	}
+	
+	new RunGML_Enum("RunGML_Test_Enum", {
+		"foo": RunGML_Test_Enum.foo,
+		"bar": RunGML_Test_Enum.bar
+	})
+	
+	new RunGML_Enum("RunGML_Test_Enum2", {
+		"foo": 0,
+		"bar": 1
+	})
 }
