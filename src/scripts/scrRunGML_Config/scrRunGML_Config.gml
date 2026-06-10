@@ -70,6 +70,11 @@ global.RunGML_manualLanguage = "en"
 // Options are: "lts", "monthly", "beta"
 global.RunGML_manualVersion = "lts"
 
+// For use with RunGML_Munge(_json)
+// Checks the _json object for arrays starting with this value.
+// Any found will have the remaining values interpreted as a RunGML program.
+// The output of that program will replace the array.
+global.RunGML_mungePrefix = "#!"
 
 // Define custom behavior when toggling the console on/off
 // For example: `global.paused = _enabled`

@@ -1,5 +1,11 @@
 # RunGML Patch Notes
 
+## 1.4.1 (2026-05-30)
+- Added data munging abilities via `RunGML_Munge` and `munge`operator.
+    - Pass a JSON object as the first argument.  Any arrays starting with the prefix `#!` will have the rest of their elements evaluated as a RunGML program, and the output of that program will replace the array in the returned copy of the JSON object.
+    - Optional second argument specifies an instance of `RunGML_Interpreter` (if undefined, one will be created)
+    - Optional third argument specifies a prefix value.  Default value of `#!` can be changed by setting `global.RunGML_mungePrefix`
+
 ## 1.4.0 (2026-05-22)
 #### Features
 - Upgraded to LTS 2026 (you should too if you want to use this version of RunGML).

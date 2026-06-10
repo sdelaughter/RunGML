@@ -38,6 +38,9 @@ with(new RunGML_Interpreter("Test")) {
 		show_debug_message("RunGML Test: Running bounce example with Loose JSON")
 		run(["example", "bounce_loose"]);
 	}
+	
+	show_debug_message("RunGML Test: Hello data munging?");
+	show_debug_message(run(["munge", ["import", "RunGML/munge_test.json"]]));
 }
 
 //with(new RunGML_Interpreter("Debug")) {

@@ -795,6 +795,8 @@ Opens to a search for the search term if no page exists.
 		]
 	)
 	
+	
+	
 	new RunGML_Op("rec_replay",
 		function(_i, _l) {
 			var _runner = "run";
@@ -874,6 +876,28 @@ Opens to a search for the search term if no page exists.
 - args: []
 - output: []",
 		[new RunGML_Constraint_ArgType(0, "array")]
+	)
+	
+	new RunGML_Op("munge",
+		function(_i, _l) {
+			if array_length(_l) < 1 return undefined;
+			var _json = _l[0];
+			
+			var _gmli = _i;
+			if array_length(_l) > 1 _gmli = _l[1];
+			
+			var _prefix = undefined;
+			if array_length(_l) > 2 _prefix = _l[2];
+			
+			return RunGML_Munge(_json, _gmli, _prefix)
+		},
+	@"Modify a JSON object by evaluating any arrays starting with a given prefix as RunGML programs.  Prefix defaults to RunGML_mungePrefix.
+- args: [json, (interpreter), (prefix)]
+- output: *",
+		[
+			new RunGML_Constraint_ArgCount("geq", 1),
+			new RunGML_Constraint_ArgCount("leq", 3)
+		]
 	)
 	
 	new RunGML_Op("if",

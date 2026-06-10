@@ -525,6 +525,46 @@ function RunGML_Load_GM_Manual_Index(_path="RunGML/gm_manual.json") {
 	return RunGML_Read(_json_string);	
 }
 
+function RunGML_Munge(_json, _gmli=undefined, _prefix=undefined) {
+	if is_undefined(_gmli) {
+		_gmli = new RunGML_Interpreter();
+	}
+	
+	if is_undefined(_prefix) {
+		_prefix = global.RunGML_mungePrefix;
+	}
+	
+	if is_array(_json) {
+		if array_length(_json) < 1 return _json;
+		if _json[0] == _prefix {
+			var _ = array_shift(_json);
+			return _gmli.run(_json);
+		} else {
+			var _n = array_length(_json);
+			var _val;
+			for (var i=0; i<_n; i++) {
+				_val = _json[i];
+				if is_array(_val) or is_struct(_val) {
+					_json[i] = RunGML_Munge(_val, _gmli, _prefix);	
+				}
+			}
+		}
+		return _json;
+	} else if is_struct(_json) {
+		var _keys = struct_get_names(_json);
+		var _n_keys = array_length(_keys);
+		var _key, _val;
+		for (var i=0; i<_n_keys; i++) {
+			_key = _keys[i];			
+			_val = struct_get(_json, _key);
+			if is_array(_val) or is_struct(_val) {
+				struct_set(_json, _key, RunGML_Munge(_val, _gmli, _prefix));
+			}
+		}
+	}
+	return _json;
+}
+
 function RunGML_Init() {
 	global.RunGML_Ops = {};
 	global.RunGML_Aliases = {};
