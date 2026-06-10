@@ -22,6 +22,7 @@
   ],
   "IncludedFiles":[
     {"$GMIncludedFile":"","%Name":"gm_manual.json","CopyToMask":-1,"filePath":"datafiles/RunGML","name":"gm_manual.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"munge_test.json","CopyToMask":-1,"filePath":"datafiles/RunGML","name":"munge_test.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"patch_notes.md","CopyToMask":-1,"filePath":"datafiles/RunGML","name":"patch_notes.md","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"bounce_loose.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"bounce_loose.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"bounce.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"bounce.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
@@ -38,7 +39,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2026.0.0.15",
+    "IDEVersion":"2026.0.0.16",
   },
   "name":"RunGML",
   "resources":[
@@ -57,7 +58,9 @@
     {"id":{"name":"scrRunGML_Colors","path":"scripts/scrRunGML_Colors/scrRunGML_Colors.yy",},},
     {"id":{"name":"scrRunGML_Config","path":"scripts/scrRunGML_Config/scrRunGML_Config.yy",},},
     {"id":{"name":"scrRunGML_Constants","path":"scripts/scrRunGML_Constants/scrRunGML_Constants.yy",},},
+    {"id":{"name":"scrRunGML_Custom","path":"scripts/scrRunGML_Custom/scrRunGML_Custom.yy",},},
     {"id":{"name":"scrRunGML_Ops","path":"scripts/scrRunGML_Ops/scrRunGML_Ops.yy",},},
+    {"id":{"name":"scrRunGML_Test","path":"scripts/scrRunGML_Test/scrRunGML_Test.yy",},},
     {"id":{"name":"scrRunGML","path":"scripts/scrRunGML/scrRunGML.yy",},},
   ],
   "resourceType":"GMProject",

@@ -1,4 +1,5 @@
 // Configure settings and define additional operators here
+// Be sure to back up a copy of any changes you make here before updating RunGML
 
 // Perform constraint validation.  Show an error if an operator receives the wrong number or type of arguments.
 // For debugging purposes, will negatively impact performance
@@ -70,56 +71,15 @@ global.RunGML_manualLanguage = "en"
 // Options are: "lts", "monthly", "beta"
 global.RunGML_manualVersion = "lts"
 
+// For use with RunGML_Munge(_json)
+// Checks the _json object for arrays starting with this value.
+// Any found will have the remaining values interpreted as a RunGML program.
+// The output of that program will replace the array.
+global.RunGML_mungePrefix = "#!"
+
 
 // Define custom behavior when toggling the console on/off
 // For example: `global.paused = _enabled`
 function RunGML_Console_OnToggle(_enabled) {
 	
-}
-
-// Define your own operators, aliases, and colors inside this function
-function RunGML_ConfigOps() {
-	/*An operator definition has the following parameters:
-		- A name
-		- A constant, or a function that accepts an interpreter instance and list of arguments
-		- An optional documentation string
-		- An optional list of constraints
-	*/
-	new RunGML_Op("test_operator",
-		function(_i, _l) {
-			return "Hello, Config!"
-		},
-		@"Test operator
-- args: []
-- output: string",
-		[new RunGML_Constraint_ArgCount("geq", 0)]
-	)
-
-	// Operators can also define constant values
-	new RunGML_Op("test_constant", 42);
-
-	// You can also define aliases for operators
-	RunGML_alias("test_alias", "test_operator");
-	
-	// Or even define aliases for other aliases, ad infinitum
-	RunGML_alias("test_alias_alias", "test_alias");
-	
-	// And define new color names for use with the "color" operator
-	RunGML_color("seafoam", #78aa9f)
-	
-	// If can create an accessor for an enum like this:
-	enum RunGML_Test_Enum {
-		foo,
-		bar
-	}
-	
-	new RunGML_Enum("RunGML_Test_Enum", {
-		"foo": RunGML_Test_Enum.foo,
-		"bar": RunGML_Test_Enum.bar
-	})
-	
-	new RunGML_Enum("RunGML_Test_Enum2", {
-		"foo": 0,
-		"bar": 1
-	})
 }

@@ -1,5 +1,17 @@
 # RunGML Patch Notes
 
+## 1.5.0 (2026-06-08)
+- Added data munging abilities via `RunGML_Munge` and `munge` operator.
+    - Pass a JSON object as the first argument.
+        - Any array whose first element is the string `"#!"` will have the rest of its elements evaluated as a RunGML program, and the output of that program will replace the array in the returned copy of the JSON object.
+        - Any struct keys starting with the substring `"#!"` will have the rest of their string evaluated as a RunGML program, and the output of that program will replace the string in the returned copy of the JSON object.  The program string must be wrapped in brackets, and any double-quotes it contains must be escaped with a backslash.
+        - See `datafiles/munge_test.json` for examples.
+    - Optional second argument specifies an instance of `RunGML_Interpreter` (if undefined, one will be created)
+    - Optional third argument specifies a prefix string.  Default value of `"#!"` can be changed by setting `global.RunGML_mungePrefix`
+- User-created operators and aliases should now be defined in `RunGML_DefineCustom()`, inside the new `scrRunGML_Custom` script.
+    - The old function `RunGML_ConfigOps()` has been renamed to `RunGML_DefineTest()`, relocated to the new `scrRunGML_Test` script, and is now only called if running tests (via the `oRunGML_Test` object).
+- Test operators and aliases are no longer included in the provided version of the manual.
+
 ## 1.4.0 (2026-05-22)
 #### Features
 - Upgraded to LTS 2026 (you should too if you want to use this version of RunGML).

@@ -1,6 +1,9 @@
 // Start an interpreter
-
 with(new RunGML_Interpreter("Test")) {
+	//run(["manual"]); game_end(); exit; // Build the manual and quit (for dev purposes)
+	
+	RunGML_DefineTest();
+	
 	// Run a single-line program
 	show_debug_message("RunGML Test: Hello, RunGML?")
 	run(["print", "Hello, RunGML!"]);
@@ -38,9 +41,7 @@ with(new RunGML_Interpreter("Test")) {
 		show_debug_message("RunGML Test: Running bounce example with Loose JSON")
 		run(["example", "bounce_loose"]);
 	}
+	
+	show_debug_message("RunGML Test: Hello data munging?");
+	show_debug_message(run(["munge", ["import", "RunGML/munge_test.json"]]));
 }
-
-//with(new RunGML_Interpreter("Debug")) {
-//	debug = true;
-//	run(["example", "loop"])
-//}
