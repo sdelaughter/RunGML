@@ -1,4 +1,4 @@
-#macro RunGML_Version "1.4.0"
+#macro RunGML_Version "1.5.0"
 #macro RunGML_Homepage "https://github.com/sdelaughter/RunGML"
 
 global.RunGML_Ops = {};
@@ -525,13 +525,65 @@ function RunGML_Load_GM_Manual_Index(_path="RunGML/gm_manual.json") {
 	return RunGML_Read(_json_string);	
 }
 
+function RunGML_Munge(_json, _gmli=undefined, _prefix=undefined) {
+	if is_undefined(_gmli) {
+		_gmli = new RunGML_Interpreter();
+	}
+	
+	if is_undefined(_prefix) {
+		_prefix = global.RunGML_mungePrefix;
+	}
+	
+	if is_array(_json) {
+		if array_length(_json) < 1 return _json;
+		if _json[0] == _prefix {
+			var _ = array_shift(_json);
+			return _gmli.run(_json);
+		} else {
+			var _n = array_length(_json);
+			var _val;
+			for (var i=0; i<_n; i++) {
+				_val = _json[i];
+				if is_array(_val) or is_struct(_val) {
+					_json[i] = RunGML_Munge(_val, _gmli, _prefix);	
+				}
+			}
+		}
+		return _json;
+	} else if is_struct(_json) {
+		var _keys = struct_get_names(_json);
+		var _n_keys = array_length(_keys);
+		var _key, _val;
+		for (var i=0; i<_n_keys; i++) {
+			_key = _keys[i];
+			_val = struct_get(_json, _key);
+			
+			var _did_change = false;
+			if string_starts_with(_key, _prefix) {
+				var _prog = string_trim_start(_key, [_prefix]);
+				struct_remove(_json, _key);
+				_key = _gmli.run(RunGML_Read(_prog));
+				_did_change = true;	
+			}
+			
+			if is_array(_val) or is_struct(_val) {
+				_val = RunGML_Munge(_val, _gmli, _prefix);
+				_did_change = true;
+			}
+			
+			if _did_change struct_set(_json, _key, _val);
+		}
+	}
+	return _json;
+}
+
 function RunGML_Init() {
 	global.RunGML_Ops = {};
 	global.RunGML_Aliases = {};
 
 	RunGML_DefineOps();
 	RunGML_DefineAliases();
-	RunGML_ConfigOps();
+	RunGML_DefineCustom();
 	
 	global.RunGML_GM_Manual_Index = RunGML_Load_GM_Manual_Index();
 	global.RunGML_DidInit = true;

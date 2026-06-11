@@ -1,0 +1,22 @@
+{
+    "Hello": ["#!", "last",
+        ["v", "foo", "Data"],
+        ["v", "bar", "Munging"],
+        ["r", "cat", "foo", " ", "bar", "!"]
+    ],
+    "count_to_4": [
+        1,
+        2,
+        ["#!", "add", 1, 2],
+        ["#!", "mult", 2, [["cat", "a", "d", "d"], 1, 1]]
+    ],
+    "the": {
+        "answer": {
+            "is": ["#!", "test_constant"]
+        }
+    },
+    "global_prefix": ["#!", "g", "RunGML_mungePrefix"],
+    "c_white": ["#!", "c_white"],
+    "#![\"cat\", \"key\", \"_\", \"munging\"]": "Key Munging!",
+    "#![cat, loose, _, key, _, munging]": "Loose Key Munging!"
+}
