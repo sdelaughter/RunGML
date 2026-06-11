@@ -21,6 +21,7 @@ A runtime scripting language for GameMaker.
     - [Constraint Definitions](#constraint-definitions)
     - [Enum Definitions](#enum-definitions)
 - [Alias Definitions](#alias-definitons)
+- [Data Munging](#data-munging)
 - [Acknowledgements](#acknowledgements)
 - [Projects Using RunGML](#projects-using-rungml)
 
@@ -381,6 +382,128 @@ You can provide a description and constraint list when defining an enum as you w
 Custom aliases can be added from anywhere using RunGML_alias("nickname", "operator_name").  They also *should* be defined in RunGML_ConfigOps().
 
 It is possible to define an alias for anohter alias (ad infinitum) as well as for an operator.
+
+## Data Munging
+As of v1.5.0, RunGML includes "data munging" features, which allow you to reference assets, objects, global variables, etc. from included JSON files.  In contrast to something like the RunGML example programs where the entire JSON file is a RunGML program, data munging allows you to store programs as part of otherwise ordinary JSON data.
+
+Munging can be performed either by passing a JSON object to `RunGML_Munge()`, or to the `munge` operator within RunGML itself.  An optional second argument can be used to specify an instance of the RunGML Interpreter, or else a new instance will be created.  An optional third argument can be used to specify a prefix string, which defaults to `"#!"`, or whatever value you set for `global.RunGML_mungePrefix`.
+
+Any array whose first element is the prefix string will have the rest of its elements evaluated as a RunGML program, and the output of that program will replace the array in the returned JSON object.  Any struct keys starting with the prefix string as a substring will have the rest of their string evaluated as a RunGML program, and the output of that program will replace the string in the returned JSON object.  The program string must be wrapped in brackets, and any double-quotes it contains must be escaped with a backslash.
+
+Remember that you must pass a JSON object, not a string, so when munging a file you must do something like `["munge", ["import", "/path/to/data.json"]]` rather than `["munge", "/path/to/data.json"]`
+
+As an example, say you want to define parameters for some enemies in an external JSON file.  You might have something like:
+
+```
+{
+    "small_enemy": {
+        "hp": 3,
+        "attack_damage": 1
+    },
+    "large_enemy": {
+        "hp": 5,
+        "attack_damage": 2
+    }
+}
+```
+
+But you may also want to specify different sprite assets to use for each enemy, or different GameMaker color constants to use for their blendmodes.  Normally your only option would be to store string representations of these values, and implement custom logic in your game to convert those strings to the desired assets/values.  Instead, data munging allows you to do the following:
+
+```
+{
+    "small_enemy": {
+        "hp": 3,
+        "attack_damage": 1,
+        "sprite": ["#!", "sprEnemySmall"],
+        "blend": ["#!", "c_white"]
+    },
+    "large_enemy": {
+        "hp": 5,
+        "attack_damage": 2,
+        "sprite": ["#!", "sprEnemyLarge"],
+        "blend": ["#!", "c_red"]
+    }
+}
+```
+
+### Ordering and Persistence
+When munging a JSON object, the same instance of the RunGML interpreter will be used throughout.  This means it's possible to do things like define a variable in one struct value and reference it in another.  However, you must be mindful of the fact that the order in which struct elements are evaluated is unpredictable.  For example, consider the following JSON:
+
+```
+{
+    "A": ["#!", "last",
+        ["v", "foo", 1],
+        ["v", "bar"]
+    ],
+    "B": ["#!", "last",
+        ["v", "bar", 2]
+        ["v", "foo"]
+    ]
+}
+```
+
+If the `"A"` portion is evaulated first, this will become:
+```
+{
+    "A": undefined,
+    "B": 2
+}
+```
+
+But if the `"B"` portion is evaluated first it will instead become:
+```
+{
+    "A": 1,
+    "B": undefined
+}
+```
+
+You can get around this limitation by structuring your JSON file as an array at the top level instead of a struct.  Place any necessary prep work to set variables in the first element of the array, and store the actual data in the second, like so:
+
+```
+[
+    ["#!", "pass",
+        ["v", "foo", 1],
+        ["v", "bar", 2]
+    ],
+    {
+        "A": ["#!", "v", "foo"]
+        "B": ["#!", "v", "bar"]
+    }
+]
+```
+
+This will always become:
+```
+[
+    [],
+    {
+        "A": 1,
+        "B": 2
+    }
+]
+```
+
+Then you can simply extract the struct and discard the empty array left in the first element with something like `my_struct = RunGML_Munge(json_object)[1]`.
+
+For a more practical example, consider a case where a modder wants to define data for a new enemy type with a new sprite that is not included in the base game.  They could accomplish this like so:
+```
+[
+    ["#!", "v", "custom_sprite", 
+        ["sprite_add", "/path/to/sprite.png", 1, 0, 0, 0, 0]
+    ],
+    {
+        "custom_enemy": {
+            "hp": 2,
+            "attack_damage": 2,
+            "sprite": ["#!", "v", "custom_sprite"],
+        },
+    }
+]
+```
+
+If your goal is to facilitate modding, it's recommended to structure any data files that get automatically munged by your game in this `[[prep],{data}]` format, even if you do not need to perform any prep operations for the base game.
+
 
 ## Acknowledgements
 Thanks to:

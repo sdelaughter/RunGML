@@ -1,6 +1,6 @@
 # RunGML Patch Notes
 
-## 1.5.0 (2026-06-10)
+## 1.5.0 (2026-06-11)
 - Added data munging abilities via `RunGML_Munge` and `munge` operator.
     - Pass a JSON object as the first argument.
         - Any array whose first element is the string `"#!"` will have the rest of its elements evaluated as a RunGML program, and the output of that program will replace the array in the returned copy of the JSON object.
