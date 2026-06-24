@@ -1,5 +1,12 @@
 # RunGML Patch Notes
 
+## 1.5.1 (2026-06-24)
+- Added new `pong` and `snake` example programs. Have fun!
+- The `reference`/`r` operator no longer returns undefined when the following operator is not defined in the interpreter's `ops` dictionary, allowing it to be used with aliases and built-in functions.
+- The `and` and `or` operators are no longer restricted to two arguments.  `and` will return `true` if all arguments are true, while `or` will return `true` if at least one argument is true.  Both will return `undefined` if no arguments are passed.
+- Changed the font to [Liberation Mono](https://www.dafont.com/liberation-mono.font).
+- Added an icon for use with standalone version.
+
 ## 1.5.0 (2026-06-11)
 - Added data munging abilities via `RunGML_Munge` and `munge` operator.
     - Pass a JSON object as the first argument.

@@ -1194,16 +1194,16 @@ Opens to a search for the search term if no page exists.
 	new RunGML_Op ("reference",
 		function(_i, _l) {
 			if array_length(_l) == 0 return _i.registers;
-			if struct_exists(_i.ops, _l[0]) {
-				var _n_args = array_length(_l)
-				for (var i=1; i<_n_args; i++) {
-					if struct_exists(_i.registers, _l[i]) {
-						_l[i] = struct_get(_i.registers, _l[i]);
-					}
+			//if struct_exists(_i.ops, _l[0]) {
+			var _n_args = array_length(_l)
+			for (var i=1; i<_n_args; i++) {
+				if struct_exists(_i.registers, _l[i]) {
+					_l[i] = struct_get(_i.registers, _l[i]);
 				}
-				return _i.run(_l);
 			}
-			else return undefined;
+			return _i.run(_l);
+			//}
+			//else return undefined;
 		},	
 	@"Operate on referenced values.  Behavior depends on the number of arguments:
 
@@ -1674,7 +1674,6 @@ Opens to a search for the search term if no page exists.
 			new RunGML_Constraint_ArgType(0, "numeric", false)
 		]
 	)
-
 	new RunGML_Op("choose",
 		function(_i, _l) {
 			var _index = irandom_range(0, array_length(_l[0])-1);
@@ -1687,7 +1686,7 @@ Opens to a search for the search term if no page exists.
 			new RunGML_Constraint_ArgType(0, "array")
 		]
 	)
-
+	
 	#endregion Math
 
 	#region Trigonometry
@@ -1851,20 +1850,30 @@ Opens to a search for the search term if no page exists.
 
 	new RunGML_Op("and",
 		function(_i, _l) {
-			return _l[0] and _l[1];	
+			var _n = array_length(_l);
+			if _n < 1 return undefined;
+			for (var i=0; i<_n; i++) {
+				if not _l[i] return false;
+			}
+			return true;
 		},
 	@"Logical and operator
-- args: [A, B]
-- output: A and B"
+- args: [A, B, ...]
+- output: A and B (and C ...)"
 	)
 	
 	new RunGML_Op("or",
 		function(_i, _l) {
-			return _l[0] or _l[1];	
+			var _n = array_length(_l);
+			if _n < 1 return undefined;
+			for (var i=0; i<_n; i++) {
+				if _l[i] return true;
+			}
+			return false;
 		},
 	@"Logical or operator
-- args: [A, B]
-- output: [(A or B)]"
+- args: [A, B, ...]
+- output: A or B (or C ...)"
 	)
 	
 	new RunGML_Op("not",
@@ -2853,7 +2862,7 @@ Opens to a search for the search term if no page exists.
 			new RunGML_Constraint_ArgType(0, "alphanumeric", false)
 		]
 	)
-
+	
 	#endregion Cursor
 
 	#region Game

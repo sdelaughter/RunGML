@@ -1,0 +1,247 @@
+["object", 0, 0, 0, {
+    "create": ["pass",
+        ["v", "move_delay", 0.2],
+        ["v", "player_color", ["make_color_rgb", 50, 130, 40]],
+        ["v", "fruit_color", ["make_color_rgb", 220, 210, 80]],
+        ["v", "grid_color", ["c_dkgray"]],
+        ["v", "score_color", ["c_white"]],
+        ["v", "grid_w", 24],
+        ["v", "grid_h", 16],
+        ["v", "cell_size", 16],
+        ["v", "cell_half", ["div", ["v", "cell_size"], 2.0]],
+        ["v", "fruit_r", ["div", ["v", "cell_size"], 3.0]],
+        ["v", "draw_w", ["r", "mult", "cell_size", "grid_w"]],
+        ["v", "draw_h", ["r", "mult", "cell_size", "grid_h"]],
+        ["v", "offset_x", ["floor", ["div", ["sub", ["room_w"], ["v", "draw_w"]], 2.0]]],
+        ["v", "offset_y", ["floor", ["div", ["sub", ["room_h"], ["v", "draw_h"]], 2.0]]],
+        ["v", "grid", ["r", "ds_grid_create", "grid_w", "grid_h"]],
+        ["v", "dir_r", 1],
+        ["v", "dir_u", 2],
+        ["v", "dir_l", 3],
+        ["v", "dir_d", 4],
+        ["ini_open", "RunGML.ini"],
+        ["v", "hiscore", ["ini_read_real", "snake", "hiscore", 0]],
+        ["ini_close"],
+        ["v", "score", 0],
+        ["v", "hf", {
+            "exit": ["pass",
+                ["ds_grid_destroy", ["v", "grid"]],
+                ["destroy", ["p"]]
+            ],
+            "reset": ["pass",
+                ["v", "snake_color", ["v", "player_color"]],
+                ["if", ["r", "gt", "score", "hiscore"], {"True": ["pass",
+                    ["v", "hiscore", ["v", "score"]],
+                    ["ini_open", "RunGML.ini"],
+                    ["ini_write_real", "snake", "hiscore", ["v", "hiscore"]],
+                    ["ini_close"]
+                ]}],
+                ["v", "score", 0],
+                ["ds_grid_clear", ["v", "grid"], 0],
+                ["v", "head_x", ["floor", ["r", "div", "grid_w", 2.0]]],
+                ["v", "head_y", ["floor", ["r", "div", "grid_h", 2.0]]],
+                ["v", "head_dir", ["v", "dir_r"]],
+                ["v", "body", ["l", ["l", ["v", "head_x"], ["v", "head_y"]]]],
+                ["r", "ds_grid_set", "grid", "head_x", "head_y", "head_dir"],
+                ["v", "fruit_x", ["add", ["v", "head_x"], 1]],
+                ["v", "fruit_y", ["v", "head_y"]],
+                ["v", "tri_list", ["l"]],
+                ["run", ["s", ["v", "hf"], "update_triangles"]],
+                ["v", "move_cooldown", ["v", "move_delay"]],
+                ["v", "did_eat", 1],
+                ["v", "input", 0]
+            ],
+            "spawn_fruit": ["pass",
+                ["v", "fruit_x", ["irandom_range", 0, ["sub", ["v", "grid_w"], 1]]],
+                ["v", "fruit_y", ["irandom_range", 0, ["sub", ["v", "grid_h"], 1]]]
+            ],
+            "eat_check": ["pass",
+                ["if",
+                    ["and",
+                        ["r", "eq", "head_x", "fruit_x"],
+                        ["r", "eq", "head_y", "fruit_y"]
+                    ], {"True": ["pass",
+                        ["inc", "score"],
+                        ["if", ["r", "eq", "score", 128], {"True":
+                            ["v", "snake_color", ["make_color_rgb", 180, 80, 220]]
+                        }],
+                        ["if", ["r", "eq", "score", 256], {"True":
+                            ["v", "snake_color", ["make_color_rgb", 120, 170, 159]]
+                        }],
+                        ["run", ["s", ["v", "hf"], "spawn_fruit"]],
+                        ["v", "did_eat", "True"]
+                    ]}
+                ]
+            ],
+            "move": ["pass",
+                ["if", ["r", "neq", "input", 0], {"True": ["v", "head_dir", ["v", "input"]]}],
+                ["if", ["r", "eq", "head_dir", "dir_r"], {"True": ["inc", "head_x"]}],
+                ["if", ["r", "eq", "head_dir", "dir_u"], {"True": ["dec", "head_y"]}],
+                ["if", ["r", "eq", "head_dir", "dir_l"], {"True": ["dec", "head_x"]}],
+                ["if", ["r", "eq", "head_dir", "dir_d"], {"True": ["inc", "head_y"]}],
+                
+                ["if",
+                    ["or",
+                        ["neq", 0, ["ds_grid_get", ["v", "grid"], ["v", "head_x"], ["v", "head_y"]]],
+                        ["lt", ["v", "head_x"], 0],
+                        ["lt", ["v", "head_y"], 0],
+                        ["geq", ["v", "head_x"], ["v", "grid_w"]],
+                        ["geq", ["v", "head_y"], ["v", "grid_h"]]
+                    ], {
+                        "True": ["run", ["s", ["v", "hf"], "reset"]],
+                        "False": ["pass",
+                            ["array_insert", ["v", "body"], 0, ["l", ["v", "head_x"], ["v", "head_y"]]],
+                            ["r", "ds_grid_set", "grid", "head_x", "head_y", "head_dir"]
+                        ]
+                    }
+                ],
+                ["run", ["s", ["v", "hf"], "update_triangles"]],
+                ["run", ["s", ["v", "hf"], "eat_check"]],
+                ["if", ["v", "did_eat"], {"False": ["pass",
+                    ["v", "tail", ["array_pop", ["v", "body"]]],
+                    ["ds_grid_set", 
+                        ["v", "grid"],
+                        ["a", ["v", "tail"], 0],
+                        ["a", ["v", "tail"], 1],
+                        0
+                    ],
+                    ["if", ["gt", ["array_length", ["v", "body"]], 1], {"True": 
+                        ["array_pop", ["v", "tri_list"]]
+                    }]
+                ]}],
+                ["v", "did_eat", 0],   
+                ["v", "input", 0]
+            ],
+            "update_triangles": ["pass",
+                ["v", "cell_x1", ["r", "add", ["r", "mult", "head_x", "cell_size"], "offset_x"]],
+                ["v", "cell_y1", ["r", "add", ["r", "mult", "head_y", "cell_size"], "offset_y"]],
+                ["v", "cell_x2", ["r", "add", ["r", "mult", "head_x", "cell_size"], "cell_size", "offset_x"]],
+                ["v", "cell_y2", ["r", "add", ["r", "mult", "head_y", "cell_size"], "cell_size", "offset_y"]],
+                ["v", "cell_xm", ["div", ["r", "add", "cell_x1", "cell_x2"], 2.0]],
+                ["v", "cell_ym", ["div", ["r", "add", "cell_y1", "cell_y2"], 2.0]],
+                ["if", ["r", "eq", "head_dir", "dir_r"], {"True": ["pass",
+                    ["v", "tri_x1", ["v", "cell_x1"]],
+                    ["v", "tri_y1", ["v", "cell_y1"]],
+                    ["v", "tri_x2", ["v", "cell_x1"]],
+                    ["v", "tri_y2", ["v", "cell_y2"]],
+                    ["v", "tri_x3", ["v", "cell_x2"]],
+                    ["v", "tri_y3", ["v", "cell_ym"]]
+                ]}],
+                ["if", ["r", "eq", "head_dir", "dir_u"], {"True": ["pass",
+                    ["v", "tri_x1", ["v", "cell_x1"]],
+                    ["v", "tri_y1", ["v", "cell_y2"]],
+                    ["v", "tri_x2", ["v", "cell_x2"]],
+                    ["v", "tri_y2", ["v", "cell_y2"]],
+                    ["v", "tri_x3", ["v", "cell_xm"]],
+                    ["v", "tri_y3", ["v", "cell_y1"]]
+                ]}],
+                ["if", ["r", "eq", "head_dir", "dir_l"], {"True": ["pass",
+                    ["v", "tri_x1", ["v", "cell_x2"]],
+                    ["v", "tri_y1", ["v", "cell_y1"]],
+                    ["v", "tri_x2", ["v", "cell_x2"]],
+                    ["v", "tri_y2", ["v", "cell_y2"]],
+                    ["v", "tri_x3", ["v", "cell_x1"]],
+                    ["v", "tri_y3", ["v", "cell_ym"]]
+                ]}],
+                ["if", ["r", "eq", "head_dir", "dir_d"], {"True": ["pass",
+                    ["v", "tri_x1", ["v", "cell_x1"]],
+                    ["v", "tri_y1", ["v", "cell_y1"]],
+                    ["v", "tri_x2", ["v", "cell_x2"]],
+                    ["v", "tri_y2", ["v", "cell_y1"]],
+                    ["v", "tri_x3", ["v", "cell_xm"]],
+                    ["v", "tri_y3", ["v", "cell_y2"]]
+                ]}],
+                ["array_insert", ["v", "tri_list"], 0, ["r", "l", "tri_x1", "tri_y1", "tri_x2", "tri_y2", "tri_x3", "tri_y3"]]
+            ]
+        }],
+        ["run", ["s", ["v", "hf"], "reset"]]
+    ],
+
+    "step": ["pass",
+        ["if", ["keyboard_check_pressed", ["vk_escape"]], {"True": ["run", ["s", ["v", "hf"], "exit"]]}],
+        ["if", ["keyboard_check_pressed", ["ord", "R"]], {"True": ["run", ["s", ["v", "hf"], "reset"]]}],
+        ["if", 
+            ["and",
+                ["keyboard_check_pressed", ["vk_right"]], 
+                ["array_contains", ["l", ["v", "dir_u"], ["v", "dir_d"]], ["v", "head_dir"]]
+            ], {"True": ["v", "input", ["v", "dir_r"]]}
+        ],
+        ["if", 
+            ["and",
+                ["keyboard_check_pressed", ["vk_up"]], 
+                ["array_contains", ["l", ["v", "dir_l"], ["v", "dir_r"]], ["v", "head_dir"]]
+            ], {"True": ["v", "input", ["v", "dir_u"]]}
+        ],
+        ["if", 
+            ["and",
+                ["keyboard_check_pressed", ["vk_left"]], 
+                ["array_contains", ["l", ["v", "dir_u"], ["v", "dir_d"]], ["v", "head_dir"]]
+            ], {"True": ["v", "input", ["v", "dir_l"]]}
+        ],
+        ["if", 
+            ["and",
+                ["keyboard_check_pressed", ["vk_down"]], 
+                ["array_contains", ["l", ["v", "dir_l"], ["v", "dir_r"]], ["v", "head_dir"]]
+            ], {"True": ["v", "input", ["v", "dir_d"]]}
+        ],
+        ["dec", "move_cooldown", ["delta"]],
+        ["if", ["leq", ["v", "move_cooldown"], 0], {"True": ["pass",
+            ["run", ["s", ["v", "hf"], "move"]],
+            ["inc", "move_cooldown", ["v", "move_delay"]]
+        ]}],
+        
+        ["v", "draw_head_x", ["add", ["v", "offset_x"], ["r", "mult", "head_x", "cell_size"], ["v", "cell_half"]]],
+        ["v", "draw_head_y", ["add", ["v", "offset_y"], ["r", "mult", "head_y", "cell_size"], ["v", "cell_half"]]],
+        ["v", "draw_fruit_x", ["add", ["v", "offset_x"], ["r", "mult", "fruit_x", "cell_size"], ["v", "cell_half"]]],
+        ["v", "draw_fruit_y", ["add", ["v", "offset_y"], ["r", "mult", "fruit_y", "cell_size"], ["v", "cell_half"]]]
+    ],
+    
+    "draw": ["pass",
+        ["draw_alpha", 1.0],
+        ["draw_halign", ["fa_left"]],
+        ["draw_valign", ["fa_top"]],
+        ["draw_font", ["fntRunGML_Console"]],
+
+        ["draw_color", ["v", "grid_color"]],
+        ["v", "xx", ["v", "offset_x"]],
+        ["v", "y1", ["v", "offset_y"]],
+        ["v", "y2", ["r", "add", "offset_y", "draw_h"]],
+        ["for", 0, "leq", ["v", "grid_w"], 1, {"do": ["pass",
+            ["r", "draw_line_width", "xx", "y1", "xx", "y2", 1.1],
+            ["inc", "xx", ["v", "cell_size"]]
+        ]}],
+        ["v", "yy", ["v", "offset_y"]],
+        ["v", "x1", ["v", "offset_x"]],
+        ["v", "x2", ["r", "add", "offset_x", "draw_w"]],
+        ["for", 0, "leq", ["v", "grid_h"], 1, {"do": ["pass",
+            ["r", "draw_line_width", "x1", "yy", "x2", "yy", 1.1],
+            ["inc", "yy", ["v", "cell_size"]]
+        ]}],
+
+        ["draw_color", ["v", "snake_color"]],
+        ["v", "iter", 0],
+        ["for", 0, "lt", ["array_length", ["v", "tri_list"]], 1, {"do": ["pass",
+            ["v", "tri", ["a", ["v", "tri_list"], ["v", "iter"]]],
+            ["v", "tri_x1", ["a", ["v", "tri"], 0]],
+            ["v", "tri_y1", ["a", ["v", "tri"], 1]],
+            ["v", "tri_x2", ["a", ["v", "tri"], 2]],
+            ["v", "tri_y2", ["a", ["v", "tri"], 3]],
+            ["v", "tri_x3", ["a", ["v", "tri"], 4]],
+            ["v", "tri_y3", ["a", ["v", "tri"], 5]],
+            ["r", "draw_triangle", "tri_x1", "tri_y1", "tri_x2", "tri_y2", "tri_x3", "tri_y3", 0],
+            ["inc", "iter"]
+        ]}],
+        ["r", "draw_circle", "draw_head_x", "draw_head_y", "cell_half", 0],
+
+        ["draw_color", ["v", "fruit_color"]],
+        ["draw_circle", 
+            ["v", "draw_fruit_x"],
+            ["v", "draw_fruit_y"],
+            ["v", "fruit_r"],
+            0
+        ],
+
+        ["draw_color", ["v", "score_color"]],
+        ["draw_text", 4, 4, ["cat", "Score: ", ["v", "score"], "\n Best: ", ["v", "hiscore"]]]
+    ]
+}]

@@ -1,0 +1,149 @@
+["object", 0, 0, 0, {
+    "create": ["pass",
+        ["rand_seed"],
+        ["v", "paddle_h", 50],
+        ["v", "paddle_w", 4],
+        ["v", "paddle_h_half", ["div", ["v", "paddle_h"], 2.0]],
+        ["v", "paddle_speed", 100],
+        ["v", "ball_r", 5],
+        ["v", "steering", 20],
+        ["v", "singleplayer", 0],
+        ["v", "score_l", 0],
+        ["v", "score_r", 0],
+        ["v", "hf", {
+            "reset": ["pass",
+                ["v", "ball_x", ["div", ["room_w"], 2.0]],
+                ["v", "ball_y", ["div", ["room_h"], 2.0]],
+                ["v", "paddle_l_y", ["v", "ball_y"]],
+                ["v", "paddle_r_y", ["v", "ball_y"]],
+                ["v", "paddle_l_dir", 0],
+                ["v", "paddle_r_dir", 0],
+                ["v", "ball_speed_x", ["mult", 100, ["choose", ["l", 1, -1]]]],
+                ["v", "ball_speed_y", ["random_range", -50, 50]]
+            ],
+            "paddle_collision": ["or",
+                ["lt", 
+                    ["r", "add", "ball_y", "ball_r"],
+                    ["r", "sub", ["v", "_paddle_y"], "paddle_h_half"]
+                ], ["gt", 
+                    ["r", "sub", "ball_y", "ball_r"],
+                    ["r", "add", ["v", "_paddle_y"], "paddle_h_half"]
+                ]
+            ],
+            "move_ball": ["pass",
+                ["inc", "ball_x", ["mult", ["delta"], ["v", "ball_speed_x"]]],
+                ["inc", "ball_y", ["mult", ["delta"], ["v", "ball_speed_y"]]],
+                ["if", ["lt", ["v", "ball_y"], 0], {"True": ["pass",
+                    ["v", "ball_speed_y", ["mult", -1, ["v", "ball_speed_y"]]],
+                    ["v", "ball_y", 0]
+                ]}],
+                ["if", ["gt", ["v", "ball_y"], ["room_h"]], {"True": ["pass",
+                    ["v", "ball_speed_y", ["mult", -1, ["v", "ball_speed_y"]]],
+                    ["v", "ball_y", ["room_h"]]
+                ]}],
+                ["v", "_paddle_y", "paddle_l_y"],
+                ["if", ["r", "lt", "ball_x", 0], {"True": ["if", 
+                    ["run", ["s", ["v", "hf"], "paddle_collision"]], {
+                        "True": ["pass",
+                            ["inc", "score_r", 1],
+                            ["run", ["s", ["v", "hf"], "reset"]]
+                        ], "False": ["pass",
+                            ["v", "ball_speed_x", ["mult", -1, ["v", "ball_speed_x"]]],
+                            ["inc", "ball_speed_y", ["r", "mult", "paddle_l_dir", "steering"]],
+                            ["v", "ball_x", 1]
+                        ]
+                    }
+                ]}],
+                ["v", "_paddle_y", "paddle_r_y"],
+                ["if", ["r", "gt", "ball_x", ["room_w"]], {"True": ["if", 
+                    ["run", ["s", ["v", "hf"], "paddle_collision"]], {
+                        "True": ["pass",
+                            ["inc", "score_l", 1],
+                            ["run", ["s", ["v", "hf"], "reset"]]
+                        ], "False": ["pass",
+                            ["v", "ball_speed_x", ["mult", -1, ["v", "ball_speed_x"]]],
+                            ["inc", "ball_speed_y", ["r", "mult", "paddle_r_dir", "steering"]],
+                            ["v", "ball_x", ["sub", ["room_w"], 1]]
+                        ]
+                    }
+                ]}]
+            ],
+            "paddle_clamp": ["pass",
+                ["v", ["v", "_paddle_y"], ["clamp", 
+                    ["v", ["v", "_paddle_y"]],
+                    ["add", 0, ["v", "paddle_h_half"]],
+                    ["sub", ["room_h"], ["v", "paddle_h_half"]]
+                ]]
+            ]
+        }],
+        ["run", ["s", ["v", "hf"], "reset"]]
+    ], "step": ["pass",
+        ["v", "paddle_l_dir", 0],
+        ["v", "paddle_r_dir", 0],
+        ["if", ["keyboard_check_pressed", ["vk_escape"]], {"True": ["destroy", ["p"]]}],
+        ["if", ["keyboard_check_pressed", ["ord", "R"]], {"True": ["pass",
+            ["v", "score_l", 0],
+            ["v", "score_r", 0],
+            ["run", ["s", ["v", "hf"], "reset"]]
+        ]}],
+        ["if", ["keyboard_check_pressed", ["vk_space"]], {"True":
+            ["v", "singleplayer", ["sub", 1, ["v", "singleplayer"]]]
+        }],
+        ["v", "_paddle_y", "paddle_l_y"],
+        ["if", ["keyboard_check", ["ord", "W"]], {"True": ["pass",
+            ["dec", "paddle_l_y", ["mult", ["delta"], ["v", "paddle_speed"]]],
+            ["run", ["s", ["v", "hf"], "paddle_clamp"]],
+            ["v", "paddle_l_dir", -1]
+        ]}],
+        ["if", ["keyboard_check", ["ord", "S"]], {"True": ["pass",
+            ["inc", "paddle_l_y", ["mult", ["delta"], ["v", "paddle_speed"]]],
+            ["run", ["s", ["v", "hf"], "paddle_clamp"]],
+            ["v", "paddle_l_dir", 1]
+        ]}],
+        ["v", "_paddle_y", "paddle_r_y"],
+        ["if", 
+            ["or",
+                ["keyboard_check", ["vk_up"]],
+                ["and", ["v", "singleplayer"], ["r", "lt", "ball_y", "paddle_r_y"]]
+            ], {"True": ["pass",
+                ["dec", "paddle_r_y", ["mult", ["delta"], ["v", "paddle_speed"]]],
+                ["run", ["s", ["v", "hf"], "paddle_clamp"]],
+                ["v", "paddle_r_dir", -1]
+            ]}
+        ],
+        ["if",
+            ["or",
+                ["keyboard_check", ["vk_down"]],
+                ["and", ["v", "singleplayer"], ["r", "gt", "ball_y", "paddle_r_y"]]
+            ], {"True": ["pass",
+                ["inc", "paddle_r_y", ["mult", ["delta"], ["v", "paddle_speed"]]],
+                ["run", ["s", ["v", "hf"], "paddle_clamp"]],
+                ["v", "paddle_r_dir", 1]
+            ]}
+        ],
+        ["run", ["s", ["v", "hf"], "move_ball"]]
+    ], "draw": [
+        ["draw_color", ["c_white"]],
+        ["draw_alpha", 1.0],
+        ["draw_valign", ["fa_top"]],
+        ["draw_halign", ["fa_center"]],
+        ["draw_font", ["fntRunGML_Console"]],
+        ["draw_rectangle", 2, 2, ["sub", ["room_w"], 2], ["sub", ["room_h"], 2], 1],
+        ["draw_rectangle", 
+            0,
+            ["r", "sub", "paddle_l_y", "paddle_h_half"],
+            ["add", 0, ["v", "paddle_w"]],
+            ["r", "add", "paddle_l_y", "paddle_h_half"],
+            0
+        ],
+        ["draw_rectangle", 
+            ["sub", ["room_w"], ["v", "paddle_w"]],
+            ["r", "sub", "paddle_r_y", "paddle_h_half"],
+            ["room_w"],
+            ["r", "add", "paddle_r_y", "paddle_h_half"],
+            0
+        ],
+        ["r", "draw_circle", "ball_x", "ball_y", "ball_r", 0],
+        ["draw_text", ["div", ["room_w"], 2.0], 4, ["r", "cat", "score_l", " - ", "score_r"]]
+    ]
+}]
