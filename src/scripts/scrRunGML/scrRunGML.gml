@@ -1,4 +1,4 @@
-#macro RunGML_Version "1.5.0"
+#macro RunGML_Version "1.5.1"
 #macro RunGML_Homepage "https://github.com/sdelaughter/RunGML"
 
 global.RunGML_Ops = {};

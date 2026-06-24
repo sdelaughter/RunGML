@@ -2,7 +2,7 @@
 			
 ## About
 
-Version: 1.5.0
+Version: 1.5.1
 
 Homepage: https://github.com/sdelaughter/RunGML
 
@@ -80,8 +80,8 @@ Create an operator alias. Behavior depends on the number of arguments:
 
 ### and
 Logical and operator
-- args: [A, B]
-- output: A and B
+- args: [A, B, ...]
+- output: A and B (and C ...)
 
 ### angle
 Find the shortest distance between two angles.
@@ -913,8 +913,8 @@ Return a list of operators and aliases whose names contain a give string.
 
 ### or
 Logical or operator
-- args: [A, B]
-- output: [(A or B)]
+- args: [A, B, ...]
+- output: A or B (or C ...)
 
 ### os_browser
 [dynamic constant]
@@ -1337,11 +1337,11 @@ Exectue a RunGML program while a condition is true
 
 ## Constant Definitions
 
-- GM_Version = 1.5.0.0
-- GM_build_date = 46183.43852703
+- GM_Version = 1.5.1.0
+- GM_build_date = 46197.76
 - GM_build_type = run
 - GM_runtime_version = 2026.0.0.23
-- RunGML_Version = 1.5.0
+- RunGML_Version = 1.5.1
 - all = -3
 - animcurvetype_catmullrom = 1
 - animcurvetype_linear = 0

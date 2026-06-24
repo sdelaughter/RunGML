@@ -33,6 +33,8 @@
     {"$GMIncludedFile":"","%Name":"math.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"math.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"object_template.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"object_template.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"object.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"object.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"pong.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"pong.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"snake.json","CopyToMask":-1,"filePath":"datafiles/RunGML/programs/examples","name":"snake.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"README.md","CopyToMask":-1,"filePath":"datafiles/RunGML","name":"README.md","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"RunGML.png","CopyToMask":-1,"filePath":"datafiles/RunGML/sprites","name":"RunGML.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
   ],
