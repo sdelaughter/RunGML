@@ -214,7 +214,7 @@ function RunGML_DefineConstants() {
 		"vertex_usage_colour":			vertex_usage_colour,
 		"vertex_usage_color":			vertex_usage_color,
 		"vertex_usage_normal":			vertex_usage_normal,
-		"vertex_usage_textcoord":		vertex_usage_textcoord,
+		"vertex_usage_textcoord":		vertex_usage_textcoord, // TODO: figure out why this one is blue
 		"vertex_usage_texcoord":		vertex_usage_texcoord,
 		"vertex_usage_blendweight":		vertex_usage_blendweight,
 		"vertex_usage_blendindices":	vertex_usage_blendindices,

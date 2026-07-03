@@ -1,0 +1,344 @@
+["object", 0, 0, 0, {
+	"create": ["pass",
+        ["rand_seed"],
+        ["v", "game_dir", "RunGML/programs/games/rocks/"],
+        ["v", "ship_accel", 35],
+        ["v", "ship_brake", 35],
+        ["v", "ship_speed_max", 80],
+        ["v", "ship_steering", 100],
+        ["v", "ship_color", ["c_white"]],
+        ["v", "ship_r", 4],
+        ["v", "bullet_delay", 0.8],
+        ["v", "bullet_speed", 150],
+        ["v", "bullet_r", 3],
+        ["v", "bullet_life", 3],
+        ["v", "bullet_color", ["c_aqua"]],
+        ["v", "rock_color", ["c_white"]],
+        ["v", "rock_size_max", 1],
+        ["v", "rock_size_min", 0.25],
+        ["v", "rock_r", 11],
+        ["v", "rock_delay_min", 3],
+        ["v", "rock_delay_max", 5],
+        ["v", "rock_dist", ["div", ["room_h"], 2.0]],
+        ["v", "rock_speed_min", 10],
+        ["v", "rock_speed_max", 25],
+        ["v", "max_rocks", 20],
+
+        ["v", "part_sys", ["part_system_create"]],
+        ["v", "pt_exhaust", ["part_type_create"]],
+        ["part_type_shape", ["v", "pt_exhaust"], ["pt_shape_pixel"]],
+        ["part_type_life", ["v", "pt_exhaust"], 20, 30],
+        ["part_type_alpha2", ["v", "pt_exhaust"], 1.0, 0.0],
+        ["part_type_color1", ["v", "pt_exhaust"], ["c_white"]],
+        ["part_type_speed", ["v", "pt_exhaust"], 0.1, 1.0, 0, 0],
+
+        ["v", "pt_dust", ["part_type_create"]],
+        ["part_type_shape", ["v", "pt_dust"], ["pt_shape_pixel"]],
+        ["part_type_life", ["v", "pt_dust"], 20, 30],
+        ["part_type_alpha2", ["v", "pt_dust"], 1.0, 0.0],
+        ["part_type_color1", ["v", "pt_dust"], ["c_white"]],
+        ["part_type_speed", ["v", "pt_dust"], 0.1, 1.0, 0, 0],
+        ["part_type_direction", ["v", "pt_dust"], 0, 360, 0, 0],
+
+        ["v", "sprPlayer", 
+            ["sprite_add", ["cat", ["v", "game_dir"], "art/player.png"], 0, 0, 0, 5, 5]
+        ],
+        ["v", "sprRock0", 
+            ["sprite_add", ["cat", ["v", "game_dir"], "art/rock0.png"], 0, 0, 0, 12, 12]
+        ],
+        ["v", "sprRock1", 
+            ["sprite_add", ["cat", ["v", "game_dir"], "art/rock1.png"], 0, 0, 0, 12, 12]
+        ],
+        ["v", "sprRock2", 
+            ["sprite_add", ["cat", ["v", "game_dir"], "art/rock2.png"], 0, 0, 0, 12, 12]
+        ],
+
+        ["v", "score", 0],
+        ["ini_open", "RunGML.ini"],
+        ["v", "hiscore", ["ini_read_real", "rocks", "hiscore", 0]],
+        ["ini_close"],
+
+        ["v", "controls", ["munge", ["import", ["cat", ["v", "game_dir"], "controls.json"]]]],
+
+        ["v", "hf", {
+            "reset": ["pass",
+                ["if", ["r", "gt", "score", "hiscore"], {"True": ["pass",
+                    ["v", "hiscore", ["v", "score"]],
+                    ["ini_open", "RunGML.ini"],
+                    ["ini_write_real", "rocks", "hiscore", ["v", "hiscore"]],
+                    ["ini_close"]
+                ]}],
+                ["v", "score", 0],
+                ["v", "ship_x", ["div", ["room_w"], 2.0]],
+                ["v", "ship_y", ["div", ["room_h"], 2.0]],
+                ["v", "ship_dir", 90],
+                ["v", "ship_speed", 0],
+                ["v", "bullets", ["l"]],
+                ["v", "rocks", ["l"]],
+                ["v", "bullet_cooldown", 0],
+                ["v", "rock_cooldown", 1],
+                ["r", "part_system_clear", "part_sys"]
+            ],
+            "room_wrap": ["pass",
+                ["v", ["v", "_x"], ["mod", ["add", ["v", ["v", "_x"]], ["room_w"]], ["room_w"]]],
+                ["v", ["v", "_y"], ["mod", ["add", ["v", ["v", "_y"]], ["room_h"]], ["room_h"]]]
+            ],
+            "spawn_rock": ["pass",
+                ["array_push", ["v", "rocks"], ["l",
+                    ["v", "_rx"],
+                    ["v", "_ry"],
+                    ["mult", ["r", "random_range", "rock_speed_min", "rock_speed_max"], ["choose", 1, -1]],
+                    ["mult", ["r", "random_range", "rock_speed_min", "rock_speed_max"], ["choose", 1, -1]],
+                    ["random_range", 0, 360],
+                    ["v", "_rs"],
+                    ["random_range", 0, 360],
+                    ["random_range", -50, 50],
+                    ["choose", "sprRock0", "sprRock1", "sprRock2"]
+                ]]
+            ],
+            "split_rock": ["pass",
+                ["v", "_r", ["a", ["v", "rocks"], ["v", "_ri"]]],
+                ["v", "_rs", ["div", ["a", ["v", "_r"], 5], 2.0]],
+                ["if", ["r", "geq", "_rs", "rock_size_min"], {
+                    "True":["pass",
+                        ["v", "_rx", ["a", ["v", "_r"], 0]],
+                        ["v", "_ry", ["a", ["v", "_r"], 1]],
+                        ["run", ["s", ["v", "hf"], "spawn_rock"]],
+                        ["run", ["s", ["v", "hf"], "spawn_rock"]],
+                        ["inc", "score"]
+                    ]
+                }]
+            ],
+            "spawn_bullet": ["array_push", ["v", "bullets"], ["l",
+                ["v", "ship_x"],
+                ["v", "ship_y"],
+                ["v", "ship_dir"],
+                ["v", "bullet_life"]
+            ]],
+            "collision_check": ["last",
+                ["v", "_dist", ["r", "point_distance", "_x1", "_y1", "_x2", "_y2"]],
+                ["lt", ["v", "_dist"], ["r", "add", "_r1", "_r2"]]
+            ],
+            "take_damage": ["run", ["s", ["v", "hf"], "reset"]],
+            "exit": ["pass",
+                ["r", "part_system_clear", "part_sys"],
+                ["r", "part_system_destroy", "part_sys"],
+                ["r", "part_type_destroy", "pt_exhaust"],
+                ["destroy", ["p"]]
+            ]
+        }],
+        ["run", ["s", ["v", "hf"], "reset"]]
+        
+	],
+	"step": ["pass",
+        ["comment", "### Get input ###"],
+        ["if", ["control_check", ["v", "controls"], "exit"], {"True": ["run", ["s", ["v", "hf"], "exit"]]}],
+        ["if", ["control_check", ["v", "controls"], "reset"], {"True": ["run", ["s", ["v", "hf"], "reset"]]}],
+		["if", ["control_check", ["v", "controls"], "right"], {"True": 
+            ["dec", "ship_dir", ["mult", ["delta"], ["v", "ship_steering"]]]
+        }],
+        ["if", ["control_check", ["v", "controls"], "left"], {"True": 
+            ["inc", "ship_dir", ["mult", ["delta"], ["v", "ship_steering"]]]
+        }],
+        ["v", "ship_dir", ["mod", ["v", "ship_dir"], 360]],
+
+        ["if", ["control_check", ["v", "controls"], "thrust"], {
+            "True":  ["pass",
+                ["inc", "ship_speed", ["mult", ["delta"], ["v", "ship_accel"]]],
+                ["v", "_pt_dir", ["add", ["v", "ship_dir"], 180]],
+                ["r", "part_type_direction", "pt_exhaust", "_pt_dir", "_pt_dir", 0, 0],
+                ["r", "part_particles_create", "part_sys", "ship_x", "ship_y", "pt_exhaust", 1]
+            ],
+            "False": ["dec", "ship_speed", ["mult", ["delta"], ["v", "ship_brake"]]]
+        }],
+
+        ["comment", "### Shoot bullets ###"],
+        ["dec", "bullet_cooldown", ["delta"]],
+        ["if", ["leq", ["v", "bullet_cooldown"], 0], {"True": ["pass",
+            ["if", ["control_check", ["v", "controls"], "shoot"], {"True": ["pass",
+                ["run", ["s", ["v", "hf"], "spawn_bullet"]],
+                ["v", "bullet_cooldown", ["v", "bullet_delay"]]
+            ]}]
+        ]}],
+
+        ["comment", "### Update ship position/direction ###"],
+        ["v", "ship_speed", ["clamp", ["v", "ship_speed"], 0, ["v", "ship_speed_max"]]],
+
+        ["inc", "ship_x", ["mult", ["delta"], ["r", "lengthdir_x", "ship_speed", "ship_dir"]]],
+        ["inc", "ship_y", ["mult", ["delta"], ["r", "lengthdir_y", "ship_speed", "ship_dir"]]],
+
+        ["v", "_x", "ship_x"],
+        ["v", "_y", "ship_y"],
+        ["run", ["s", ["v", "hf"], "room_wrap"]],
+
+        ["comment", "### Spawn rocks ###"],
+        ["dec", "rock_cooldown", ["delta"]],
+        ["if", ["leq", ["v", "rock_cooldown"], 0], {"True": ["pass",
+            ["if", ["leq", ["array_length", ["v", "rocks"]], ["v", "max_rocks"]], {"True": ["pass",
+                ["v", "_dir", ["random_range", 0, 360]],
+                ["v", "_rx", ["add", ["v", "ship_x"], ["r", "lengthdir_x", "rock_dist", "_dir"]]],
+                ["v", "_ry", ["add", ["v", "ship_y"], ["r", "lengthdir_y", "rock_dist", "_dir"]]],
+                ["v", "_rs", ["v", "rock_size_max"]],
+                ["run", ["s", ["v", "hf"], "spawn_rock"]]
+            ]}],
+            ["v", "rock_cooldown", ["r", "random_range", "rock_delay_min", "rock_delay_max"]]
+        ]}],
+
+        ["comment", "### Update bullet positions ###"],
+        ["v", "_i", 0],
+        ["v", "_expired_bullets", ["l"]],
+        ["v", "_rocks_hit", ["l"]],
+        ["for", 0, "lt", ["array_length", ["v", "bullets"]], 1, {"do": ["pass",
+            ["v", "_b", ["a", ["v", "bullets"], ["v", "_i"]]],
+            ["a", ["v", "_b"], 3, ["sub",
+                ["a", ["v", "_b"], 3],
+                ["delta"]
+            ]],
+            ["if", ["leq", ["a", ["v", "_b"], 3], 0], {
+                "True": ["array_push", ["v", "_expired_bullets"], ["v", "_i"]],
+                "False": ["pass",
+                    ["v", "_b_dir", ["a", ["v", "_b"], 2]],
+                    ["v", "_bsx", ["r", "lengthdir_x", "bullet_speed", "_b_dir"]],
+                    ["v", "_bsy", ["r", "lengthdir_y", "bullet_speed", "_b_dir"]],
+                    ["a", ["v", "_b"], 0, 
+                        ["mod", ["add", 
+                            ["a", ["v", "_b"], 0], 
+                            ["mult", ["delta"], ["v", "_bsx"]],
+                            ["room_w"]
+                        ], ["room_w"]]
+                    ],
+                    ["a", ["v", "_b"], 1, 
+                        ["mod", ["add", 
+                            ["a", ["v", "_b"], 1], 
+                            ["mult", ["delta"], ["v", "_bsy"]],
+                            ["room_h"]
+                        ], ["room_h"]]
+                    ],
+
+                    ["v", "_j", 0],
+                    ["v", "_did_collide", 0],
+                    ["for", 0, "lt", ["array_length", ["v", "rocks"]], 1, {"do": ["pass",
+                        ["if", ["v", "_did_collide"], {"False": ["pass",
+                            ["v", "_r", ["a", ["v", "rocks"], ["v", "_j"]]],
+                            ["v", "_x1", ["a", ["v", "_r"], 0]],
+                            ["v", "_y1", ["a", ["v", "_r"], 1]],
+                            ["v", "_r1", ["mult", ["v", "rock_r"], ["a", ["v", "_r"], 5]]],
+                            ["v", "_x2", ["a", ["v", "_b"], 0]],
+                            ["v", "_y2", ["a", ["v", "_b"], 1]],
+                            ["v", "_r2", ["v", "bullet_r"]],
+                            ["if", ["run", ["s", ["v", "hf"], "collision_check"]], {"True": ["pass", 
+                                ["v", "_did_collide", 1],
+                                ["if", ["array_contains", ["v", "_rocks_hit"], ["v", "_j"]], {"False": ["pass",
+                                    ["array_push", ["v", "_rocks_hit"], ["v", "_j"]],
+                                    ["array_push", ["v", "_expired_bullets"], ["v", "_i"]],
+                                    ["r", "part_particles_create", "part_sys", "_x1", "_y1", "pt_dust", ["mult", 40, ["a", ["v", "_r"], 5]]]
+                                ]}]
+                            ]}]
+                        ]}],
+                        ["inc", "_j"]
+                    ]}]
+                ]
+            }],
+            ["inc", "_i"]
+        ]}],
+
+        ["v", "_i", ["sub", ["array_length", ["v", "_expired_bullets"]], 1]],
+        ["for", ["v", "_i"], "geq", 0, -1, {"do": ["pass",
+            ["v", "_bi", ["a", ["v", "_expired_bullets"], ["v", "_i"]]],
+            ["array_delete", ["v", "bullets"], ["v", "_bi"], 1],
+            ["dec", "_i"]
+        ]}],
+
+        ["v", "_i", 0],
+        ["for", 0, "lt", ["array_length", ["v", "_rocks_hit"]], 1, {"do": ["pass",
+            ["v", "_ri", ["a", ["v", "_rocks_hit"], ["v", "_i"]]],
+            ["run", ["s", ["v", "hf"], "split_rock"]],
+            ["inc", "_i"]
+        ]}],
+
+        ["v", "_i", ["sub", ["array_length", ["v", "_rocks_hit"]], 1]],
+        ["for", ["v", "_i"], "geq", 0, -1, {"do": ["pass",
+            ["v", "_ri", ["a", ["v", "_rocks_hit"], ["v", "_i"]]],
+            ["array_delete", ["v", "rocks"], ["v", "_ri"], 1],
+            ["dec", "_i"]
+        ]}],
+
+        ["comment", "### Check for ship/rock collisions ###"],
+        ["v", "_i", 0],
+        ["v", "_x1", ["v", "ship_x"]],
+        ["v", "_y1", ["v", "ship_y"]],
+        ["v", "_r1", ["v", "ship_r"]],
+        ["v", "_did_collide", 0],
+        ["for", 0, "lt", ["array_length", ["v", "rocks"]], 1, {"do": ["pass",
+            ["if", ["v", "_did_collide"], {"False": ["pass",
+                ["v", "_r", ["a", ["v", "rocks"], ["v", "_i"]]],
+
+                ["a", ["v", "_r"], 0, 
+                    ["mod", ["add", 
+                        ["a", ["v", "_r"], 0], 
+                        ["mult", ["delta"], ["a", ["v", "_r"], 2]],
+                        ["room_w"]
+                    ], ["room_w"]]
+                ],
+                ["a", ["v", "_r"], 1, 
+                    ["mod", ["add", 
+                        ["a", ["v", "_r"], 1], 
+                        ["mult", ["delta"], ["a", ["v", "_r"], 3]],
+                        ["room_h"]
+                    ], ["room_h"]]
+                ],
+
+                ["a", ["v", "_r"], 6, 
+                    ["mod", ["add", 
+                        ["a", ["v", "_r"], 6], 
+                        ["mult", ["delta"], ["a", ["v", "_r"], 7]],
+                    ], 360]
+                ],
+
+                ["v", "_x2", ["a", ["v", "_r"], 0]],
+                ["v", "_y2", ["a", ["v", "_r"], 1]],
+                ["v", "_r2", ["mult", ["v", "rock_r"], ["a", ["v", "_r"], 5]]],
+                ["if", ["run", ["s", ["v", "hf"], "collision_check"]], {"True":
+                    ["v", "_did_collide", 1]
+                }]
+            ]}],
+            ["inc", "_i"]
+        ]}],
+        ["if", ["v", "_did_collide"], {"True": ["run", ["s", ["v", "hf"], "take_damage"]]}]
+	],
+	"draw": ["pass",
+        ["draw_font", ["fntRunGML_Console"]],
+        ["draw_color", ["c_white"]],
+        ["draw_alpha", 1.0],
+        ["draw_halign", ["fa_left"]],
+        ["draw_valign", ["fa_top"]],
+
+        ["r", "draw_sprite_ext", "sprPlayer", 0, "ship_x", "ship_y", 1, 1, "ship_dir", "ship_color", 1.0],
+
+        ["v", "_i", 0],
+        ["for", 0, "lt", ["array_length", ["v", "rocks"]], 1, {"do": ["pass",
+            ["v", "_r", ["a", ["v", "rocks"], ["v", ["_i"]]]],
+            ["v", "_rx", ["a", ["v", "_r"], 0]],
+            ["v", "_ry", ["a", ["v", "_r"], 1]],
+            ["v", "_rs", ["a", ["v", "_r"], 5]],
+            ["v", "_ra", ["a", ["v", "_r"], 6]],
+            ["v", "_rspr", ["v", ["a", ["v", "_r"], 8]]],
+            ["r", "draw_sprite_ext", "_rspr", 0, "_rx", "_ry", "_rs", "_rs", "_ra", "rock_color", 1.0],
+            ["inc", "_i"]
+        ]}],
+
+        ["draw_color", ["v", "bullet_color"]],
+        ["v", "_i", 0],
+        ["for", 0, "lt", ["array_length", ["v", "bullets"]], 1, {"do": ["pass",
+            ["v", "_b", ["a", ["v", "bullets"], ["v", ["_i"]]]],
+            ["v", "_bx", ["a", ["v", "_b"], 0]],
+            ["v", "_by", ["a", ["v", "_b"], 1]],
+            ["r", "draw_circle", "_bx", "_by", "bullet_r", 0],
+            ["inc", "_i"]
+        ]}]
+    ],
+    "draw_gui": ["pass",
+        ["draw_color", ["c_white"]],
+        ["draw_text", 4, 4, ["cat", "Score: ", ["v", "score"], "\n Best: ", ["v", "hiscore"]]]
+    ]
+}]

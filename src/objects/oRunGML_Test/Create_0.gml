@@ -1,6 +1,6 @@
 	// Start an interpreter
 with(new RunGML_Interpreter("Test")) {
-	// run(["manual"]); game_end(); exit;	// Build the manual and quit (for dev purposes)
+	 //run(["manual"]); game_end(); exit;	// Build the manual and quit (for dev purposes)
 	 //exit;								// Skip tests (for standalone executable)
 	
 	RunGML_DefineTest();
@@ -30,20 +30,20 @@ with(new RunGML_Interpreter("Test")) {
 	run(["example", "math"]);
 	
 	// Create a clock
-	show_debug_message("RunGML Test: Running clock example")
-	run(["example", "clock"]);
+	//show_debug_message("RunGML Test: Running clock example")
+	//run(["example", "clock"]);
 	
 	show_debug_message("RunGML Test: Hello data munging?");
 	show_debug_message(run(["munge", ["import", "RunGML/munge_test.json"]]));
 	
 	// Create a bouncer
 	//debug = true;
-	show_debug_message("RunGML Test: Running bounce example")
-	run(["example", "bounce"]);
+	//show_debug_message("RunGML Test: Running bounce example")
+	//run(["example", "bounce"]);
 	
-	// Create a second bouncer if LooseJSON is enabled
-	if global.RunGML_importLooseJSON {
-		show_debug_message("RunGML Test: Running bounce example with Loose JSON")
-		run(["example", "bounce_loose"]);
-	}	
+	//// Create a second bouncer if LooseJSON is enabled
+	//if global.RunGML_importLooseJSON {
+	//	show_debug_message("RunGML Test: Running bounce example with Loose JSON")
+	//	run(["example", "bounce_loose"]);
+	//}
 }

@@ -18,6 +18,7 @@ function RunGML_DefineAliases(_wipe=true) {
 	RunGML_alias("multiply", "mult");
 	RunGML_alias("subtract", "sub");
 	RunGML_alias("divide", "div");
+	RunGML_alias("comment", "pass");
 	
 	// Constants
 	RunGML_alias("version", "RunGML_Version");

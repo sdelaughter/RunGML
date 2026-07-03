@@ -1,5 +1,20 @@
 # RunGML Patch Notes
 
+## 1.6.0 (2026-07-03)
+- Added two new games, `flappy` and `rocks`.
+- Added new `play` operator for launching games.  Similar to `example` but takes some `game_name` as an argument and runs the program at `datafiles/RunGML/programs/games/game_name/game_name.json`.  Will automatically toggle off the console, if called from the console's interpreter.  Will return a list of available game names if called without an argument.
+    - This will provide better organization while allowing more complex games to ship with images, sounds, fonts, control bindings, etc..
+    - Existing game files have been relocated to make use of this new system.
+- Added new `control_check` operator to help simplify the process of implementing control binding customization for RunGML games.  See the new `flappy` and `rocks` games for example usage.
+- Added new `new` operator.  Takes a reference to a constructor as the first argument and returns a new instance of it.  Up  to 16 additional arguments can be provided to be passed to the constructor.
+- Using the name of a constructor as an operator will now return a reference to that constructor instead of trying to execute it as a script (without `new`).  The old behavior would change the interpreter's scope to be an instance of the constructor, potentially breaking further interpreation entirely. (Thanks to TabularElf for help fixing this.)
+- Renamed the `choose` operator to `array_choose`, which better reflects its behavior and allows the built-in `choose` function to be used as expected.
+- The `mult`/`multiply` operator will now multiply together any number of arguments instead of just 2.
+- It is now possible to paste text from the system clipboard into the console using Ctrl-V.
+- Partially fixed a bug with loop iteration (prevented excessive warnings being printed when trying to delete something outisde the bounds of an array during for/while/repeat operators, but still need to figure out why that OOB deletion is being attempted).
+- Added `comment` as an alias for `pass`.
+- Added configurable controls and other minor improvements to existing games.
+
 ## 1.5.1 (2026-06-24)
 - Added new `pong` and `snake` example programs. Have fun!
 - The `reference`/`r` operator no longer returns undefined when the following operator is not defined in the interpreter's `ops` dictionary, allowing it to be used with aliases and built-in functions.

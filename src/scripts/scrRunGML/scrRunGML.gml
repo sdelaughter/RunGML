@@ -1,4 +1,4 @@
-#macro RunGML_Version "1.5.1"
+#macro RunGML_Version "1.6.0"
 #macro RunGML_Homepage "https://github.com/sdelaughter/RunGML"
 
 global.RunGML_Ops = {};
@@ -56,7 +56,9 @@ function RunGML_Interpreter(_name="RunGML_I") constructor {
 			var _asset = asset_get_index(_op_name);
 			if _asset != -1 {
 				if is_callable(_asset) {
-					_out = script_execute_ext(_asset, _temp_list);
+					if not asset_has_tags(_asset, "@@constructor") {
+						_out = script_execute_ext(_asset, _temp_list);
+					} else _out = _asset;
 				} else _out = _asset;
 			}
 		}
@@ -397,7 +399,6 @@ function RunGML_alias(_nickname, _name, _i=undefined, _overwrite=false) {
 		_aliases = global.RunGML_Aliases;
 		_ops = global.RunGML_Ops;
 	} else {
-		show_debug_message($"_i: {_i}");
 		_aliases = _i.aliases;
 		_ops = _i.ops;
 	}

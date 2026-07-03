@@ -1,0 +1,20 @@
+{
+    "up": {
+        "keyboard_check_pressed": ["#!", "list", ["vk_up"], ["ord", "W"]],
+        "gamepad_button_check_pressed": ["#!", "list", ["list", 0, ["gp_padu"]], ["list", 4, ["gp_padu"]]]
+    },
+    "down": {
+        "keyboard_check_pressed": ["#!", "list", ["vk_down"], ["ord", "S"]],
+        "gamepad_button_check_pressed": ["#!", "list", ["list", 0, ["gp_padd"]], ["list", 4, ["gp_padd"]]]
+    },
+    "left": {
+        "keyboard_check_pressed": ["#!", "list", ["vk_left"], ["ord", "A"]],
+        "gamepad_button_check_pressed": ["#!", "list", ["list", 0, ["gp_padl"]], ["list", 4, ["gp_padl"]]]
+    },
+    "right": {
+        "keyboard_check_pressed": ["#!", "list", ["vk_right"], ["ord", "D"]],
+        "gamepad_button_check_pressed": ["#!", "list", ["list", 0, ["gp_padr"]], ["list", 4, ["gp_padr"]]]
+    },
+    "reset": {"keyboard_check_pressed": ["#!", "list", ["ord", "R"]]},
+    "exit": {"keyboard_check_pressed": ["#!", "list", ["vk_escape"]]}
+}

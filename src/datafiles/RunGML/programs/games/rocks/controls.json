@@ -1,0 +1,20 @@
+{
+    "thrust": {
+        "keyboard_check": ["#!", "list", ["vk_up"], ["ord", "W"]],
+        "gamepad_button_check": ["#!", "list", ["list", 0, ["gp_face1"]], ["list", 4, ["gp_face1"]]]
+    },
+    "left": {
+        "keyboard_check": ["#!", "list", ["vk_left"], ["ord", "A"]],
+        "gamepad_button_check": ["#!", "list", ["list", 0, ["gp_padl"]], ["list", 4, ["gp_padl"]]]
+    },
+    "right": {
+        "keyboard_check": ["#!", "list", ["vk_right"], ["ord", "D"]],
+        "gamepad_button_check": ["#!", "list", ["list", 0, ["gp_padr"]], ["list", 4, ["gp_padr"]]]
+    },
+    "shoot": {
+        "keyboard_check": ["#!", "list", ["vk_space"], ["ord", "K"]],
+        "gamepad_button_check": ["#!", "list", ["list", 0, ["gp_face3"]], ["list", 4, ["gp_face3"]]]
+    },
+    "reset": {"keyboard_check_pressed": ["#!", "list", ["ord", "R"]]},
+    "exit": {"keyboard_check_pressed": ["#!", "list", ["vk_escape"]]}
+}

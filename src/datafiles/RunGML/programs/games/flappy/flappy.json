@@ -1,0 +1,128 @@
+["object", 0, 0, 0, {
+	"create": [
+		["rand_seed"],
+		["v", "game_dir", "RunGML/programs/games/flappy/"],
+		["v", "bird_accel", -100],
+		["v", "bird_grav", 300],
+		["v", "bird_grav_max", 500],
+		["v", "bird_r", 4],
+		["v", "pipe_w", 8],
+		["v", "pipe_gap", 40],
+		["v", "pipe_hmin", ["div", ["room_h"], 6.0]],
+		["v", "pipe_hmax", ["sub", ["sub", ["room_h"], ["v", "pipe_hmin"]], ["v", "pipe_gap"]]],
+		["v", "pipe_speed", 100],
+		["v", "pipe_delay", 2],
+
+		["v", "controls", ["munge", ["import", ["cat", ["v", "game_dir"], "controls.json"]]]],
+
+		["v", "score", 0],
+		["ini_open", "RunGML.ini"],
+        ["v", "hiscore", ["ini_read_real", "flappy", "hiscore", 0]],
+        ["ini_close"],
+
+		["v", "hf", {
+			"reset": ["pass",
+				["if", ["r", "gt", "score", "hiscore"], {"True": ["pass",
+                    ["v", "hiscore", ["v", "score"]],
+                    ["ini_open", "RunGML.ini"],
+                    ["ini_write_real", "flappy", "hiscore", ["v", "hiscore"]],
+                    ["ini_close"]
+                ]}],
+				["v", "score", 0],
+				["v", "bird_x", ["div", ["room_w"], 5.0]],
+				["v", "bird_y", ["div", ["room_h"], 3.0]],
+				["v", "bird_yspeed", 0],
+				["v", "pipes", ["l"]],
+				["v", "pipe_cooldown", 0]
+			]
+		}],
+
+		["run", ["s", ["v", "hf"], "reset"]]
+	],
+	"step": [
+		["if", ["control_check", ["v", "controls"], "exit"], {"True": ["destroy", ["p"]]}],
+		["if", ["control_check", ["v", "controls"], "reset"], {"True": ["run", ["s", ["v", "hf"], "reset"]]}],
+		["if", ["control_check", ["v", "controls"], "fly"], {
+			"True": ["v", "bird_yspeed", ["v", "bird_accel"]],
+			"False": ["pass",
+				["inc", "bird_yspeed", ["mult", ["v", "bird_grav"], ["delta"]]],
+				["v", "bird_yspeed", ["max", 0, ["v", "bird_yspeed"]]]
+			]
+		}],
+		["v", "bird_yspeed", ["r", "clamp", "bird_yspeed", "bird_accel", "bird_grav_max"]],
+		["inc", "bird_y", ["mult", ["v", "bird_yspeed"], ["delta"]]],
+		["v", "bird_y", ["clamp", ["v", "bird_y"], ["v", "bird_r"], ["sub", ["room_h"], ["v", "bird_r"]]]],
+
+		["dec", "pipe_cooldown", ["delta"]],
+		["if", ["leq", ["v", "pipe_cooldown"], 0], {"True": ["pass",
+			["array_push", ["v", "pipes"], ["l", ["room_w"], ["r", "random_range", "pipe_hmin", "pipe_hmax"]]],
+			["inc", "pipe_cooldown", ["v", "pipe_delay"]]
+		]}],
+		["v", "_keep_pipes", ["l"]],
+		["v", "_did_collide", 0],
+		["v", "_i", 0],
+		["for", 0, "lt", ["array_length", ["v", "pipes"]], 1, {"do": ["pass",
+			["if", ["v", "_did_collide"], {"False": ["pass",
+				["v", "_p", ["a", ["v", "pipes"], ["v", "_i"]]],
+				["v", "_px1", ["a", ["v", "_p"], 0]],
+				["v", "_px2", ["r", "add", "_px1", "pipe_w"]],
+				["a", ["v", "_p"], 0, ["sub", ["v", "_px1"], ["mult", ["v", "pipe_speed"], ["delta"]]]],
+				["if", ["gt", ["v", "_px2"], 0], {
+					"True": ["pass",
+						["array_push", ["v", "_keep_pipes"], ["v", "_p"]],
+						["v", "_py", ["a", ["v", "_p"], 1]],
+						["if", ["and",
+							["geq", ["r", "add", "bird_x", "bird_r"], ["v", "_px1"]],
+							["leq", ["r", "sub", "bird_x", "bird_r"], ["v", "_px2"]],
+							["or",
+								["leq", ["r", "sub", "bird_y", "bird_r"], ["v", "_py"]],
+								["geq", ["r", "add", "bird_y", "bird_r"], ["r", "add", "_py", "pipe_gap"]]
+							]
+						], {
+							"True": ["v", "_did_collide", 1]}]],
+							"False": ["inc", "score"]
+						}
+				],
+				["inc", "_i"]
+			]}]
+		]}],
+		["if", ["v", "_did_collide"], {
+			"True": ["run", ["s", ["v", "hf"], "reset"]],
+			"False": ["v", "pipes", ["v", "_keep_pipes"]]
+		}]
+	],
+	"draw": [
+		["draw_color", ["c_white"]],
+		["draw_alpha", 1.0],
+		["draw_font", "fntRunGML_Console"],
+		["draw_halign", ["fa_left"]],
+		["draw_valign", ["fa_top"]],
+		["r", "draw_circle", "bird_x", "bird_y", "bird_r", 0],
+		["v", "beak_y1", ["r", "add", "bird_y", "bird_r"]],
+		["v", "beak_y2", ["r", "sub", "bird_y", "bird_r"]],
+		["v", "beak_x3", ["r", "add", "bird_x", "bird_r", "bird_r"]],
+		["v", "beak_y3", ["add", ["v", "bird_y"], ["mult", 2, ["v", "bird_r"], ["r", "div", "bird_yspeed", "bird_grav_max"]]]],
+		["r", "draw_triangle", "bird_x", "beak_y1", "bird_x", "beak_y2", "beak_x3", "beak_y3", 0],
+
+		["v", "_i", 0],
+		["for", 0, "lt", ["array_length", ["v", "pipes"]], 1, {"do": ["pass",
+			["v", "_p", ["a", ["v", "pipes"], ["v", "_i"]]],
+			["v", "_px1", ["a", ["v", "_p"], 0]],
+			["v", "_px2", ["r", "add", "_px1", "pipe_w"]],
+			["v", "_py1", 0],
+			["v", "_py2", ["a", ["v", "_p"], 1]],
+			["r", "draw_rectangle", "_px1", "_py1", "_px2", "_py2", 0],
+			["v", "_py1", ["r", "add", "_py2", "pipe_gap"]],
+			["v", "_py2", ["room_h"]],
+			["r", "draw_rectangle", "_px1", "_py1", "_px2", "_py2", 0],
+			["inc", "_i"]
+		]}],
+
+		["draw_color", ["c_black"]],
+		["draw_circle", ["r", "add", "bird_x", 1], ["r", "sub", "bird_y", 1], 1, 0]
+	],
+	"draw_gui": ["pass",
+		["draw_color", ["c_white"]],
+		["draw_text", 4, 4, ["cat", "Score: ", ["v", "score"], "\n Best: ", ["v", "hiscore"]]]
+	]
+}]
