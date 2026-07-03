@@ -33,7 +33,6 @@ function RunGML_DefineOps(_wipe=true) {
 - output: number",
 		[new RunGML_Constraint_ArgCount("eq", 0)]
 	)
-	
 	new RunGML_Op("op_list",
 		function(_i, _l=[]) {
 			var _op_list = struct_get_names(_i.ops);
@@ -831,6 +830,75 @@ Opens to a search for the search term if no page exists.
 		]
 	)
 	
+	new RunGML_Op("play",
+		function(_i, _l) {
+			var _n_args = array_length(_l)
+			if _n_args < 1 {
+				var _games = []
+				var _game_dir = "RunGML/programs/games"
+				var _item = file_find_first($"{_game_dir}/*", fa_directory);
+				while (_item != "") {
+					array_push(_games, _item);
+					_item = file_find_next();
+				}
+				file_find_close();
+				return _games;
+			}
+			
+			var _runner = "run_clean";
+			if _n_args > 1 {
+				if not _l[1] _runner = "run";	
+			}
+			
+			var _game_file = string("RunGML/programs/games/{0}/{0}.json", _l[0])
+			if not file_exists(_game_file) {
+				var _valid_games = _i.run(["play"]);
+				return new RunGML_Error($"No game with name '{_l[0]}' is available.  Valid game names are:\n{_valid_games}")
+			}
+			
+			if object_get_name(variable_instance_get(_i.parent, "object_index")) == "oRunGML_Console" {
+				_i.parent.toggle(false);
+			}
+			return _i.run([_runner, ["import", _game_file]])
+		},
+	@"Play an included game, or return a list of available game names if no argument is provided.
+- args: [(game_name)]
+- output: [(game_list)]",
+		[
+			new RunGML_Constraint_ArgType(0, "string"),
+			new RunGML_Constraint_ArgType(1, "bool", false)
+		]
+	)
+	
+	new RunGML_Op("control_check",
+		function(_i, _l) {
+			var _controls = _l[0];
+			var _verb = _l[1];
+			if !is_struct(_controls) return false;
+			if !struct_exists(_controls, _verb) return false;
+			var _binding_map = struct_get(_controls, _verb);
+			var _checkers = struct_get_names(_binding_map)
+			var _n_checkers = array_length(_checkers);
+			var _checker, _bindings, _n_bindings, _binding;
+			for (var i=0; i<_n_checkers; i++) {
+				_checker = _checkers[i];
+				_bindings = struct_get(_binding_map, _checker);
+				var _n_bindings = array_length(_bindings);
+				for (var j=0; j<_n_bindings; j++) {
+					_binding = _bindings[j];
+					if !is_array(_binding) _binding = [_binding]
+					if script_execute_ext(asset_get_index(_checker), _binding) return true;
+				}	
+			}
+			return false;
+		},
+	@"Check whether a control binding is active.  Control struct should have the following format:
+{verb: {checker_function_name: [list, of, bindings]}}
+- args: [control_struct, binding_name]
+- output: bool",
+		[]
+	)	
+	
 	new RunGML_Op("export",
 		function(_i, _l) {
 			var _file = file_text_open_write(_l[0]);
@@ -981,8 +1049,12 @@ Opens to a search for the search term if no page exists.
 				_i.run(_program)
 			
 			}
-		
-			array_delete(_i.loop_iter, _i.loop_depth, 1)
+			
+			if _i.loop_depth < array_length(_i.loop_iter) and _i.loop_depth >= 0 {
+				array_delete(_i.loop_iter, _i.loop_depth, 1)
+			//} else {
+			//	show_debug_message($"loop depth: {_i.loop_depth}, loop iter: {_i.loop_iter}");	
+			}
 			_i.loop_depth -= 1;
 			return [];
 		},
@@ -1015,7 +1087,9 @@ Opens to a search for the search term if no page exists.
 					_i.run(_f);
 				} else break;
 			}
-			array_delete(_i.loop_iter, _i.loop_depth, 1)
+			if _i.loop_depth < array_length(_i.loop_iter) and _i.loop_depth >= 0 {
+				array_delete(_i.loop_iter, _i.loop_depth, 1)
+			}
 			_i.loop_depth -= 1;
 			return [];
 		},
@@ -1034,7 +1108,9 @@ Opens to a search for the search term if no page exists.
 				_i.loop_iter[_i.loop_depth] = i;
 				_i.run(struct_get(_l[1], "do"));
 			}
-			array_delete(_i.loop_iter, _i.loop_depth, 1)
+			if _i.loop_depth < array_length(_i.loop_iter) and _i.loop_depth >= 0 {
+				array_delete(_i.loop_iter, _i.loop_depth, 1)
+			}
 			_i.loop_depth -= 1;
 			return [];
 		},
@@ -1438,7 +1514,7 @@ Opens to a search for the search term if no page exists.
 	)
 
 	#endregion Accessors
-
+	
 	#region Math
 
 	new RunGML_Op("add",
@@ -1515,14 +1591,18 @@ Opens to a search for the search term if no page exists.
 	
 	new RunGML_Op("mult",
 		function(_i, _l) {
-			// a, b
-			return _l[0] * _l[1];	
+			var _out = 1;
+			var _n = array_length(_l)
+			for (var i=0; i<_n; i++) {
+				_out *= _l[i];	
+			}
+			return _out;
 		},
-	@"Multiply two numbers
-- args: [A, B]
-- output: A * B",
+	@"Multiply numbers
+- args: [A, B, (C, ...)]
+- output: A * B (* C * ...)",
 		[
-			new RunGML_Constraint_ArgCount("eq", 2),
+			new RunGML_Constraint_ArgCount("geq", 1),
 			new RunGML_Constraint_ArgType("all", "numeric")
 		]
 	)
@@ -1674,7 +1754,7 @@ Opens to a search for the search term if no page exists.
 			new RunGML_Constraint_ArgType(0, "numeric", false)
 		]
 	)
-	new RunGML_Op("choose",
+	new RunGML_Op("array_choose",
 		function(_i, _l) {
 			var _index = irandom_range(0, array_length(_l[0])-1);
 			return _l[0][_index]
@@ -1686,7 +1766,6 @@ Opens to a search for the search term if no page exists.
 			new RunGML_Constraint_ArgType(0, "array")
 		]
 	)
-	
 	#endregion Math
 
 	#region Trigonometry
@@ -1845,6 +1924,42 @@ Opens to a search for the search term if no page exists.
 	)
 
 	#endregion Objects
+
+	#region Constructors
+	
+	new RunGML_Op("new",
+		function(_i, _l) {
+			var _n_args = array_length(_l)
+			if _n_args < 1 return;
+			switch(_n_args) {
+				case 0:	 return;
+				case 1:  return new _l[0]();
+				case 2:  return new _l[0](_l[1]);
+				case 3:  return new _l[0](_l[1], _l[2]);
+				case 4:  return new _l[0](_l[1], _l[2], _l[3]);
+				case 5:  return new _l[0](_l[1], _l[2], _l[3], _l[4]);
+				case 6:  return new _l[0](_l[1], _l[2], _l[3], _l[4], _l[5]);
+				case 7:  return new _l[0](_l[1], _l[2], _l[3], _l[4], _l[5], _l[6]);
+				case 8:  return new _l[0](_l[1], _l[2], _l[3], _l[4], _l[5], _l[6], _l[7]);
+				case 9:  return new _l[0](_l[1], _l[2], _l[3], _l[4], _l[5], _l[6], _l[7], _l[8]);
+				case 10: return new _l[0](_l[1], _l[2], _l[3], _l[4], _l[5], _l[6], _l[7], _l[8], _l[9]);
+				case 11: return new _l[0](_l[1], _l[2], _l[3], _l[4], _l[5], _l[6], _l[7], _l[8], _l[9], _l[10]);
+				case 12: return new _l[0](_l[1], _l[2], _l[3], _l[4], _l[5], _l[6], _l[7], _l[8], _l[9], _l[10], _l[11]);
+				case 13: return new _l[0](_l[1], _l[2], _l[3], _l[4], _l[5], _l[6], _l[7], _l[8], _l[9], _l[10], _l[11], _l[12]);
+				case 14: return new _l[0](_l[1], _l[2], _l[3], _l[4], _l[5], _l[6], _l[7], _l[8], _l[9], _l[10], _l[11], _l[12], _l[13]);
+				case 15: return new _l[0](_l[1], _l[2], _l[3], _l[4], _l[5], _l[6], _l[7], _l[8], _l[9], _l[10], _l[11], _l[12], _l[13], _l[14]);
+				case 16: return new _l[0](_l[1], _l[2], _l[3], _l[4], _l[5], _l[6], _l[7], _l[8], _l[9], _l[10], _l[11], _l[12], _l[13], _l[14], _l[15]);
+				case 17: return new _l[0](_l[1], _l[2], _l[3], _l[4], _l[5], _l[6], _l[7], _l[8], _l[9], _l[10], _l[11], _l[12], _l[13], _l[14], _l[15], _l[16]);
+				default: return new RunGML_Error($"Too many arguments passed to constructor, the 'new' operator supports at most 16");
+			}
+		},
+	@"Create a new instance of a constructor.  Supports up to 16 arguments.
+- args: [constructor_reference, (arg0, arg1, ... , arg16)]
+- output: struct",
+		[new RunGML_Constraint_ArgCount("leq", 17)]
+	)
+	
+	#endregion Constructors
 	
 	#region Logic
 

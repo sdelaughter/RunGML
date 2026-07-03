@@ -1,0 +1,9 @@
+{
+    "fly": {
+        "keyboard_check": ["#!", "list", ["vk_space"], ["vk_up"], ["ord", "K"], ["ord", "W"]],
+        "mouse_check_button": ["#!", "list", ["mb_left"]],
+        "gamepad_button_check": ["#!", "list", ["list", 0, ["gp_face1"]], ["list", 4, ["gp_face1"]]]
+    },
+    "reset": {"keyboard_check_pressed": ["#!", "list", ["ord", "R"]]},
+    "exit": {"keyboard_check_pressed": ["#!", "list", ["vk_escape"]]}
+}

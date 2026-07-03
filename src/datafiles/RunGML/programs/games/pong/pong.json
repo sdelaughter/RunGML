@@ -1,6 +1,7 @@
 ["object", 0, 0, 0, {
     "create": ["pass",
         ["rand_seed"],
+        ["v", "game_dir", "RunGML/programs/games/pong/"],
         ["v", "paddle_h", 50],
         ["v", "paddle_w", 4],
         ["v", "paddle_h_half", ["div", ["v", "paddle_h"], 2.0]],
@@ -10,6 +11,7 @@
         ["v", "singleplayer", 0],
         ["v", "score_l", 0],
         ["v", "score_r", 0],
+        ["v", "controls", ["munge", ["import", ["cat", ["v", "game_dir"], "controls.json"]]]],
         ["v", "hf", {
             "reset": ["pass",
                 ["v", "ball_x", ["div", ["room_w"], 2.0]],
@@ -18,7 +20,7 @@
                 ["v", "paddle_r_y", ["v", "ball_y"]],
                 ["v", "paddle_l_dir", 0],
                 ["v", "paddle_r_dir", 0],
-                ["v", "ball_speed_x", ["mult", 100, ["choose", ["l", 1, -1]]]],
+                ["v", "ball_speed_x", ["mult", 100, ["choose", 1, -1]]],
                 ["v", "ball_speed_y", ["random_range", -50, 50]]
             ],
             "paddle_collision": ["or",
@@ -80,22 +82,22 @@
     ], "step": ["pass",
         ["v", "paddle_l_dir", 0],
         ["v", "paddle_r_dir", 0],
-        ["if", ["keyboard_check_pressed", ["vk_escape"]], {"True": ["destroy", ["p"]]}],
-        ["if", ["keyboard_check_pressed", ["ord", "R"]], {"True": ["pass",
+        ["if", ["control_check", ["v", "controls"], "exit"], {"True": ["destroy", ["p"]]}],
+        ["if", ["control_check", ["v", "controls"], "reset"], {"True": ["pass",
             ["v", "score_l", 0],
             ["v", "score_r", 0],
             ["run", ["s", ["v", "hf"], "reset"]]
         ]}],
-        ["if", ["keyboard_check_pressed", ["vk_space"]], {"True":
+        ["if", ["control_check", ["v", "controls"], "singleplayer"], {"True":
             ["v", "singleplayer", ["sub", 1, ["v", "singleplayer"]]]
         }],
         ["v", "_paddle_y", "paddle_l_y"],
-        ["if", ["keyboard_check", ["ord", "W"]], {"True": ["pass",
+        ["if", ["control_check", ["v", "controls"], "p1_up"], {"True": ["pass",
             ["dec", "paddle_l_y", ["mult", ["delta"], ["v", "paddle_speed"]]],
             ["run", ["s", ["v", "hf"], "paddle_clamp"]],
             ["v", "paddle_l_dir", -1]
         ]}],
-        ["if", ["keyboard_check", ["ord", "S"]], {"True": ["pass",
+        ["if", ["control_check", ["v", "controls"], "p1_down"], {"True": ["pass",
             ["inc", "paddle_l_y", ["mult", ["delta"], ["v", "paddle_speed"]]],
             ["run", ["s", ["v", "hf"], "paddle_clamp"]],
             ["v", "paddle_l_dir", 1]
@@ -103,7 +105,7 @@
         ["v", "_paddle_y", "paddle_r_y"],
         ["if", 
             ["or",
-                ["keyboard_check", ["vk_up"]],
+                ["control_check", ["v", "controls"], "p2_up"],
                 ["and", ["v", "singleplayer"], ["r", "lt", "ball_y", "paddle_r_y"]]
             ], {"True": ["pass",
                 ["dec", "paddle_r_y", ["mult", ["delta"], ["v", "paddle_speed"]]],
@@ -113,7 +115,7 @@
         ],
         ["if",
             ["or",
-                ["keyboard_check", ["vk_down"]],
+                ["control_check", ["v", "controls"], "p2_down"],
                 ["and", ["v", "singleplayer"], ["r", "gt", "ball_y", "paddle_r_y"]]
             ], {"True": ["pass",
                 ["inc", "paddle_r_y", ["mult", ["delta"], ["v", "paddle_speed"]]],

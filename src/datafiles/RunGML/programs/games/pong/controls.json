@@ -1,0 +1,24 @@
+{
+    "p1_up": {
+        "keyboard_check": ["#!", "list", ["ord", "W"]],
+        "gamepad_button_check": ["#!", "list", ["list", 0, ["gp_padu"]], ["list", 4, ["gp_padu"]]]
+    },
+    "p1_down": {
+        "keyboard_check": ["#!", "list", ["ord", "S"]],
+        "gamepad_button_check": ["#!", "list", ["list", 0, ["gp_padd"]], ["list", 4, ["gp_padd"]]]
+    },
+    "p2_up": {
+        "keyboard_check": ["#!", "list", ["vk_up"]],
+        "gamepad_button_check": ["#!", "list", ["list", 1, ["gp_padu"]], ["list", 5, ["gp_padu"]]]
+    },
+    "p2_down": {
+        "keyboard_check": ["#!", "list", ["vk_down"]],
+        "gamepad_button_check": ["#!", "list", ["list", 1, ["gp_padd"]], ["list", 5, ["gp_padd"]]]
+    },
+    "singleplayer": {
+        "keyboard_check_pressed": ["#!", "list", ["vk_space"]],
+        "gamepad_button_check_pressed": ["#!", "list", ["list", 0, ["gp_select"]], ["list", 4, ["gp_select"]]]
+    },
+    "reset": {"keyboard_check_pressed": ["#!", "list", ["ord", "R"]]},
+    "exit": {"keyboard_check_pressed": ["#!", "list", ["vk_escape"]]}
+}

@@ -14,6 +14,9 @@ if keyboard_check(meta_key) {
 	if keyboard_check_pressed(ord("E")) or keyboard_check_pressed(vk_right) {
 		cursor_pos = string_length(current_line) + 1;
 	}
+	if keyboard_check_pressed(ord("V")) {
+		current_line = string_insert(clipboard_get_text(), current_line, cursor_pos);
+	}
 } else {
 
 	key_hold_check_and_update(vk_backspace, "backspace", backspace);

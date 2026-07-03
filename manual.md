@@ -2,7 +2,7 @@
 			
 ## About
 
-Version: 1.5.1
+Version: 1.6.0
 
 Homepage: https://github.com/sdelaughter/RunGML
 
@@ -15,13 +15,14 @@ Homepage: https://github.com/sdelaughter/RunGML
 
 
 ## Operator List
-[AudioEffectType](#audioeffecttype), [AudioLFOType](#audiolfotype), [GM_is_sandboxed](#gm_is_sandboxed), [add](#add), [alias](#alias), [and](#and), [angle](#angle), [application_surface](#application_surface), [approach](#approach), [arctan2](#arctan2), [array](#array), [asset](#asset), [asset_type](#asset_type), [async_load](#async_load), [cat](#cat), [choose](#choose), [clear](#clear), [color](#color), [color_inv](#color_inv), [color_inv_hue](#color_inv_hue), [color_merge](#color_merge), [color_rand](#color_rand), [console](#console), [cos](#cos), [create](#create), [current](#current), [current_day](#current_day), [current_hour](#current_hour), [current_minute](#current_minute), [current_month](#current_month), [current_second](#current_second), [current_time](#current_time), [current_year](#current_year), [cursor](#cursor), [cursor_sprite](#cursor_sprite), [date_get](#date_get), [datestring](#datestring), [datetime](#datetime), [debug](#debug), [dec](#dec), [delta](#delta), [delta_time](#delta_time), [destroy](#destroy), [display_gui_h](#display_gui_h), [display_gui_w](#display_gui_w), [display_h](#display_h), [display_w](#display_w), [div](#div), [do](#do), [do_here](#do_here), [dot](#dot), [dot3](#dot3), [dot3_norm](#dot3_norm), [dot_norm](#dot_norm), [draw_alpha](#draw_alpha), [draw_circle](#draw_circle), [draw_color](#draw_color), [draw_ellipse](#draw_ellipse), [draw_font](#draw_font), [draw_format](#draw_format), [draw_halign](#draw_halign), [draw_line](#draw_line), [draw_point](#draw_point), [draw_rect](#draw_rect), [draw_self](#draw_self), [draw_valign](#draw_valign), [eq](#eq), [event_data](#event_data), [event_number](#event_number), [event_type](#event_type), [example](#example), [exec](#exec), [export](#export), [flexpanel_align](#flexpanel_align), [flexpanel_direction](#flexpanel_direction), [flexpanel_display](#flexpanel_display), [flexpanel_edge](#flexpanel_edge), [flexpanel_flex_direction](#flexpanel_flex_direction), [flexpanel_gutter](#flexpanel_gutter), [flexpanel_justify](#flexpanel_justify), [flexpanel_position_type](#flexpanel_position_type), [flexpanel_unit](#flexpanel_unit), [flexpanel_wrap](#flexpanel_wrap), [for](#for), [fps](#fps), [fps_real](#fps_real), [fullscreen](#fullscreen), [game_display_name](#game_display_name), [game_project_name](#game_project_name), [game_save_id](#game_save_id), [game_speed](#game_speed), [game_time](#game_time), [geq](#geq), [global](#global), [gm_manual](#gm_manual), [gt](#gt), [help](#help), [hsv](#hsv), [if](#if), [import](#import), [in](#in), [inc](#inc), [inst](#inst), [instance_count](#instance_count), [iter](#iter), [iters](#iters), [last](#last), [len](#len), [lendir_x](#lendir_x), [lendir_y](#lendir_y), [leq](#leq), [list](#list), [log](#log), [lt](#lt), [manual](#manual), [map_range](#map_range), [mod](#mod), [mouse_button](#mouse_button), [mouse_lastbutton](#mouse_lastbutton), [mouse_x](#mouse_x), [mouse_y](#mouse_y), [mult](#mult), [munge](#munge), [near](#near), [near_cursor](#near_cursor), [neq](#neq), [not](#not), [nth](#nth), [object](#object), [op_count](#op_count), [op_list](#op_list), [op_names](#op_names), [op_search](#op_search), [or](#or), [os_browser](#os_browser), [os_device](#os_device), [os_type](#os_type), [os_version](#os_version), [out](#out), [parent](#parent), [pass](#pass), [point_dir](#point_dir), [point_dist](#point_dist), [pow](#pow), [print](#print), [prog](#prog), [program_directory](#program_directory), [quit](#quit), [rand](#rand), [rand_int](#rand_int), [rand_seed](#rand_seed), [rec_cancel](#rec_cancel), [rec_delete](#rec_delete), [rec_line](#rec_line), [rec_pause](#rec_pause), [rec_preview](#rec_preview), [rec_replay](#rec_replay), [rec_resume](#rec_resume), [rec_start](#rec_start), [rec_stop](#rec_stop), [reference](#reference), [reference_parent](#reference_parent), [repeat](#repeat), [restart](#restart), [rgb](#rgb), [rickroll](#rickroll), [room](#room), [room_first](#room_first), [room_h](#room_h), [room_last](#room_last), [room_next](#room_next), [room_w](#room_w), [run](#run), [run_clean](#run_clean), [runfile](#runfile), [runprog](#runprog), [screenshot](#screenshot), [shader](#shader), [shader_reset](#shader_reset), [sin](#sin), [sprite](#sprite), [string](#string), [struct](#struct), [struct_keys](#struct_keys), [sub](#sub), [switch](#switch), [tan](#tan), [temp_directory](#temp_directory), [this](#this), [type](#type), [undefined](#undefined), [update](#update), [url_open](#url_open), [var](#var), [view_current](#view_current), [webgl_enabled](#webgl_enabled), [while](#while), [working_directory](#working_directory)
+[AudioEffectType](#audioeffecttype), [AudioLFOType](#audiolfotype), [GM_is_sandboxed](#gm_is_sandboxed), [add](#add), [alias](#alias), [and](#and), [angle](#angle), [application_surface](#application_surface), [approach](#approach), [arctan2](#arctan2), [array](#array), [array_choose](#array_choose), [asset](#asset), [asset_type](#asset_type), [async_load](#async_load), [cat](#cat), [clear](#clear), [color](#color), [color_inv](#color_inv), [color_inv_hue](#color_inv_hue), [color_merge](#color_merge), [color_rand](#color_rand), [console](#console), [control_check](#control_check), [cos](#cos), [create](#create), [current](#current), [current_day](#current_day), [current_hour](#current_hour), [current_minute](#current_minute), [current_month](#current_month), [current_second](#current_second), [current_time](#current_time), [current_year](#current_year), [cursor](#cursor), [cursor_sprite](#cursor_sprite), [date_get](#date_get), [datestring](#datestring), [datetime](#datetime), [debug](#debug), [dec](#dec), [delta](#delta), [delta_time](#delta_time), [destroy](#destroy), [display_gui_h](#display_gui_h), [display_gui_w](#display_gui_w), [display_h](#display_h), [display_w](#display_w), [div](#div), [do](#do), [do_here](#do_here), [dot](#dot), [dot3](#dot3), [dot3_norm](#dot3_norm), [dot_norm](#dot_norm), [draw_alpha](#draw_alpha), [draw_circle](#draw_circle), [draw_color](#draw_color), [draw_ellipse](#draw_ellipse), [draw_font](#draw_font), [draw_format](#draw_format), [draw_halign](#draw_halign), [draw_line](#draw_line), [draw_point](#draw_point), [draw_rect](#draw_rect), [draw_self](#draw_self), [draw_valign](#draw_valign), [eq](#eq), [event_data](#event_data), [event_number](#event_number), [event_type](#event_type), [example](#example), [exec](#exec), [export](#export), [flexpanel_align](#flexpanel_align), [flexpanel_direction](#flexpanel_direction), [flexpanel_display](#flexpanel_display), [flexpanel_edge](#flexpanel_edge), [flexpanel_flex_direction](#flexpanel_flex_direction), [flexpanel_gutter](#flexpanel_gutter), [flexpanel_justify](#flexpanel_justify), [flexpanel_position_type](#flexpanel_position_type), [flexpanel_unit](#flexpanel_unit), [flexpanel_wrap](#flexpanel_wrap), [for](#for), [fps](#fps), [fps_real](#fps_real), [fullscreen](#fullscreen), [game_display_name](#game_display_name), [game_project_name](#game_project_name), [game_save_id](#game_save_id), [game_speed](#game_speed), [game_time](#game_time), [geq](#geq), [global](#global), [gm_manual](#gm_manual), [gt](#gt), [help](#help), [hsv](#hsv), [if](#if), [import](#import), [in](#in), [inc](#inc), [inst](#inst), [instance_count](#instance_count), [iter](#iter), [iters](#iters), [last](#last), [len](#len), [lendir_x](#lendir_x), [lendir_y](#lendir_y), [leq](#leq), [list](#list), [log](#log), [lt](#lt), [manual](#manual), [map_range](#map_range), [mod](#mod), [mouse_button](#mouse_button), [mouse_lastbutton](#mouse_lastbutton), [mouse_x](#mouse_x), [mouse_y](#mouse_y), [mult](#mult), [munge](#munge), [near](#near), [near_cursor](#near_cursor), [neq](#neq), [new](#new), [not](#not), [nth](#nth), [object](#object), [op_count](#op_count), [op_list](#op_list), [op_names](#op_names), [op_search](#op_search), [or](#or), [os_browser](#os_browser), [os_device](#os_device), [os_type](#os_type), [os_version](#os_version), [out](#out), [parent](#parent), [pass](#pass), [play](#play), [point_dir](#point_dir), [point_dist](#point_dist), [pow](#pow), [print](#print), [prog](#prog), [program_directory](#program_directory), [quit](#quit), [rand](#rand), [rand_int](#rand_int), [rand_seed](#rand_seed), [rec_cancel](#rec_cancel), [rec_delete](#rec_delete), [rec_line](#rec_line), [rec_pause](#rec_pause), [rec_preview](#rec_preview), [rec_replay](#rec_replay), [rec_resume](#rec_resume), [rec_start](#rec_start), [rec_stop](#rec_stop), [reference](#reference), [reference_parent](#reference_parent), [repeat](#repeat), [restart](#restart), [rgb](#rgb), [rickroll](#rickroll), [room](#room), [room_first](#room_first), [room_h](#room_h), [room_last](#room_last), [room_next](#room_next), [room_w](#room_w), [run](#run), [run_clean](#run_clean), [runfile](#runfile), [runprog](#runprog), [screenshot](#screenshot), [shader](#shader), [shader_reset](#shader_reset), [sin](#sin), [sprite](#sprite), [string](#string), [struct](#struct), [struct_keys](#struct_keys), [sub](#sub), [switch](#switch), [tan](#tan), [temp_directory](#temp_directory), [this](#this), [type](#type), [undefined](#undefined), [update](#update), [url_open](#url_open), [var](#var), [view_current](#view_current), [webgl_enabled](#webgl_enabled), [while](#while), [working_directory](#working_directory)
 
 ## Alias Definitions
 - False -> false
 - NaN -> nan
 - True -> true
 - a -> array
+- comment -> pass
 - divide -> div
 - g -> global
 - i -> inst
@@ -122,6 +123,13 @@ Create, read, or modify an array. Behavior depends on the number of arguments:
 - output: [*]
 - aliases: [ "a" ]
 
+### array_choose
+Return a random element from a list.
+- args: [(max=1)]
+- output: number
+- constraints:
+    - typeof(args[0]) in [ "array" ] (required)
+
 ### asset
 Return the index of the named asset
 - args: [asset_name]
@@ -143,13 +151,6 @@ Return the type of a variable
 Concatenate arguments into a single string
 - args: [value, (...)]
 - output: [string]
-
-### choose
-Return a random element from a list.
-- args: [(max=1)]
-- output: number
-- constraints:
-    - typeof(args[0]) in [ "array" ] (required)
 
 ### clear
 If run from a console, clear that console's history
@@ -196,6 +197,12 @@ Return a reference to the RunGML console, creating one if it doesn't exist
 - constraints:
     - count(args) leq 2
     - typeof(args[0]) in [ "string" ] (optional)
+
+### control_check
+Check whether a control binding is active.  Control struct should have the following format:
+{verb: {checker_function_name: [list, of, bindings]}}
+- args: [control_struct, binding_name]
+- output: bool
 
 ### cos
 Return the cosine of an angle in raidans.
@@ -824,12 +831,12 @@ Modulo operator
 [dynamic constant]
 
 ### mult
-Multiply two numbers
-- args: [A, B]
-- output: A * B
+Multiply numbers
+- args: [A, B, (C, ...)]
+- output: A * B (* C * ...)
 - aliases: [ "multiply" ]
 - constraints:
-    - count(args) eq 2
+    - count(args) geq 1
     - typeof(args[all]) in [ "number","int32","int64" ] (required)
 
 ### munge
@@ -860,6 +867,13 @@ Return index of instance nearest to the mouse.  Optional argument specifies an o
 Check whether two arguments are not equal (inverse of 'eq')
 - args: [A, B]
 - output: [(A != B)]
+
+### new
+Create a new instance of a constructor.  Supports up to 16 arguments.
+- args: [constructor_reference, (arg0, arg1, ... , arg16)]
+- output: struct
+- constraints:
+    - count(args) leq 17
 
 ### not
 Return the inverse of the argument's boolean value
@@ -945,6 +959,15 @@ Return a reference to the RunGML interpreter's parent object.
 Do nothing
 - args: [*]
 - output: []
+- aliases: [ "comment" ]
+
+### play
+Play an included game, or return a list of available game names if no argument is provided.
+- args: [(game_name)]
+- output: [(game_list)]
+- constraints:
+    - typeof(args[0]) in [ "string" ] (required)
+    - typeof(args[1]) in [ "bool" ] (optional)
 
 ### point_dir
 Find the direction from one point to another
@@ -1337,11 +1360,11 @@ Exectue a RunGML program while a condition is true
 
 ## Constant Definitions
 
-- GM_Version = 1.5.1.0
-- GM_build_date = 46197.76
+- GM_Version = 1.6.0.0
+- GM_build_date = 46206.79591415
 - GM_build_type = run
 - GM_runtime_version = 2026.0.0.23
-- RunGML_Version = 1.5.1
+- RunGML_Version = 1.6.0
 - all = -3
 - animcurvetype_catmullrom = 1
 - animcurvetype_linear = 0
